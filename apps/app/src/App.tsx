@@ -1,29 +1,17 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+import ThemeProvider, { useTheme } from "@/components/theme-provider"
+import "./styles/global.css"
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const { theme } = useTheme()
   return (
-    <>
-      <div>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <ThemeProvider defaultTheme="dark" storageKey="theme">
+      <div className="flex w-screen h-screen">
+        <div className="flex m-auto flex-col">
+          <img src={theme === "dark" ? "/logo.png" : "/logo-light.png"} alt="logo" className="h-32 mx-auto my-8" />
+          <h1 className="text-center">Coming soon...</h1>
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>dd
-        <p className='text-red-500'>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </ThemeProvider>
   )
 }
 
