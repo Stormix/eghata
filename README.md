@@ -1,7 +1,5 @@
  # Eghata - Moroccan Volunteer  Platform
 
-![./docs/architecture.png](./docs/architecture.png)
-
 ## Table of Contents
 - [Overview](#overview)
 - [Features](#features)
@@ -16,6 +14,9 @@
 ## Overview
 
 This project is a monorepo containing the source code and documentation for the Eghata plateform. This platform is designed to connect volunteers and individuals in need of assistance across Morocco.
+
+
+![./docs/architecture.png](./docs/architecture.png)
 
 ## Features
 

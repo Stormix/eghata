@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"name": "⚙️api",
+			"path": ".."
+		}
+	],
+	"settings": {
+		"editor.codeActionsOnSave": {
+			"source.fixAll.eslint": true,
+			"source.organizeImports": true
+		},
+		"typescript.tsdk": "node_modules\\typescript\\lib"
+	}
+}

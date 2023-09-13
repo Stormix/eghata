@@ -17,6 +17,10 @@
 		"monorepoWorkspace.folders.custom": [
 			{"regex":"api", "prefix": "⚙️"},
 			{"regex":"app", "prefix": "🚀"}
-		]
+		],
+		"editor.codeActionsOnSave": {
+			"source.fixAll.eslint": true,
+			"source.organizeImports": true
+		},
 	}
 }

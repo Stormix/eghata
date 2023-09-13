@@ -18,8 +18,26 @@
 |
 */
 
+import HealthCheck from '@ioc:Adonis/Core/HealthCheck'
 import Route from '@ioc:Adonis/Core/Route'
+import AutoSwagger from 'adonis-autoswagger'
+import swagger from '../config/swagger'
 
 Route.get('/', async () => {
   return { hello: 'world' }
+})
+
+// Returns swagger in YAML
+Route.get('/swagger', async () => {
+  return AutoSwagger.docs(Route.toJSON(), swagger)
+})
+
+// Renders Swagger-UI and passes YAML-output of /swagger
+Route.get('/docs', async () => {
+  return AutoSwagger.ui('/swagger')
+})
+
+Route.get('/health', async ({ response }) => {
+  const report = await HealthCheck.getReport()
+  return report.healthy ? response.ok(report) : response.badRequest(report)
 })
