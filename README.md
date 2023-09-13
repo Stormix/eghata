@@ -1,5 +1,7 @@
  # Eghata - Moroccan Volunteer  Platform
 
+![./docs/architecture.png](./docs/architecture.png)
+
 ## Table of Contents
 - [Overview](#overview)
 - [Features](#features)

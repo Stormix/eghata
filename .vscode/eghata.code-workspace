@@ -1,8 +1,22 @@
 {
 	"folders": [
 		{
+			"name": "✨ eghata",
 			"path": ".."
+		},
+		{
+			"name": "⚙️api",
+			"path": "../apps/api"
+		},
+		{
+			"name": "🚀app",
+			"path": "../apps/app"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"monorepoWorkspace.folders.custom": [
+			{"regex":"api", "prefix": "⚙️"},
+			{"regex":"app", "prefix": "🚀"}
+		]
+	}
 }
