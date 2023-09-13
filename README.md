@@ -1,7 +1,9 @@
- # Eghata - Moroccan Volunteer  Platform
+# Eghata - Moroccan volunteer platform
 
 ## Table of Contents
+
 - [Overview](#overview)
+- [Architecture](#architecture)
 - [Features](#features)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
@@ -10,10 +12,51 @@
 - [Contributing](#contributing)
 - [License](#license)
 - [About](#about)
+- [Resources](#resources)
+
 
 ## Overview
 
 This project is a monorepo containing the source code and documentation for the Eghata plateform. This platform is designed to connect volunteers and individuals in need of assistance across Morocco.
+
+P.S: While we are not the first to come up with this idea, our goal is to build upon the existing Nt3awnou نتعاونو platform, and expand its capabilities to make it a versatile hub for connecting volunteers and people in need of help throughout Morocco. We also aim to make the platform more accessible and user-friendly and centralize information from the various existing initiatives.
+
+P.S2: [Maadlou](http://www.twitch.tv/maadlou) designed the full UI live on stream using Figma & Adobe Illustrator.
+
+P.S3: The full project is open source and will be implemented live on [Twitch](https://www.twitch.tv/stormix_co).
+
+P.S4: The chosen tech stack was decided based on a single criteria: "What's the fastest way to get this done?"
+
+P.S5: The project is currently in its early stages, and we are looking for contributors to help us build it. If you are interested, please reach out to us on [Discord](https://discord.gg/dypfvn64kJ).
+
+## FAQ
+
+### When will the project be completed?
+
+We are aiming to have a working prototype by the end of the week. However, we will continue to work on the project and add new features and improvements over time. We both have full-time jobs, so we will be working on this project in our free time mostly.
+
+
+### What is the tech stack?
+
+- [React](https://reactjs.org/)
+- [AdonisJS](https://adonisjs.com/)
+- [PostgreSQL](https://www.postgresql.org/)
+- [TailwindCSS](https://tailwindcss.com/)
+- [Redis](https://redis.io/)
+- [Capacitor](https://capacitorjs.com/)
+
+
+### What features are you planning to add?
+
+Check out the project board [here](https://github.com/users/Stormix/projects/5?query=is%3Aopen+sort%3Aupdated-desc)
+
+### How can I contribute?
+
+Join our [Discord](https://discord.gg/dypfvn64kJ) and reach out to us. We will be happy to help you get started.
+
+## Architecture
+
+In short:
 
 
 ![./docs/architecture.png](./docs/architecture.png)
@@ -96,9 +139,9 @@ This project is licensed under the [MIT License](https://choosealicense.com/lice
 
 
 
-# About Eghata
+## About Eghata
 
-## Project Overview:
+### Project Overview:
 
 A Moroccan volunteer connection platform and an extension/enhancement of the existing Nt3awnou نتعاونو platform, dedicated to aiding individuals impacted by various crises, including the recent earthquake in Morocco. Building upon the core mission of streamlining and coordinating timely assistance, our goal is to expand the platform's capabilities, making it a versatile hub for connecting volunteers and people in need of help throughout Morocco.
 
@@ -109,9 +152,9 @@ For reference:
 - https://www.maroc-solidarite.com/
 
 
-## Key Features and Components:
+### Key Features and Components:
 
-### 1. Listing of "Need Help Requests"
+#### 1. Listing of "Need Help Requests"
    - **Request or Offer Type:** Users can specify whether they are requesting assistance or offering help. The platform accommodates various categories, including:
      - Rescue
      - Medical Assistance
@@ -126,7 +169,7 @@ For reference:
    - **Start Date (Carpooling Only):** For carpooling requests, the start date is specified to plan transportation efficiently.
    - **End Date / Deadline (Carpooling Only):** Carpooling requests may have a deadline for when the assistance is needed.
 
-### 2. Info
+#### 2. Info
 
    - **Blood Donation Centers:** The platform provides information on local blood donation centers, making it easier for users to find places to donate blood.
    - **Food Banks:** Users can access details about nearby food banks, helping those in need find food resources.
@@ -135,9 +178,9 @@ For reference:
 
 
 
-## Layouts
+### Layouts
 
-### Home Screen
+#### Home Screen
 
 - [App Logo]  
 - [Navigation Menu]  
@@ -149,7 +192,7 @@ For reference:
 - [Filter Options]
 - [Create Request/Offer Button]
 
-### Request/Offer Detail Screen
+#### Request/Offer Detail Screen
 
 - [Back Button]  
 - [Request/Offer Type]  
@@ -159,7 +202,7 @@ For reference:
 - [Contact User]  
 - [Offer Assistance]  
 
-### Create Request/Offer Screen
+#### Create Request/Offer Screen
 
 - [Request/Offer Type Dropdown]  
 - [Location Input/Map]  
@@ -169,13 +212,13 @@ For reference:
 - [End Date (if carpooling)]  
 - [Submit Button]  
 
-### Map View Screen
+#### Map View Screen
 
 - [Map with Markers]  
 - [Filter Options]  
 - [Switch to List View Button]  
 
-### List View Screen
+#### List View Screen
 
 - [List of Requests/Offers]  
   - [Request/Offer Title]  
@@ -185,7 +228,7 @@ For reference:
 - [Switch to Map View Button]  
 
 
-### Information Screens
+#### Information Screens
 
 - List of Organizations/Centers:  
   - [Organization Name]  
@@ -199,6 +242,3 @@ For reference:
 
 - Wireframe: https://www.figma.com/file/JM6gStruX3ltmkcx5Iuj2z/eghata?type=design&node-id=0%3A1&mode=design&t=qaVnkRPDE78XTJTh-1
 
-
-## Features Dump
-- 
