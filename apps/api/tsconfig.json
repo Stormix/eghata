@@ -33,7 +33,9 @@
       "@adonisjs/auth",
       "@adonisjs/bouncer",
       "@adonisjs/drive-s3",
-      "@adonisjs/route-model-binding/build/adonis-typings"
+      "@adonisjs/route-model-binding/build/adonis-typings",
+      "@adonisjs/limiter",
+      "@adonisjs/redis"
     ]
   }
 }

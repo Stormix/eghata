@@ -9,13 +9,13 @@ export default class User extends BaseModel {
   public isAdmin: boolean
 
   @column()
-  public username: string
-
-  @column()
   public email: string
 
   @column({ serializeAs: null })
   public password: string
+
+  @column()
+  public fingerprint: string
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

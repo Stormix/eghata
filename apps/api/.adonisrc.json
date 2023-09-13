@@ -17,7 +17,8 @@
   "preloads": [
     "./start/routes",
     "./start/kernel",
-    "./start/bouncer"
+    "./start/bouncer",
+    "./start/limiter"
   ],
   "providers": [
     "./providers/AppProvider",
@@ -26,7 +27,9 @@
     "@adonisjs/auth",
     "@adonisjs/bouncer",
     "@adonisjs/drive-s3",
-    "@adonisjs/route-model-binding/build/providers/RmbProvider"
+    "@adonisjs/route-model-binding/build/providers/RmbProvider",
+    "@adonisjs/limiter",
+    "@adonisjs/redis"
   ],
   "aceProviders": [
     "@adonisjs/repl"
