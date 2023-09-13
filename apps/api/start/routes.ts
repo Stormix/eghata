@@ -41,3 +41,38 @@ Route.get('/health', async ({ response }) => {
   const report = await HealthCheck.getReport()
   return report.healthy ? response.ok(report) : response.badRequest(report)
 })
+
+Route.resource('offers', 'OffersController')
+  .middleware({
+    store: ['auth'],
+    destroy: ['auth'],
+  })
+  .apiOnly()
+
+Route.resource('carpooling-ads', 'CarpoolingAdsController')
+  .middleware({
+    destroy: ['auth'],
+    update: ['auth'],
+  })
+  .apiOnly()
+
+Route.resource('help-requests', 'HelpRequestsController')
+  .middleware({
+    destroy: ['auth'],
+    update: ['auth'],
+  })
+  .apiOnly()
+
+Route.resource('types', 'TypesController')
+  .middleware({
+    store: ['auth'],
+    destroy: ['auth'],
+    update: ['auth'],
+  })
+  .apiOnly()
+
+Route.resource('users', 'UsersController')
+  .middleware({
+    '*': ['auth'],
+  })
+  .apiOnly()

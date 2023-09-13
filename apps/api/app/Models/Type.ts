@@ -1,21 +1,13 @@
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 import { DateTime } from 'luxon'
+import { RequestTypes } from '../../contracts/requests'
 
-export default class User extends BaseModel {
+export default class Type extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
   @column()
-  public isAdmin: boolean
-
-  @column()
-  public username: string
-
-  @column()
-  public email: string
-
-  @column({ serializeAs: null })
-  public password: string
+  public type: RequestTypes
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
