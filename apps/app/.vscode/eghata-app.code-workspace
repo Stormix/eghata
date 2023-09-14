@@ -1,27 +1,16 @@
 {
 	"folders": [
 		{
-			"name": "✨ eghata",
-			"path": ".."
-		},
-		{
-			"name": "⚙️api",
-			"path": "../apps/api"
-		},
-		{
 			"name": "🚀app",
-			"path": "../apps/app"
+			"path": ".."
 		}
 	],
 	"settings": {
-		"monorepoWorkspace.folders.custom": [
-			{"regex":"api", "prefix": "⚙️"},
-			{"regex":"app", "prefix": "🚀"}
-		],
 		"editor.codeActionsOnSave": {
 			"source.fixAll.eslint": true,
 			"source.organizeImports": true
 		},
+		"typescript.tsdk": "node_modules\\typescript\\lib",
 		"files.exclude": {
 			"**/.git": true,
 			"**/.svn": true,
@@ -29,7 +18,7 @@
 			"**/CVS": true,
 			"**/.DS_Store": true,
 			"**/Thumbs.db": true,
-			"**/android": true
+			"**/android": true,
 		}
 	}
 }
