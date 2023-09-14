@@ -3,7 +3,7 @@ import HelpRequest from '../../Models/HelpRequest'
 ;('use strict')
 
 export default class HelpRequestController {
-  public async store({ request }: HttpContextContract) {
+  public async store({ request, response }: HttpContextContract) {
     try {
       const data = request.only([
         'longitude',
@@ -30,12 +30,13 @@ export default class HelpRequestController {
 
       return helpRequest
     } catch (error) {
-      console.error(error)
-      throw new Error('An error occurred while creating the help request.')
+      return response.badRequest({
+        error: { message: 'Unable create the help request' },
+      })
     }
   }
 
-  public async update({ request, params }: HttpContextContract) {
+  public async update({ request, params, response }: HttpContextContract) {
     try {
       const helpRequest = await HelpRequest.findOrFail(params.id)
 
@@ -58,23 +59,25 @@ export default class HelpRequestController {
 
       return helpRequest
     } catch (error) {
-      console.error(error)
-      throw new Error('An error occurred while updating the help request.')
+      return response.badRequest({
+        error: { message: 'Unable update the help request' },
+      })
     }
   }
 
-  public async destroy({ params }: HttpContextContract) {
+  public async destroy({ params, response }: HttpContextContract) {
     try {
       const helpRequest = await HelpRequest.findOrFail(params.id)
 
       await helpRequest.delete()
     } catch (error) {
-      console.error(error)
-      throw new Error('An error occurred while deleting the help request.')
+      return response.badRequest({
+        error: { message: 'Unable delete the help request' },
+      })
     }
   }
 
-  public async addType({ params, request }: HttpContextContract) {
+  public async addType({ params, request, response }: HttpContextContract) {
     try {
       const helpRequest = await HelpRequest.findOrFail(params.id)
 
@@ -85,12 +88,13 @@ export default class HelpRequestController {
 
       return helpRequest.load('types')
     } catch (error) {
-      console.error(error)
-      throw new Error('An error occurred while adding a type to the help request.')
+      return response.badRequest({
+        error: { message: 'Unable to add the types to the help request' },
+      })
     }
   }
 
-  public async removeType({ params, request }: HttpContextContract) {
+  public async removeType({ params, request, response }: HttpContextContract) {
     try {
       const helpRequest = await HelpRequest.findOrFail(params.id)
 
@@ -101,33 +105,50 @@ export default class HelpRequestController {
 
       return helpRequest.load('types')
     } catch (error) {
-      console.error(error)
-      throw new Error('An error occurred while removing a type from the help request.')
+      return response.badRequest({
+        error: { message: 'Unable to remove the types from the help request' },
+      })
     }
   }
 
-  public async index(ctx: HttpContextContract) {
-    const helpRequests = await HelpRequest.all()
+  public async index({ response }: HttpContextContract) {
+    try {
+      const helpRequests = await HelpRequest.all()
 
-    return helpRequests
+      return helpRequests
+    } catch (error) {
+      return response.noContent()
+    }
   }
 
-  public async indexById({ params }: HttpContextContract) {
-    const helpRequest = await HelpRequest.find(params.id)
+  public async indexById({ params, response }: HttpContextContract) {
+    try {
+      const helpRequest = await HelpRequest.find(params.id)
 
-    return helpRequest
+      return helpRequest
+    } catch (error) {
+      return response.noContent()
+    }
   }
 
-  public async indexByRecent(ctx: HttpContextContract) {
-    const helpRequest = await HelpRequest.query().orderBy('created_at', 'desc')
+  public async indexByRecent({ response }: HttpContextContract) {
+    try {
+      const helpRequests = await HelpRequest.query().orderBy('created_at', 'desc')
 
-    return helpRequest
+      return helpRequests
+    } catch (error) {
+      return response.noContent()
+    }
   }
 
-  public async indexByOldest(ctx: HttpContextContract) {
-    const helpRequest = await HelpRequest.query().orderBy('created_at', 'asc')
+  public async indexByOldest({ response }: HttpContextContract) {
+    try {
+      const helpRequests = await HelpRequest.query().orderBy('created_at', 'asc')
 
-    return helpRequest
+      return helpRequests
+    } catch (error) {
+      return response.noContent()
+    }
   }
   /*
   public async indexByTypes({ request, response }: HttpContextContract) {
@@ -143,8 +164,7 @@ export default class HelpRequestController {
 
       return response.status(200).json({ data: helpRequests })
     } catch (error) {
-      console.error(error)
-      return response.status(500).json({ error: 'An error occurred while fetching help requests.' })
+      return response.noContent()
     }
   }
   */
