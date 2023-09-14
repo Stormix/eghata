@@ -28,10 +28,10 @@ export default class HelpRequestController {
 
       await helpRequest.load('types')
 
-      return helpRequest
+      return response.created(helpRequest)
     } catch (error) {
       return response.badRequest({
-        error: { message: 'Unable create the help request' },
+        error: { message: 'Unable add the help request' },
       })
     }
   }
