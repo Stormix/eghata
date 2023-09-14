@@ -69,28 +69,42 @@ Route.post('/register', 'AuthController.register')
 Route.post('/login', 'AuthController.login')
 Route.post('/logout', 'AuthController.logout').middleware('auth:api')
 
-// Routes for creating, updating, and deleting help requests
-Route.post('help-requests', 'HelpRequestController.store')
-Route.put('help-requests/:id', 'HelpRequestController.update')
-Route.delete('help-requests/:id', 'HelpRequestController.destroy')
+// Dynamic routes for the duplicate routes
+Route.post('/:controller', ({ params }) => {
+  return `${params.controller}Controller.store`
+})
 
-// Route for adding a type to a help request
-Route.post('help-requests/:id/add-type', 'HelpRequestController.addType')
+Route.put('/:controller/:id', ({ params }) => {
+  return `${params.controller}Controller.update`
+})
 
-// Route for removing a type from a help request
-Route.post('help-requests/:id/remove-type', 'HelpRequestController.removeType')
+Route.delete('/:controller/:id', ({ params }) => {
+  return `${params.controller}Controller.destroy`
+})
 
-// Route for fetching all help requests
-Route.get('help-requests', 'HelpRequestController.index')
+Route.post('/:controller/:id/add-type', ({ params }) => {
+  return `${params.controller}Controller.addType`
+})
 
-// Route for fetching a help request by ID
-Route.get('help-requests/:id', 'HelpRequestController.indexById')
+Route.post('/:controller/:id/remove-type', ({ params }) => {
+  return `${params.controller}Controller.removeType`
+})
 
-// Route for fetching help requests by recent
-Route.get('help-requests/recent', 'HelpRequestController.indexByRecent')
+Route.get('/:controller', ({ params }) => {
+  return `${params.controller}Controller.index`
+})
 
-// Route for fetching help requests by oldest
-Route.get('help-requests/oldest', 'HelpRequestController.indexByOldest')
+Route.get('/:controller/:id', ({ params }) => {
+  return `${params.controller}Controller.indexById`
+})
+
+Route.get('/:controller/recent', ({ params }) => {
+  return `${params.controller}Controller.indexByRecent`
+})
+
+Route.get('/:controller/oldest', ({ params }) => {
+  return `${params.controller}Controller.indexByOldest`
+})
 
 // Route for fetching help requests by types
 //Route.get('help-requests/by-types', 'HelpRequestController.indexByTypes');
