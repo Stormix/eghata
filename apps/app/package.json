@@ -23,6 +23,7 @@
     "i18next-http-backend": "^2.2.2",
     "lucide-react": "^0.277.0",
     "react": "^18.2.0",
+    "react-device-detect": "^2.2.3",
     "react-dom": "^18.2.0",
     "react-i18next": "^13.2.2",
     "react-router-dom": "^6.16.0",
