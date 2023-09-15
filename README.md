@@ -84,6 +84,8 @@ In short:
 Before you begin, ensure you have met the following requirements:
 
 - Node [v18.x.x](https://nodejs.org/en/download/)
+- pnpm [v8.x](https://pnpm.io/installation)
+- (Optional) Docker for dbs
 
 ### Installation
 
@@ -93,23 +95,60 @@ Before you begin, ensure you have met the following requirements:
     git clone https://github.com/The-Embassy-Collective/eghata
     cd eghata
   ```
+2. Run docker containers
+```bash
+docker run -d -e POSTGRES_USER=USER -e POSTGRES_PASSWORD=PASS -p 5432:5432 --name eghata-pg postgres
+docker run -d -p 6379:6379 --name eghata-redis redis
+```
+3. Setup Frontend
+- Install dependencies
+```bash
+cd apps/app
+pnpm install
+```
+- Run server
+```bash
+pnpm dev
+```
+4. Setup Backend
+- Install dependencies
+```bash
+cd apps/api
+pnpm install
+```
+- Create .env file and update with your values
+```bash
+cp .env.example .env
+```
+- Run migrations and seeders
+```bash
+node ace migration:run
+node ace db:seed
+```
+- Run the api
+```bash
+pnpm dev
+```
 
 ### Apps and Packages
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `ui`: a stub React component library shared by both `web` and `docs` applications
-- `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `tsconfig`: `tsconfig.json`s used throughout the monorepo
+- api: [AdonisJs](https://adonisjs.com/) REST API
+- app: [Vite](https://vitejs.dev/) React app 
 
 Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
 
 ### Build
 
-To build all apps and packages, run the following command:
+1. To build frontend app, run the following command:
 
 ```
-cd my-turborepo
+cd apps/app
+pnpm build
+```
+1. To build backend app, run the following command:
+
+```
+cd apps/api
 pnpm build
 ```
 
