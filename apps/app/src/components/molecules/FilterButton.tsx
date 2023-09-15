@@ -25,7 +25,7 @@ interface FilterProps {
   onFilter?: (filters: Filter[]) => void;
 }
 
-const FilterButton = ({ filters, onFilter }: FilterProps) => {
+const FilterButton = ({}: FilterProps) => {
   const { t } = useTranslation();
   const iconsMap: Record<RequestTypes, ReactNode> = {
     [RequestTypes.Food]: <FoodIcon className="w-4 h-4 text-teal-500" />,

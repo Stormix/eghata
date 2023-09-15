@@ -3,11 +3,11 @@ import { cn } from '@/lib/utils';
 
 interface IconInputProps {
   icon: ({ className }: { className?: string }) => React.ReactNode;
-  position?: 'left' | 'right';
+  position?: 'left' | 'right'; // TODO: implment this
 }
 
 // TODO: refactor search input to use this
-const IconSelect = ({ icon: Icon, position = 'right', ...props }: IconInputProps) => {
+const IconSelect = ({ icon: Icon }: IconInputProps) => {
   return (
     <Select>
       <SelectTrigger className="relative w-full">
@@ -15,6 +15,7 @@ const IconSelect = ({ icon: Icon, position = 'right', ...props }: IconInputProps
           <div className="flex gap-2 items-center">
             <Icon className={cn('')} />
             Status
+            {/* TODO: display current value */}
           </div>
         </SelectValue>
       </SelectTrigger>
