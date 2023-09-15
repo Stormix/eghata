@@ -12,6 +12,7 @@ const Layout = () => {
   const location = useLocation();
 
   document.body.dir = i18n.dir();
+
   return (
     <div>
       {isBrowser ? (
@@ -25,7 +26,7 @@ const Layout = () => {
         <div>
           <Providers>
             {!hideHeaderRoutes.includes(location.pathname) && <Header />}
-            <main className="flex flex-col w-screen h-screen overflow-hidden px-4">
+            <main className="flex flex-col w-screen h-screen overflow-hidden">
               <Outlet />
               <Navbar />
             </main>
