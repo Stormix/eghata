@@ -1,27 +1,31 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 type AppProviderProps = {
   children: React.ReactNode;
 };
 
 type AppProviderState = {
-  showBackButton?: boolean;
-  setShowBackButton?: (show: boolean) => void;
+  showBackButton: boolean;
 };
 
 const initialState: AppProviderState = {
-  showBackButton: false,
-  setShowBackButton: () => {}
+  showBackButton: false
 };
 
 const AppProviderContext = createContext<AppProviderState>(initialState);
 
 export default function AppProvider({ children }: AppProviderProps) {
-  const [showBackButton, setShowBackButton] = useState(false);
+  const location = useLocation();
+  const [showBackButton, setShowBackButton] = useState(location.pathname !== '/');
+
   const value = {
-    showBackButton,
-    setShowBackButton
+    showBackButton
   };
+
+  useEffect(() => {
+    setShowBackButton(location.pathname !== '/');
+  }, [location]);
 
   return <AppProviderContext.Provider value={value}>{children}</AppProviderContext.Provider>;
 }

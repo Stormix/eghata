@@ -1,3 +1,9 @@
 {
-  "foo": "bar"
+  "foo": "bar",
+  
+  "rescue": "rescue",
+  "medical_assistance": "medical",
+  "food": "food",
+  "shelter": "shelter",
+  "other": "other"
 }

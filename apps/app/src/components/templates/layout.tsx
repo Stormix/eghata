@@ -1,17 +1,17 @@
 import Providers from '@/providers';
+import { isBrowser } from 'react-device-detect';
 import { useTranslation } from 'react-i18next';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import Header from '../molecules/header';
 import Navbar from '../molecules/navbar';
-import { isBrowser } from 'react-device-detect';
-
-
 
 const Layout = () => {
   const { i18n } = useTranslation();
 
-  document.body.dir = i18n.dir();
+  const hideHeaderRoutes = ['/map'];
+  const location = useLocation();
 
+  document.body.dir = i18n.dir();
   return (
     <div>
       {isBrowser ? (
@@ -24,15 +24,15 @@ const Layout = () => {
       ) : (
         <div>
           <Providers>
-             <Header />
-             <main className="flex flex-col w-screen h-screen overflow-hidden px-4">
+            {!hideHeaderRoutes.includes(location.pathname) && <Header />}
+            <main className="flex flex-col w-screen h-screen overflow-hidden px-4">
               <Outlet />
               <Navbar />
             </main>
           </Providers>
         </div>
       )}
-      </div>
+    </div>
   );
 };
 

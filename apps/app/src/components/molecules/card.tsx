@@ -1,9 +1,9 @@
 import { cn } from '@/lib/utils';
 import { ArrowRightIcon } from '@radix-ui/react-icons';
-import { ReactComponent as FoodIcon } from '../../assets/icons/food.svg';
-import { ReactComponent as MedicalIcon } from '../../assets/icons/medical.svg';
-import { ReactComponent as RiskIcon } from '../../assets/icons/risk.svg';
-import { ReactComponent as ShelterIcon } from '../../assets/icons/shelter.svg';
+import { ReactComponent as FoodIcon } from '@/assets/icons/food.svg';
+import { ReactComponent as MedicalIcon } from '@/assets/icons/medical.svg';
+import { ReactComponent as RiskIcon } from '@/assets/icons/risk.svg';
+import { ReactComponent as ShelterIcon } from '@/assets/icons/shelter.svg';
 import { Badge } from '../atoms/badge';
 
 interface CardProps {
