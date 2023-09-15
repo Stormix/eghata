@@ -1,9 +1,10 @@
-import { cn } from '@/lib/utils';
-import { ArrowRightIcon } from '@radix-ui/react-icons';
 import { ReactComponent as FoodIcon } from '@/assets/icons/food.svg';
 import { ReactComponent as MedicalIcon } from '@/assets/icons/medical.svg';
 import { ReactComponent as RiskIcon } from '@/assets/icons/risk.svg';
 import { ReactComponent as ShelterIcon } from '@/assets/icons/shelter.svg';
+import { cn } from '@/lib/utils';
+import { ArrowRightIcon } from '@radix-ui/react-icons';
+import { useNavigate } from 'react-router-dom';
 import { Badge } from '../atoms/badge';
 
 interface CardProps {
@@ -11,8 +12,15 @@ interface CardProps {
 }
 
 const Card = ({ className }: CardProps) => {
+  const navigate = useNavigate();
+  const onClick = () => {
+    navigate('/detail/offer/1');
+  };
   return (
-    <div className={cn('flex gap-4 overflow-hidden rounded-lg bg-gray-100 p-2 items-center shadow-md', className)}>
+    <div
+      className={cn('flex gap-4 overflow-hidden rounded-lg bg-gray-100 p-2 items-center shadow-md', className)}
+      onClick={onClick}
+    >
       <img src="https://i.pravatar.cc/300" className="w-32 h-32 rounded-md" />
       <div className="flex flex-col gap-2 flex-grow justify-between">
         <div className="flex flex-col gap-2">
@@ -29,7 +37,7 @@ const Card = ({ className }: CardProps) => {
           <span>
             <Badge variant={'destructive'}>Requested</Badge>
           </span>
-          <div className="text-xs text-teal-500 flex">
+          <div className="text-xs text-teal-500 flex" onClick={onClick}>
             More info <ArrowRightIcon className="w-4 h-4" />
           </div>
         </div>

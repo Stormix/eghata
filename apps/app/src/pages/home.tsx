@@ -1,7 +1,7 @@
-import SearchInput from '../atoms/search-input';
-import Card from '../molecules/card';
-import Carousel from '../molecules/carousel';
-import CarpoolingCard from '../molecules/carpooling-card';
+import SearchInput from '../components/atoms/search-input';
+import Card from '../components/molecules/card';
+import Carousel from '../components/molecules/carousel';
+import CarpoolingCard from '../components/molecules/carpooling-card';
 
 const Home = () => {
   return (

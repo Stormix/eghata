@@ -8,7 +8,7 @@ const BackButton = ({ className }: { className?: string }) => {
   return (
     <div
       className={cn(
-        'flex items-center justify-center p-2 capitalize border border-gray-200 rounded h-9 w-9',
+        'flex items-center justify-center p-2 capitalize border border-gray-200 rounded h-9 w-9 bg-white',
         className
       )}
       onClick={() => navigate(-1)}

@@ -1,9 +1,18 @@
-import Carpooling from '@/components/pages/carpooling';
-import Help from '@/components/pages/help';
-import Home from '@/components/pages/home';
-import Map from '@/components/pages/map';
+import NotFound from '@/components/molecules/404';
 import Layout from '@/components/templates/layout';
+import Carpooling from '@/pages/carpooling';
+import Detail from '@/pages/detail';
+import Help from '@/pages/help';
+import Home from '@/pages/home';
+import Map from '@/pages/map';
 import { RouteObject } from 'react-router-dom';
+
+enum DetailTypes {
+  Offer = 'offer',
+  Request = 'request',
+  RideRequest = 'ride-request',
+  RideOffer = 'ride-offer'
+}
 
 const routes: RouteObject[] = [
   {
@@ -15,6 +24,19 @@ const routes: RouteObject[] = [
       { path: '/carpooling', element: <Carpooling /> },
       { path: '/help', element: <Help /> }
     ]
+  },
+  {
+    path: '/detail',
+    element: <Layout />,
+    children: Object.values(DetailTypes).map((type) => ({
+      path: `/detail/${type}/:id`,
+      element: <Detail />
+    }))
+  },
+  {
+    path: '*',
+    element: <Layout />,
+    children: [{ path: '*', element: <NotFound /> }]
   }
 ];
 

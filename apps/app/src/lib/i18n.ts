@@ -9,7 +9,7 @@ i18n
   .use(initReactI18next) // bind react-i18next to the instance
   .init({
     fallbackLng: 'en-us',
-    debug: true,
+    debug: false,
     supportedLngs: ['en-us', 'fr-fr', 'ar-ma'],
     load: 'all',
     lowerCaseLng: true,

@@ -1,5 +1,5 @@
-import CarpoolingCard from '../molecules/carpooling-card';
-import TransportInput from '../molecules/transport-input';
+import CarpoolingCard from '../components/molecules/carpooling-card';
+import TransportInput from '../components/molecules/transport-input';
 
 const Carpooling = () => {
   return (

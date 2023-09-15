@@ -1,6 +1,6 @@
-import SearchInput from '../atoms/search-input';
-import FilterButton from '../molecules/FilterButton';
-import Card from '../molecules/card';
+import SearchInput from '../components/atoms/search-input';
+import FilterButton from '../components/molecules/FilterButton';
+import Card from '../components/molecules/card';
 
 const Help = () => {
   return (

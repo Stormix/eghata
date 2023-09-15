@@ -8,7 +8,8 @@ import Navbar from '../molecules/navbar';
 const Layout = () => {
   const { i18n } = useTranslation();
 
-  const hideHeaderRoutes = ['/map'];
+  const hideHeaderRoutes = ['/map', '/detail'];
+  const hideNavbarRoutes = ['/detail'];
   const location = useLocation();
 
   document.body.dir = i18n.dir();
@@ -25,10 +26,10 @@ const Layout = () => {
       ) : (
         <div>
           <Providers>
-            {!hideHeaderRoutes.includes(location.pathname) && <Header />}
+            {!hideHeaderRoutes.some((route) => location.pathname.includes(route)) && <Header />}
             <main className="flex flex-col w-screen h-screen overflow-hidden">
               <Outlet />
-              <Navbar />
+              {!hideNavbarRoutes.some((route) => location.pathname.includes(route)) && <Navbar />}
             </main>
           </Providers>
         </div>
