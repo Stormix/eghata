@@ -1,6 +1,6 @@
 import Providers from '@/providers';
 import { useTranslation } from 'react-i18next';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import Header from '../molecules/header';
 import Navbar from '../molecules/navbar';
 
@@ -9,10 +9,13 @@ const Layout = () => {
 
   document.body.dir = i18n.dir();
 
+  const hideHeaderRoutes = ['/map'];
+
+  const location = useLocation();
   return (
     <Providers>
-      <Header />
-      <main className="flex flex-col w-screen h-screen overflow-hidden px-4">
+      {!hideHeaderRoutes.includes(location.pathname) && <Header />}
+      <main className="flex flex-col w-screen h-screen overflow-hidden">
         <Outlet />
         <Navbar />
       </main>

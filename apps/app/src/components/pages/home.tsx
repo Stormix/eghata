@@ -5,7 +5,7 @@ import CarpoolingCard from '../molecules/carpooling-card';
 
 const Home = () => {
   return (
-    <div className="flex flex-col w-full h-full gap-4">
+    <div className="flex flex-col w-full h-full gap-4  px-4">
       <SearchInput />
 
       <Carousel items={[1, 2, 3, 4, 5, 6, 7, 8, 9].map(() => Card)} title="Requesting help" />

@@ -33,7 +33,7 @@ i18n
 
     // Detector
     detection: {
-      order: ['querystring', 'cookie', 'localStorage', 'navigator', 'htmlTag', 'path', 'subdomain'],
+      order: ['cookie', 'localStorage'],
       lookupQuerystring: 'lng',
       lookupCookie: 'i18next',
       lookupLocalStorage: 'i18nextLng',

@@ -19,9 +19,9 @@ const Navbar = () => {
   ];
 
   return (
-    <div className="fixed bottom-0 left-0 flex w-full justify-center">
-      <ActionButton className="absolute bottom-1/2 mb-4 left-1/2 -translate-x-1/2 z-20" />
-      <div className="z-10 w-full flex flex-row gap-16 py-4 justify-between px-6 mb-3">
+    <div className="fixed bottom-0 left-0 flex w-full justify-center z-10">
+      <ActionButton className="absolute bottom-1/2 mb-4 left-1/2 -translate-x-1/2 z-30" />
+      <div className="z-20 w-full flex flex-row gap-16 py-4 justify-between px-6 mb-3">
         <div className="flex gap-9">
           <HomeIcon onClick={() => navigate('/')} className={cn(...iconClasses('/'))} />
           <CarIcon onClick={() => navigate('/carpooling')} className={cn(...iconClasses('/carpooling'))} />
@@ -32,7 +32,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      <NavBackground className="absolute bottom-0 left-0 w-full z-0" />
+      <NavBackground className="absolute bottom-0 left-0 w-full z-10" />
     </div>
   );
 };

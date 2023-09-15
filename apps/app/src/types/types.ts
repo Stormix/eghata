@@ -3,5 +3,5 @@ export enum RequestTypes {
   MedicalAssistance = 'medical_assistance',
   Food = 'food',
   Shelter = 'shelter',
-  Other = 'other',
+  Other = 'other'
 }
