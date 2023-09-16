@@ -38,6 +38,10 @@ Bouncer.before((user: User | null) => {
   }
 })
 
+Bouncer.define('deleteUser', (user: User, targetUser: User) => {
+  return user.id !== targetUser.id
+})
+
 /*
 |--------------------------------------------------------------------------
 | Bouncer Policies

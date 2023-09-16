@@ -9,6 +9,9 @@ export default class User extends BaseModel {
   public isAdmin: boolean
 
   @column()
+  public isDisabled: boolean
+
+  @column()
   public email: string
 
   @column({ serializeAs: null })
