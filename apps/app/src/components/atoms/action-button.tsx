@@ -3,8 +3,11 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/atoms/popo
 import { cn } from '@/lib/utils';
 import { useState } from 'react';
 import { Button } from './button';
+import { useNavigate } from 'react-router-dom';
 
 const ActionButton = ({ className }: { className?: string }) => {
+  const navigate = useNavigate();
+
   const [open, setOpen] = useState(false);
   return (
     <Popover>
@@ -18,16 +21,16 @@ const ActionButton = ({ className }: { className?: string }) => {
       </PopoverTrigger>
       <PopoverContent align="center" className="w-screen" side="top" sideOffset={50}>
         <div className="flex flex-col gap-4 py-4">
-          <Button variant={'destructive'} className="rounded-full">
+          <Button variant={'destructive'} onClick={() => navigate('/help-offer')} className="rounded-full">
             Offer Help
           </Button>
-          <Button variant={'destructive'} className="rounded-full">
+          <Button variant={'destructive'} onClick={() => navigate('/help-request')} className="rounded-full">
             Request Help
           </Button>
-          <Button variant={'destructive'} className="rounded-full">
+          <Button variant={'destructive'} onClick={() => navigate('/transport-offer')} className="rounded-full">
             Offer Transport
           </Button>
-          <Button variant={'destructive'} className="rounded-full">
+          <Button variant={'destructive'} onClick={() => navigate('/transport-request')} className="rounded-full">
             Request Transport
           </Button>
         </div>
