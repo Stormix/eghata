@@ -1,28 +1,34 @@
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/atoms/select';
 import { cn } from '@/lib/utils';
+import { Option } from '@/types/form';
 
-interface IconInputProps {
+interface IconSelectProps {
   icon: ({ className }: { className?: string }) => React.ReactNode;
   position?: 'left' | 'right'; // TODO: implment this
+  value: string;
+  onChange: (value: string) => void;
+  options: Option[];
+  placeholder?: string;
 }
 
-// TODO: refactor search input to use this
-const IconSelect = ({ icon: Icon }: IconInputProps) => {
+const IconSelect = ({ icon: Icon, value, options, onChange, placeholder }: IconSelectProps) => {
+  const selected = (options ?? []).find((option) => option.value === value);
   return (
-    <Select>
+    <Select onValueChange={(value) => onChange(value as string)} value={value}>
       <SelectTrigger className="relative w-full">
         <SelectValue asChild>
           <div className="flex gap-2 items-center">
-            <Icon className={cn('')} />
-            Status
-            {/* TODO: display current value */}
+            <Icon className={cn('text-gray-200')} />
+            {value ? selected?.label : placeholder ?? 'Select an option...'}
           </div>
         </SelectValue>
       </SelectTrigger>
       <SelectContent>
-        <SelectItem value="light">Light</SelectItem>
-        <SelectItem value="dark">Dark</SelectItem>
-        <SelectItem value="system">System</SelectItem>
+        {options.map((option) => (
+          <SelectItem value={option.value} key={option.value}>
+            {option.label}
+          </SelectItem>
+        ))}
       </SelectContent>
     </Select>
   );

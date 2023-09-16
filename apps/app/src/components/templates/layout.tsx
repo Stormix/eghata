@@ -9,7 +9,7 @@ const Layout = () => {
   const { i18n } = useTranslation();
 
   const hideHeaderRoutes = ['/map', '/detail'];
-  const hideNavbarRoutes = ['/detail', '/help-request'];
+  const hideNavbarRoutes = ['/detail', '/help-request', '/help-offer', '/transport-offer', '/transport-request'];
   const location = useLocation();
 
   document.body.dir = i18n.dir();
@@ -20,7 +20,7 @@ const Layout = () => {
         <div className="flex w-screen h-screen bg-current">
           <div className="flex m-auto flex-col">
             <img src="/logo-light.png" alt="logo" className="h-32 mx-auto my-8" />
-            <h1 className="text-center text-white	">Coming Soon...</h1>
+            <h1 className="text-center text-white">Coming Soon...</h1>
           </div>
         </div>
       ) : (
