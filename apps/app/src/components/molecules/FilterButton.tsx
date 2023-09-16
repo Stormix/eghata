@@ -54,14 +54,14 @@ const FilterButton = ({}: FilterProps) => {
               ))}
           </div>
 
-          <IconSelect icon={SortIcon} position="left" />
+          <IconSelect icon={SortIcon} position="left" value={''} onChange={(v) => console.log(v)} options={[]} />
           <div className="flex gap-2 items-center">
             <IconInput icon={MarkerIcon} position="left" placeholder="Location" />
             <Button variant={'outline'}>
               <Crosshair2Icon />
             </Button>
           </div>
-          <IconSelect icon={StatusIcon} position="left" />
+          <IconSelect icon={StatusIcon} position="left" value={''} onChange={(v) => console.log(v)} options={[]} />
         </div>
       </PopoverContent>
     </Popover>

@@ -31,7 +31,12 @@ const Carpooling = () => {
           </div>
         </PopoverTrigger>
         <PopoverContent className="w-auto p-0">
-          <Calendar mode="single" selected={date} onSelect={setDate} initialFocus />
+          <Calendar
+            mode="single"
+            selected={date}
+            onSelect={(date: Date | undefined) => setDate(date ?? new Date())}
+            initialFocus
+          />
         </PopoverContent>
       </Popover>
 
