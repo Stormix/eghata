@@ -33,8 +33,6 @@ const AddressInput = forwardRef<HTMLDivElement, TextProps>((props, ref) => {
     place_id: undefined
   });
 
-  console.log(placeholder, '>>', props.value, location);
-
   const { placesService, placePredictions, getPlacePredictions } = usePlacesService({
     apiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
     debounce: 500
