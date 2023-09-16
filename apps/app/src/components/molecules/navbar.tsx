@@ -7,7 +7,13 @@ import { cn } from '@/lib/utils';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ActionButton from '../atoms/action-button';
 
-const Navbar = () => {
+interface NavbarProps {
+  asSubmit?: boolean;
+  disabled?: boolean;
+  loading?: boolean;
+}
+
+const Navbar = ({ asSubmit, loading, disabled }: NavbarProps) => {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -20,7 +26,12 @@ const Navbar = () => {
 
   return (
     <div className="fixed bottom-0 left-0 flex w-full justify-center z-10">
-      <ActionButton className="absolute bottom-1/2 mb-4 left-1/2 -translate-x-1/2 z-30" />
+      <ActionButton
+        className="absolute bottom-1/2 mb-4 left-1/2 -translate-x-1/2 z-30"
+        asSubmit={asSubmit}
+        disabled={disabled}
+        loading={loading}
+      />
       <div className="z-20 w-full flex flex-row gap-16 py-4 justify-between px-6 mb-3">
         <div className="flex gap-9">
           <HomeIcon onClick={() => navigate('/')} className={cn(...iconClasses('/'))} />

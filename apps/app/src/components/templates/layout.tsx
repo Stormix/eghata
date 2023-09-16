@@ -9,7 +9,7 @@ const Layout = () => {
   const { i18n } = useTranslation();
 
   const hideHeaderRoutes = ['/map', '/detail'];
-  const hideNavbarRoutes = ['/detail'];
+  const hideNavbarRoutes = ['/detail', '/help-request'];
   const location = useLocation();
 
   document.body.dir = i18n.dir();
