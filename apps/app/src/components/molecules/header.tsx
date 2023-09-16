@@ -12,7 +12,7 @@ const Header = () => {
           'opacity-0': !showBackButton
         })}
       />
-      <img src="/logo.png" alt="logo" className="object-cover h-full" />
+      <img src="/logo.svg" alt="logo" className="object-cover h-full" />
       <Language />
     </header>
   );
