@@ -27,11 +27,11 @@ const Layout = () => {
         <div>
           <Providers>
             {!hideHeaderRoutes.some((route) => location.pathname.includes(route)) && <Header />}
-            <main className="flex flex-col w-screen h-screen overflow-hidden">
+            <main className="flex flex-col w-screen overflow-hidden">
               <Outlet />
               {!hideNavbarRoutes.some((route) => location.pathname.includes(route)) && <Navbar />}
             </main>
-            <div className="h-20"></div>
+            <div className="h-32"></div>
           </Providers>
         </div>
       )}
