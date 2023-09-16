@@ -31,6 +31,7 @@ const Layout = () => {
               <Outlet />
               {!hideNavbarRoutes.some((route) => location.pathname.includes(route)) && <Navbar />}
             </main>
+            <div className="h-20"></div>
           </Providers>
         </div>
       )}
