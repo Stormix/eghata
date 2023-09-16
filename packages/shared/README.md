@@ -1,12 +1,3 @@
 # `shared`
 
-> TODO: description
-
-## Usage
-
-```
-const shared = require('shared');
-
-// TODO: DEMONSTRATE API
-```
-npx tsc
+ This packages contains shared code between the API and the UI. It contains the following: TODO
