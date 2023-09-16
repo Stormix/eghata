@@ -4,7 +4,7 @@ import Card from '../components/molecules/card';
 
 const Help = () => {
   return (
-    <div className="flex flex-col justify-start w-full gap-4 ">
+    <div className="flex flex-col justify-start w-full gap-4 pb-28 ">
       <h1 className="text-2xl font-medium text-center">Requesting help</h1>
       <div className="sticky top-0 px-4 bg-white">
         <SearchInput />

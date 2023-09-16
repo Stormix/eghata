@@ -5,11 +5,13 @@ import CarpoolingCard from '../components/molecules/carpooling-card';
 
 const Home = () => {
   return (
-    <div className="flex flex-col w-full gap-4 px-4">
+    <div className="flex flex-col w-full gap-4 px-4 pb-28">
       <SearchInput className="sticky top-0 bg-white" />
 
       <Carousel items={[1, 2, 3, 4, 5, 6, 7, 8, 9].map(() => Card)} title="Requesting help" />
       <Carousel items={[1, 2, 3, 4, 5, 6, 7, 8, 9].map(() => Card)} title="Offering help" />
+      <Carousel items={[1, 2, 3, 4, 5, 6, 7, 8, 9].map(() => CarpoolingCard)} title="Available rides" />
+      <Carousel items={[1, 2, 3, 4, 5, 6, 7, 8, 9].map(() => CarpoolingCard)} title="Available rides" />
       <Carousel items={[1, 2, 3, 4, 5, 6, 7, 8, 9].map(() => CarpoolingCard)} title="Available rides" />
     </div>
   );

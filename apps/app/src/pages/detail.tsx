@@ -11,7 +11,7 @@ const Detail = () => {
   const type = location.pathname.split('/')[2];
 
   return (
-    <div className="-mb-20 overflow-y-auto ">
+    <div className="pb-6 overflow-y-auto">
       <BackButton className="absolute z-10 top-10 left-4" />
       <img src="https://maeq-tracker.rocmine.net/assets/earth.webp" className=" h-[40vh] object-cover w-full" />
       <div className="flex flex-col gap-2 p-6">
