@@ -1,5 +1,6 @@
 import { cn } from '@/lib/utils';
 import { Input } from '../atoms/input';
+import { useTranslation } from 'react-i18next';
 
 interface LocatedOnSiteProps {
   title: string;
@@ -7,20 +8,22 @@ interface LocatedOnSiteProps {
 }
 
 const LocatedOnSiteInput = ({ title, isOptional }: LocatedOnSiteProps) => {
+  const { t } = useTranslation();
+
   return (
     <div className={cn('flex flex-col gap-y-2.5')}>
       <div className="font-medium">
-        <label>{title}</label>
+        <label>{t(title)}</label>
         {!isOptional && <span className="text-red-500">*</span>}
       </div>
       <div className="flex flex-row gap-4">
         <label className="flex flex-row items-center gap-2">
           <Input type="radio" className="w-5 focus:outline-none focus:bg-white" id="yes" name="locatedInSite" />
-          Yes
+          {t('Yes')}
         </label>
         <label className="flex flex-row items-center gap-2">
           <Input type="radio" className="w-5 focus:outline-none focus:bg-white0" id="no" name="locatedInSite" />
-          No
+          {t('No')}
         </label>
       </div>
     </div>

@@ -4,12 +4,15 @@ import { useNavigate } from 'react-router-dom';
 import { ReactComponent as Trip } from '../../assets/trip.svg';
 import { Badge } from '../atoms/badge';
 import CapacityIndicator from '../atoms/capacity-indicator';
+import { useTranslation } from 'react-i18next';
 
 interface CarpoolingCardProps {
   className?: string;
 }
 
 const CarpoolingCard = ({ className }: CarpoolingCardProps) => {
+  const { t } = useTranslation();
+
   const navigate = useNavigate();
 
   const onClick = () => {
@@ -27,17 +30,19 @@ const CarpoolingCard = ({ className }: CarpoolingCardProps) => {
       </div>
       <Trip />
       <div className="flex flex-col justify-between h-full">
-        <span className="-mt-3">Casablanca</span>
+        <span className="-mt-3">{t('Casablanca')}</span>
         <CapacityIndicator capacity={2} maxCapacity={4} />
-        <span className="text-xs">300-Litre Trunk</span>
-        <span className="-mb-2">Marackech</span>
+        <span className="text-xs">
+          300-{t('Litre')} {t('Trunk')}
+        </span>
+        <span className="-mb-2">{t('Marrakech')}</span>
       </div>
       <div className="flex flex-col justify-between h-full flex-grow ">
         <span className="-mt-3 flex justify-end">
-          <Badge>Requested</Badge>
+          <Badge>{t('Requested')}</Badge>
         </span>
         <div className="text-xs text-teal-500 flex -mb-2 justify-end" onClick={onClick}>
-          More info <ArrowRightIcon className="w-4 h-4" />
+          {t('More info')} <ArrowRightIcon className="w-4 h-4" />
         </div>
       </div>
     </div>
