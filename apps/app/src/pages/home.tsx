@@ -8,8 +8,8 @@ const Home = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="flex flex-col w-full h-full gap-4  px-4">
-      <SearchInput />
+    <div className="flex flex-col w-full gap-4 px-4 pb-28">
+      <SearchInput className="sticky top-0 bg-white" />
 
       <Carousel items={[1, 2, 3, 4, 5, 6, 7, 8, 9].map(() => Card)} title={t('Requesting help')} />
       <Carousel items={[1, 2, 3, 4, 5, 6, 7, 8, 9].map(() => Card)} title={t('Offering help')} />

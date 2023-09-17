@@ -18,7 +18,7 @@ const Layout = () => {
     <div>
       {isBrowser ? (
         <div className="flex w-screen h-screen bg-current">
-          <div className="flex m-auto flex-col">
+          <div className="flex flex-col m-auto">
             <img src="/logo-light.png" alt="logo" className="h-32 mx-auto my-8" />
             <h1 className="text-center text-white">Coming Soon...</h1>
           </div>
@@ -27,11 +27,11 @@ const Layout = () => {
         <div>
           <Providers>
             {!hideHeaderRoutes.some((route) => location.pathname.includes(route)) && <Header />}
-            <main className="flex flex-col w-screen h-screen overflow-hidden">
+            <main className="flex flex-col w-screen overflow-auto h-[calc(100vh-100px)]">
               <Outlet />
               {!hideNavbarRoutes.some((route) => location.pathname.includes(route)) && <Navbar />}
             </main>
-            <div className="h-20"></div>
+            {/* <div className="h-32"></div> */}
           </Providers>
         </div>
       )}

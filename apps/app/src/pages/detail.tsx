@@ -15,11 +15,11 @@ const Detail = () => {
   const type = location.pathname.split('/')[2];
 
   return (
-    <div className="pb-32 overflow-y-auto">
-      <BackButton className="absolute top-10 left-4 z-10" />
+    <div className="pb-6 overflow-y-auto">
+      <BackButton className="absolute z-10 top-10 left-4" />
       <img src="https://maeq-tracker.rocmine.net/assets/earth.webp" className=" h-[40vh] object-cover w-full" />
       <div className="flex flex-col gap-2 p-6">
-        <div className="flex gap-4 justify-between items-center">
+        <div className="flex items-center justify-between gap-4">
           <h1 className="text-xl font-medium">
             {t('Detail')} {t(type)} {id}
           </h1>
@@ -45,20 +45,20 @@ const Detail = () => {
         <h3 className="text-gray-500 my-2">{t('Contact Info')}</h3>
 
         <div className="flex flex-col gap-4 font-medium">
-          <div className="flex gap-2 items-center">
+          <div className="flex items-center gap-2">
             <PhoneIcon className="w-4 h-4" />
             <a
               href="tel:+212666666666"
-              className="flex-grow underline-offset-4 decoration-dotted underline decoration-red-200"
+              className="flex-grow underline underline-offset-4 decoration-dotted decoration-red-200"
             >
               +212 6 66 66 66 66
             </a>
           </div>
-          <div className="flex gap-2 items-center">
+          <div className="flex items-center gap-2">
             <MailIcon className="w-4 h-4" />
             <a
               href="mailto:test@stormix.co"
-              className="flex-grow underline-offset-4 decoration-dotted underline decoration-red-200"
+              className="flex-grow underline underline-offset-4 decoration-dotted decoration-red-200"
             >
               test@stormix.co
             </a>
@@ -69,7 +69,7 @@ const Detail = () => {
 
         <LocationMap />
 
-        <div className="absolute px-6 bottom-0 w-full pb-8 -ml-6 z-30 bg-white pt-4">
+        <div className="absolute bottom-0 z-30 w-full px-6 pt-4 pb-8 -ml-6 bg-white">
           <div className="flex gap-4">
             <Button variant="primary" className="w-full">
               {t('Offer assistance')}
