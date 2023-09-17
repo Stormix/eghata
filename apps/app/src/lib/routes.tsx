@@ -29,8 +29,8 @@ const routes: RouteObject[] = [
       { path: '/help', element: <Help /> },
       { path: '/help-request', element: <HelpRequestForm /> },
       { path: '/help-offer', element: <HelpOfferForm /> },
-      { path: '/transport-offer', element: <TransportRequestForm /> },
-      { path: '/transport-request', element: <TransportOfferForm /> }
+      { path: '/transport-request', element: <TransportRequestForm /> },
+      { path: '/transport-offer', element: <TransportOfferForm /> }
     ]
   },
   {

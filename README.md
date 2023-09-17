@@ -85,7 +85,7 @@ Before you begin, ensure you have met the following requirements:
 
 - Node [v18.x.x](https://nodejs.org/en/download/)
 - pnpm [v8.x](https://pnpm.io/installation)
-- (Optional) Docker for dbs
+- (Optional) Docker for Postgres & Redis
 
 ### Installation
 
@@ -95,27 +95,25 @@ Before you begin, ensure you have met the following requirements:
     git clone https://github.com/The-Embassy-Collective/eghata
     cd eghata
   ```
-2. Run docker containers
+2. Run docker containers (optional)
 ```bash
 docker run -d -e POSTGRES_USER=USER -e POSTGRES_PASSWORD=PASS -p 5432:5432 --name eghata-pg postgres
 docker run -d -p 6379:6379 --name eghata-redis redis
 ```
-3. Setup Frontend
-- Install dependencies
+
+3. Install dependencies
+```bash
+cd apps
+```
+
+4. Run Frontend
+
 ```bash
 cd apps/app
-pnpm install
-```
-- Run server
-```bash
 pnpm dev
 ```
 4. Setup Backend
-- Install dependencies
-```bash
-cd apps/api
-pnpm install
-```
+
 - Create .env file and update with your values
 ```bash
 cp .env.example .env
@@ -134,8 +132,10 @@ pnpm dev
 
 - api: [AdonisJs](https://adonisjs.com/) REST API
 - app: [Vite](https://vitejs.dev/) React app 
+- packages: 
+  - [shared](./packages/shared): Shared code between apps 
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+Everything is written in [TypeScript](https://www.typescriptlang.org/).
 
 ### Build
 
@@ -151,16 +151,7 @@ pnpm build
 cd apps/api
 pnpm build
 ```
-
-### Develop
-
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm dev
-```
-
+   
 
 ## Contributing
 Contributions are welcome! To contribute to this project, follow these steps:
