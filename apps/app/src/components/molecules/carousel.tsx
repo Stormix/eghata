@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import Card from './card';
+import { useTranslation } from 'react-i18next';
 
 interface CarouselProps {
   title: string;
@@ -7,11 +8,13 @@ interface CarouselProps {
 }
 
 const Carousel = ({ title, items }: CarouselProps) => {
+  const { t } = useTranslation();
+
   return (
     <div className="flex flex-col gap-2">
       <div className="flex justify-between items-center font-medium">
         <h3>{title}</h3>
-        <Link to="/help">See all</Link>
+        <Link to="/help">{t('See all')}</Link>
       </div>
 
       <div className="flex gap-2 flex-nowrap overflow-x-auto">

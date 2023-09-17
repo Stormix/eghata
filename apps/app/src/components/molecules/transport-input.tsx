@@ -2,6 +2,7 @@ import { ReactComponent as SwitchIcon } from '@/assets/icons/switch.svg';
 import { useState } from 'react';
 import { Button } from '../atoms/button';
 import AddressInput, { Location } from './address-input';
+import { useTranslation } from 'react-i18next';
 
 interface TransportValue {
   start: Location;
@@ -14,12 +15,14 @@ interface TransportInputProps {
 }
 
 const TransportInput = ({ value, onChange }: TransportInputProps) => {
+  const { t } = useTranslation();
+
   const [transportValue, setTransportValue] = useState<TransportValue>(value);
   return (
     <div className="flex items-center gap-2">
       <div className="flex flex-col gap-2 flex-grow">
         <AddressInput
-          placeholder="Start address"
+          placeholder={t('Start address')}
           value={transportValue.start}
           onChange={(value) => {
             setTransportValue({
@@ -33,7 +36,7 @@ const TransportInput = ({ value, onChange }: TransportInputProps) => {
           }}
         />
         <AddressInput
-          placeholder="End address"
+          placeholder={t('End address')}
           value={transportValue.end}
           onChange={(value) => {
             setTransportValue({

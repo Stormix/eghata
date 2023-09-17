@@ -5,7 +5,11 @@ import { Button } from '@/components/atoms/button';
 import LocationMap from '@/components/molecules/location-map';
 import { MailIcon, PhoneIcon } from 'lucide-react';
 import { useLocation, useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+
 const Detail = () => {
+  const { t } = useTranslation();
+
   const { id } = useParams();
   const location = useLocation();
   const type = location.pathname.split('/')[2];
@@ -17,24 +21,28 @@ const Detail = () => {
       <div className="flex flex-col gap-2 p-6">
         <div className="flex items-center justify-between gap-4">
           <h1 className="text-xl font-medium">
-            Detail {type} {id}
+            {t('Detail')} {t(type)} {id}
           </h1>
           <span>
-            <Badge variant={'destructive'}>Requested</Badge>
+            <Badge variant={'destructive'}>{t('Requested')}</Badge>
           </span>
         </div>
         <div className="flex justify-between">
-          <p>Marrackecxcecj, Yes</p>
-          <span className="text-sm text-gray-500">10 hours ago</span>
+          <p>
+            {t('Marrakech')}, {t('Yes')}
+          </p>
+          <span className="text-gray-500 text-sm">
+            10 {t('hours')} {t('ago')}
+          </span>
         </div>
-        <h3 className="mt-2 text-gray-500">Description</h3>
+        <h3 className="text-gray-500 mt-2">{t('Description')}</h3>
         <p className="text-justify">
-          English 2/20: Hello, I am in need of warm clothing for the upcoming winter season. I'm a single mother with
-          two young children, and we&quot;ve been struggling to stay warm. If anyone can help us with winter coats,
-          gloves, and scarves, we would be incredibly grateful. Your support means the world to us.
+          {t(`English 2/20: Hello, I am in need of warm clothing for the upcoming winter season. I'm a single mother with
+          two young children, and we've been struggling to stay warm. If anyone can help us with winter coats,
+          gloves, and scarves, we would be incredibly grateful. Your support means the world to us`)}
         </p>
 
-        <h3 className="my-2 text-gray-500">Contact Info</h3>
+        <h3 className="text-gray-500 my-2">{t('Contact Info')}</h3>
 
         <div className="flex flex-col gap-4 font-medium">
           <div className="flex items-center gap-2">
@@ -57,21 +65,21 @@ const Detail = () => {
           </div>
         </div>
 
-        <h3 className="my-2 text-gray-500">Location</h3>
+        <h3 className="text-gray-500 my-2">{t('Location')}</h3>
 
         <LocationMap />
 
         <div className="absolute bottom-0 z-30 w-full px-6 pt-4 pb-8 -ml-6 bg-white">
           <div className="flex gap-4">
             <Button variant="primary" className="w-full">
-              Offer assistance
+              {t('Offer assistance')}
             </Button>
             <Button variant="primary">
               <DirectionIcon />
             </Button>
           </div>
           <Button variant="outline" className="w-full mt-4">
-            Report
+            {t('Report')}
           </Button>
         </div>
       </div>

@@ -39,7 +39,7 @@ const FilterButton = ({}: FilterProps) => {
     <Popover>
       <PopoverTrigger>
         <Button variant="outline">
-          <FilterIcon className="mr-2" /> Filter
+          <FilterIcon className="mr-2" /> {t('Filter')}
         </Button>
       </PopoverTrigger>
       <PopoverContent align="center" className="w-screen">
@@ -54,14 +54,28 @@ const FilterButton = ({}: FilterProps) => {
               ))}
           </div>
 
-          <IconSelect icon={SortIcon} position="left" value={''} onChange={(v) => console.log(v)} options={[]} />
+          <IconSelect
+            icon={SortIcon}
+            placeholder={t('Select an option')}
+            position="left"
+            value={''}
+            onChange={(v) => console.log(v)}
+            options={[]}
+          />
           <div className="flex gap-2 items-center">
-            <IconInput icon={MarkerIcon} position="left" placeholder="Location" />
+            <IconInput icon={MarkerIcon} position="left" placeholder={t('Location')} />
             <Button variant={'outline'}>
               <Crosshair2Icon />
             </Button>
           </div>
-          <IconSelect icon={StatusIcon} position="left" value={''} onChange={(v) => console.log(v)} options={[]} />
+          <IconSelect
+            icon={StatusIcon}
+            placeholder={t('Select an option')}
+            position="left"
+            value={''}
+            onChange={(v) => console.log(v)}
+            options={[]}
+          />
         </div>
       </PopoverContent>
     </Popover>

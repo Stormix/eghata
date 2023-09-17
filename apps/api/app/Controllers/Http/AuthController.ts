@@ -6,7 +6,6 @@ import User from '../../Models/User'
 export default class AuthController {
   public async register({ request, response, auth }: HttpContextContract) {
     const throttleKey = `register_${request.ip()}`
-
     const limiter = Limiter.use({
       requests: 5,
       duration: '60 mins',

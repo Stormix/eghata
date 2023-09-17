@@ -3,6 +3,7 @@ import { BaseInputProps } from '@/types/form';
 import { forwardRef, useEffect } from 'react';
 import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet';
 import { Location } from './address-input';
+import { useTranslation } from 'react-i18next';
 
 interface MapProps extends BaseInputProps {
   value: Location;
@@ -10,6 +11,8 @@ interface MapProps extends BaseInputProps {
 }
 
 const MarkerComponent = ({ value, onChange }: MapProps) => {
+  const { t } = useTranslation();
+
   const map = useMap();
 
   useEffect(() => {
@@ -30,12 +33,16 @@ const MarkerComponent = ({ value, onChange }: MapProps) => {
         }
       }}
     >
-      <Popup>Current location: {value.address}</Popup>
+      <Popup>
+        {t('Current location')}: {value.address}
+      </Popup>
     </Marker>
   );
 };
 
 const MapInput = forwardRef<HTMLDivElement, MapProps>((props, ref) => {
+  const { t } = useTranslation();
+
   const { label, optional, value } = props;
 
   return (
@@ -44,7 +51,9 @@ const MapInput = forwardRef<HTMLDivElement, MapProps>((props, ref) => {
         <label>
           {label} {!optional && <span className="text-red-500">*</span>}
         </label>
-        <p className="text-xs text-gray-400">We will use the address GPS location if you don&apos;t specify this.</p>
+        <p className="text-xs text-gray-400">
+          {t('We will use the address GPS location if you don&apos;t specify this')}.
+        </p>
       </div>
       <MapContainer
         center={[value.lat, value.lng]}

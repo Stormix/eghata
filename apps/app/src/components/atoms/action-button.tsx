@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from './button';
 import LoadingSpinner from './loading-spinner';
+import { useTranslation } from 'react-i18next';
 
 interface ActionButtonProps {
   className?: string;
@@ -15,6 +16,8 @@ interface ActionButtonProps {
 }
 
 const ActionButton = ({ className, asSubmit, loading, disabled }: ActionButtonProps) => {
+  const { t } = useTranslation();
+
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 
@@ -45,16 +48,16 @@ const ActionButton = ({ className, asSubmit, loading, disabled }: ActionButtonPr
       <PopoverContent align="center" className="w-screen" side="top" sideOffset={50}>
         <div className="flex flex-col gap-4 py-4">
           <Button variant={'destructive'} onClick={() => navigate('/help-request')} className="rounded-full">
-            Request Help
+            {t('Request Help')}
           </Button>
           <Button variant={'destructive'} onClick={() => navigate('/help-offer')} className="rounded-full">
-            Offer Help
+            {t('Offer Help')}
           </Button>
           <Button variant={'destructive'} onClick={() => navigate('/transport-offer')} className="rounded-full">
-            Offer Transport
+            {t('Offer Transport')}
           </Button>
           <Button variant={'destructive'} onClick={() => navigate('/transport-request')} className="rounded-full">
-            Request Transport
+            {t('Request Transport')}
           </Button>
         </div>
       </PopoverContent>
