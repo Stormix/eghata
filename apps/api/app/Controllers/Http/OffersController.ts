@@ -118,7 +118,7 @@ export default class OffersController {
     }
   }
 
-  public async indexById({ params, response }: HttpContextContract) {
+  public async show({ params, response }: HttpContextContract) {
     try {
       const offer = await Offer.find(params.id)
 
@@ -165,4 +165,6 @@ export default class OffersController {
         }
       }
       */
+
+
 }
