@@ -1,1 +1,3 @@
-export const hello = (test: string) => console.log('hello', test);
+import * as User from './dto/user';
+
+export { User };

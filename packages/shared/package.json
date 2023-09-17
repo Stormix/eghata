@@ -16,6 +16,7 @@
   },
   "scripts": {
     "build": "tsc && tsc-alias",
+    "build:watch": "tsc && concurrently \"tsc -w\" \"tsc-alias -w\"", 
     "dev": "ts-node-dev -r tsconfig-paths/register --respawn src/index.ts",
     "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix"
   },
@@ -23,12 +24,14 @@
     "url": "https://github.com/Stormix/eghata/issues"
   },
   "dependencies": {
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "zod": "^3.22.2"
   },
   "devDependencies": {
     "@types/node": "^20.6.2",
     "@typescript-eslint/eslint-plugin": "^6.7.0",
     "@typescript-eslint/parser": "^6.7.0",
+    "concurrently": "^8.2.1",
     "eslint": "^8.49.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",

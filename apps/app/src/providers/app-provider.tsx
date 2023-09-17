@@ -7,10 +7,12 @@ type AppProviderProps = {
 
 type AppProviderState = {
   showBackButton: boolean;
+  authenticated?: boolean;
 };
 
 const initialState: AppProviderState = {
-  showBackButton: false
+  showBackButton: false,
+  authenticated: false
 };
 
 const AppProviderContext = createContext<AppProviderState>(initialState);

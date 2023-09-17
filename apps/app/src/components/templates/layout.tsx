@@ -14,6 +14,10 @@ const Layout = () => {
 
   document.body.dir = i18n.dir();
 
+  // const query = useApi<'login'>('login', 'test');
+
+  // const { isSuccess, isLoading } = query;
+
   return (
     <div>
       {isBrowser ? (
@@ -24,16 +28,14 @@ const Layout = () => {
           </div>
         </div>
       ) : (
-        <div>
-          <Providers>
-            {!hideHeaderRoutes.some((route) => location.pathname.includes(route)) && <Header />}
-            <main className="flex flex-col w-screen h-screen overflow-hidden">
-              <Outlet />
-              {!hideNavbarRoutes.some((route) => location.pathname.includes(route)) && <Navbar />}
-            </main>
-            <div className="h-20"></div>
-          </Providers>
-        </div>
+        <Providers>
+          {!hideHeaderRoutes.some((route) => location.pathname.includes(route)) && <Header />}
+          <main className="flex flex-col w-screen h-screen overflow-hidden">
+            <Outlet />
+            {!hideNavbarRoutes.some((route) => location.pathname.includes(route)) && <Navbar />}
+          </main>
+          <div className="h-20"></div>
+        </Providers>
       )}
     </div>
   );
