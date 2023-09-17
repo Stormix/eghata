@@ -8,6 +8,7 @@ import { BaseInputProps } from '@/types/form';
 import { RequestTypes } from '@/types/types';
 import { forwardRef } from 'react';
 import AssistanceTypeBlock from '../atoms/assistance-type-block';
+import { useTranslation } from 'react-i18next';
 
 interface AssistanceTypeProps extends BaseInputProps {
   value: RequestTypes[];
@@ -15,6 +16,8 @@ interface AssistanceTypeProps extends BaseInputProps {
 }
 
 const AssistanceTypeInput = forwardRef<HTMLDivElement, AssistanceTypeProps>((props, ref) => {
+  const { t } = useTranslation();
+
   const { value = [], onChange, label, optional, helperText } = props;
   const onTypeClick = (type: RequestTypes) => {
     if (value.includes(type)) {
@@ -35,41 +38,41 @@ const AssistanceTypeInput = forwardRef<HTMLDivElement, AssistanceTypeProps>((pro
       <div className="flex flex-row gap-2 flex-wrap">
         <AssistanceTypeBlock
           icon={ShelterIcon}
-          title="Shelter"
+          title={t('Shelter')}
           className="text-black"
           onClick={() => onTypeClick(RequestTypes.Shelter)}
           selected={value.includes(RequestTypes.Shelter)}
         />
         <AssistanceTypeBlock
           icon={FoodIcon}
-          title="Food"
+          title={t('Food')}
           className="text-teal-500"
           onClick={() => onTypeClick(RequestTypes.Food)}
           selected={value.includes(RequestTypes.Food)}
         />
         <AssistanceTypeBlock
           icon={RescueIcon}
-          title="Rescue"
+          title={t('Rescue')}
           onClick={() => onTypeClick(RequestTypes.Rescue)}
           selected={value.includes(RequestTypes.Rescue)}
         />
         <AssistanceTypeBlock
           icon={MedicalIcon}
-          title="Medical Aid"
+          title={t('Medical Aid')}
           onClick={() => onTypeClick(RequestTypes.MedicalAssistance)}
           selected={value.includes(RequestTypes.MedicalAssistance)}
         />
         <AssistanceTypeBlock
           icon={OtherIcon}
           className="text-black"
-          title="Other"
+          title={t('Other')}
           onClick={() => onTypeClick(RequestTypes.Other)}
           selected={value.includes(RequestTypes.Other)}
         />
       </div>
 
       {value.includes(RequestTypes.Other) && (
-        <p className="text-xs text-gray-400">Make sure to describe your exact needs in the description field.</p>
+        <p className="text-xs text-gray-400">{t('Make sure to describe your exact needs in the description field.')}</p>
       )}
     </div>
   );

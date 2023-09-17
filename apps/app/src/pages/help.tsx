@@ -1,11 +1,14 @@
 import SearchInput from '../components/atoms/search-input';
 import FilterButton from '../components/molecules/FilterButton';
 import Card from '../components/molecules/card';
+import { useTranslation } from 'react-i18next';
 
 const Help = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="flex flex-col w-full h-full gap-4 justify-start  px-4">
-      <h1 className="font-medium text-2xl text-center">Requesting help</h1>
+      <h1 className="font-medium text-2xl text-center">{t('Requesting help')}</h1>
 
       <SearchInput />
       <div className="flex flex-row justify-start">

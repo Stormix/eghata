@@ -12,6 +12,8 @@ import { imageSchema } from '@/lib/validation';
 import { RequestTypes } from '@/types/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+
 import * as z from 'zod';
 
 const formSchema = z.object({
@@ -31,6 +33,8 @@ const formSchema = z.object({
 });
 
 const HelpRequestForm = () => {
+  const { t } = useTranslation();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -58,7 +62,7 @@ const HelpRequestForm = () => {
 
   return (
     <div className="flex flex-col w-full gap-4 px-6 overflow-y-auto pb-20">
-      <h1 className="text-2xl">Request Help</h1>
+      <h1 className="text-2xl">{t('Request Help')}</h1>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4" encType="multipart/form-data">
           <FormField
@@ -67,7 +71,7 @@ const HelpRequestForm = () => {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <AssistanceTypeInput label="What are your needs?" {...field} />
+                  <AssistanceTypeInput label={t('What are your needs?')} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -80,7 +84,7 @@ const HelpRequestForm = () => {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <AddressInput label="Address" placeholder="Full address" {...field} />
+                  <AddressInput label={t('Address')} placeholder={t('Full address')} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -93,7 +97,7 @@ const HelpRequestForm = () => {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <MapInput label="Pin point the exact location on map if you can" optional {...field} />
+                  <MapInput label={t('Pin point the exact location on map if you can')} optional {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -107,7 +111,7 @@ const HelpRequestForm = () => {
               <FormItem>
                 <FormControl>
                   <RadioInput
-                    label="Are you located on site?"
+                    label={t('Are you located on site?')}
                     options={[
                       {
                         label: 'Yes',
@@ -133,8 +137,8 @@ const HelpRequestForm = () => {
               <FormItem>
                 <FormControl>
                   <TextAreaInput
-                    label="Can you give us more info about the situation"
-                    placeholder="Type your message here"
+                    label={t('Can you give us more info about the situation?')}
+                    placeholder={t('Type your message here')}
                     optional
                     {...field}
                   />
@@ -151,8 +155,8 @@ const HelpRequestForm = () => {
               <FormItem>
                 <FormControl>
                   <TextAreaInput
-                    label="Source of information"
-                    placeholder="Type your message here"
+                    label={t('Source of information')}
+                    placeholder={t('Type your message here')}
                     optional
                     {...field}
                   />
@@ -168,7 +172,11 @@ const HelpRequestForm = () => {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <TextInput label="Your name or the on-site person name" placeholder="Full Name" {...field} />
+                  <TextInput
+                    label={t(`Your name or the on-site person's name`)}
+                    placeholder={t('Full Name')}
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -181,7 +189,7 @@ const HelpRequestForm = () => {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <TextInput label="Email" type="email" placeholder="Email" optional {...field} />
+                  <TextInput label={t('Email')} type="email" placeholder={t('Email')} optional {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -194,7 +202,7 @@ const HelpRequestForm = () => {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <TextInput label="Phone Number" placeholder="Phone Number" type="tel" {...field} />
+                  <TextInput label={t('Phone Number')} placeholder={t('Phone Number')} type="tel" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -207,7 +215,7 @@ const HelpRequestForm = () => {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <FileInput label="Upload pictures" {...field} />
+                  <FileInput label={t('Upload pictures')} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
