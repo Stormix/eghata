@@ -68,3 +68,5 @@ Route.resource('users', 'UsersController')
 Route.post('/register', 'AuthController.register')
 Route.post('/login', 'AuthController.login')
 Route.post('/logout', 'AuthController.logout').middleware('auth:api')
+
+Route.post('/authenticate', 'AuthController.authenticate')

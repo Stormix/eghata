@@ -7,8 +7,8 @@ import { cn } from '@/lib/utils';
 import { BaseInputProps } from '@/types/form';
 import { RequestTypes } from '@/types/types';
 import { forwardRef } from 'react';
-import AssistanceTypeBlock from '../atoms/assistance-type-block';
 import { useTranslation } from 'react-i18next';
+import AssistanceTypeBlock from '../atoms/assistance-type-block';
 
 interface AssistanceTypeProps extends BaseInputProps {
   value: RequestTypes[];

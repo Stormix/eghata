@@ -1,10 +1,4 @@
 import { ReactComponent as FilterIcon } from '@/assets/icons/filter.svg';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/atoms/popover';
-import { RequestTypes } from '@/types/types';
-import { FixType } from '@/types/utils';
-import { Badge } from '../atoms/badge';
-import { Button } from '../atoms/button';
-
 import { ReactComponent as FoodIcon } from '@/assets/icons/food.svg';
 import { ReactComponent as MarkerIcon } from '@/assets/icons/marker.svg';
 import { ReactComponent as MedicalIcon } from '@/assets/icons/medical.svg';
@@ -12,14 +6,18 @@ import { ReactComponent as RiskIcon } from '@/assets/icons/risk.svg';
 import { ReactComponent as ShelterIcon } from '@/assets/icons/shelter.svg';
 import { ReactComponent as SortIcon } from '@/assets/icons/sort.svg';
 import { ReactComponent as StatusIcon } from '@/assets/icons/status.svg';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/atoms/popover';
+import { RequestTypes } from '@/types/types';
+import { FixType } from '@/types/utils';
 import { Crosshair2Icon } from '@radix-ui/react-icons';
 import { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Badge } from '../atoms/badge';
+import { Button } from '../atoms/button';
 import IconInput from './icon-input';
 import IconSelect from './icon-select';
 
 type Filter = FixType;
-
 interface FilterProps {
   filters?: Filter[];
   onFilter?: (filters: Filter[]) => void;

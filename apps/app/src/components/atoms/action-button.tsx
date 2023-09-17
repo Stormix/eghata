@@ -3,10 +3,10 @@ import { ReactComponent as PlusIcon } from '@/assets/icons/plus.svg';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/atoms/popover';
 import { cn } from '@/lib/utils';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { Button } from './button';
 import LoadingSpinner from './loading-spinner';
-import { useTranslation } from 'react-i18next';
 
 interface ActionButtonProps {
   className?: string;
@@ -38,12 +38,12 @@ const ActionButton = ({ className, asSubmit, loading, disabled }: ActionButtonPr
   return (
     <Popover>
       <PopoverTrigger>
-        <button
+        <div
           className={cn(' w-16 h-16 bg-red-800 rounded-full text-4xl flex justify-center items-center', className)}
           onClick={() => setOpen(!open)}
         >
           <PlusIcon className={cn('transform transition-transform duration-300', open && 'rotate-45')} />
-        </button>
+        </div>
       </PopoverTrigger>
       <PopoverContent align="center" className="w-screen" side="top" sideOffset={50}>
         <div className="flex flex-col gap-4 py-4">

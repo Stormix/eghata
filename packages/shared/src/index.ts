@@ -1,3 +1,3 @@
-import * as User from './dto/user';
-
-export { User };
+export const sum = (a: number, b: number) => {
+  return a + b;
+};

@@ -1,7 +1,15 @@
-import { BaseModel, column, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
+import {
+  BaseModel,
+  BelongsTo,
+  belongsTo,
+  column,
+  ManyToMany,
+  manyToMany
+} from '@ioc:Adonis/Lucid/Orm'
 import { DateTime } from 'luxon'
 import { OfferStatus } from '../../contracts/status'
 import Type from './Type'
+import User from './User'
 
 export default class Offer extends BaseModel {
   @column({ isPrimary: true })
@@ -12,9 +20,12 @@ export default class Offer extends BaseModel {
     pivotForeignKey: 'offer_id',
     relatedKey: 'id',
     pivotRelatedForeignKey: 'type_id',
-    pivotTable: 'offer_types',
+    pivotTable: 'offer_types'
   })
   public types: ManyToMany<typeof Type>
+
+  @belongsTo(() => User)
+  public user: BelongsTo<typeof User>
 
   @column()
   public longitude: number

@@ -1,12 +1,11 @@
+import { useTranslation } from 'react-i18next';
 import SearchInput from '../components/atoms/search-input';
 import Card from '../components/molecules/card';
 import Carousel from '../components/molecules/carousel';
 import CarpoolingCard from '../components/molecules/carpooling-card';
-import { useTranslation } from 'react-i18next';
 
 const Home = () => {
   const { t } = useTranslation();
-
   return (
     <div className="flex flex-col w-full gap-4 px-4 pb-28">
       <SearchInput className="sticky top-0 bg-white" />

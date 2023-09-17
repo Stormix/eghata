@@ -1,9 +1,25 @@
 import { Limiter } from '@adonisjs/limiter/build/services/index'
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import { rules, schema } from '@ioc:Adonis/Core/Validator'
+import { LoginDTO } from 'shared/dist/dto/user'
 import User from '../../Models/User'
 
 export default class AuthController {
+  public async authenticate({ request, response, auth }: HttpContextContract) {
+    try {
+      const { fingerprint } = request.only(['fingerprint'])
+      const user = await User.firstOrCreate({ fingerprint })
+      const token = await auth.use('api').generate(user)
+
+      return response.json({ token } as LoginDTO)
+    } catch (error) {
+      console.log(error)
+      return response.badRequest({
+        error: { message: 'Unable to authenticate' },
+      })
+    }
+  }
+
   public async register({ request, response, auth }: HttpContextContract) {
     const throttleKey = `register_${request.ip()}`
     const limiter = Limiter.use({
