@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils';
+import { useTranslation } from 'react-i18next';
 
 interface AssistanceTypeBlockProps {
   icon: React.FC<React.SVGProps<SVGSVGElement>>;
@@ -9,6 +10,8 @@ interface AssistanceTypeBlockProps {
 }
 
 const AssistanceTypeBlock = ({ className, title, icon: Icon, selected, onClick }: AssistanceTypeBlockProps) => {
+  const { t } = useTranslation();
+
   return (
     <div
       className={cn(

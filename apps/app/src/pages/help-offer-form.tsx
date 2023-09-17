@@ -12,6 +12,8 @@ import { imageSchema } from '@/lib/validation';
 import { RequestTypes } from '@/types/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+
 import * as z from 'zod';
 
 const formSchema = z.object({
@@ -31,6 +33,8 @@ const formSchema = z.object({
 });
 
 const OfferHelpForm = () => {
+  const { t } = useTranslation();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -66,7 +70,7 @@ const OfferHelpForm = () => {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <AssistanceTypeInput label="What can you provide?" {...field} />
+                  <AssistanceTypeInput label={t('What can you provide?')} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -80,10 +84,12 @@ const OfferHelpForm = () => {
               <FormItem>
                 <FormControl>
                   <AddressInput
-                    label="Address"
-                    placeholder="Full address"
+                    label={t('Address')}
+                    placeholder={t('Full address')}
                     {...field}
-                    helperText="Specify location where you can provide help, if you don't have means of transport, you can always post a transport request if you want to reach other locations."
+                    helperText={t(
+                      "Specify location where you can provide help, if you don't have means of transport, you can always post a transport request if you want to reach other locations"
+                    )}
                   />
                 </FormControl>
                 <FormMessage />
@@ -97,7 +103,7 @@ const OfferHelpForm = () => {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <MapInput label="Pin point the exact location on map if you can" optional {...field} />
+                  <MapInput label={t('Pin point the exact location on map if you can')} optional {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -111,14 +117,14 @@ const OfferHelpForm = () => {
               <FormItem>
                 <FormControl>
                   <RadioInput
-                    label="Are you located on site?"
+                    label={t('Are you located on site?')}
                     options={[
                       {
-                        label: 'Yes',
+                        label: t('Yes'),
                         value: 'yes'
                       },
                       {
-                        label: 'No',
+                        label: t('No'),
                         value: 'no'
                       }
                     ]}
@@ -137,8 +143,8 @@ const OfferHelpForm = () => {
               <FormItem>
                 <FormControl>
                   <TextAreaInput
-                    label="Can you give us more info about the help you can provide"
-                    placeholder="Type your message here"
+                    label={t('Can you give us more info about the help you can provide')}
+                    placeholder={t('Type your message here')}
                     optional
                     {...field}
                   />
@@ -154,7 +160,11 @@ const OfferHelpForm = () => {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <TextInput label="Your name or the on-site person name" placeholder="Full Name" {...field} />
+                  <TextInput
+                    label={t('Your name or the on-site person name')}
+                    placeholder={t('Full Name')}
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -167,7 +177,7 @@ const OfferHelpForm = () => {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <TextInput label="Email" type="email" placeholder="Email" optional {...field} />
+                  <TextInput label={t('Email')} type="email" placeholder={t('Email')} optional {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -180,7 +190,7 @@ const OfferHelpForm = () => {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <TextInput label="Phone Number" placeholder="Phone Number" type="tel" {...field} />
+                  <TextInput label={t('Phone Number')} placeholder={t('Phone Number')} type="tel" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -193,7 +203,7 @@ const OfferHelpForm = () => {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <FileInput label="Upload pictures" {...field} />
+                  <FileInput label={t('Upload pictures')} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

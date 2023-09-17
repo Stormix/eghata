@@ -81,7 +81,7 @@ export default class CarpoolingAdsController {
     }
   }
 
-  public async indexById({ params, response }: HttpContextContract) {
+  public async show({ params, response }: HttpContextContract) {
     try {
       const carpooling = await CarpoolingAd.find(params.id)
 

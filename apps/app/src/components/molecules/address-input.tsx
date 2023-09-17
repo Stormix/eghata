@@ -7,6 +7,7 @@ import { forwardRef, useEffect, useState } from 'react';
 import usePlacesService from 'react-google-autocomplete/lib/usePlacesAutocompleteService';
 import { Button } from '../atoms/button';
 import { Command, CommandGroup, CommandInput, CommandItem } from '../atoms/command';
+import { useTranslation } from 'react-i18next';
 
 interface TextProps extends BaseInputProps {
   value?: Location;
@@ -20,6 +21,8 @@ export interface Location {
 }
 
 const AddressInput = forwardRef<HTMLDivElement, TextProps>((props, ref) => {
+  const { t } = useTranslation();
+
   const { label, optional = false, placeholder } = props;
   const [open, setOpen] = useState(false);
   const [location, setLocation] = useState<
@@ -27,7 +30,7 @@ const AddressInput = forwardRef<HTMLDivElement, TextProps>((props, ref) => {
       place_id: string | undefined;
     }
   >({
-    address: props.value?.address || placeholder || 'Enter an address...',
+    address: props.value?.address || placeholder || t('Enter an address...'),
     lat: props.value?.lat || 0,
     lng: props.value?.lng || 0,
     place_id: undefined
@@ -41,7 +44,7 @@ const AddressInput = forwardRef<HTMLDivElement, TextProps>((props, ref) => {
   useEffect(() => {
     if (props.value) {
       setLocation({
-        address: props.value.address || placeholder || 'Enter an address...',
+        address: props.value.address || placeholder || t('Enter an address...'),
         lat: props.value.lat,
         lng: props.value.lng,
         place_id: undefined
@@ -66,18 +69,18 @@ const AddressInput = forwardRef<HTMLDivElement, TextProps>((props, ref) => {
           <Button
             variant="outline"
             role="combobox"
-            aria-label={placeholder ?? 'Enter an address...'}
+            aria-label={placeholder ?? t('Enter an address...')}
             aria-expanded={open}
             className="flex-1 justify-between w-full"
           >
-            {location ? location.address : placeholder ?? 'Enter an address...'}
+            {location ? location.address : placeholder ?? t('Enter an address...')}
             <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-screen">
           <Command>
             <CommandInput
-              placeholder={'Start typing your address...'}
+              placeholder={t('Start typing your address...')}
               onValueChange={(value) => getPlacePredictions({ input: value })}
             />
 

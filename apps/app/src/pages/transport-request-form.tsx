@@ -8,6 +8,8 @@ import TransportInput from '@/components/molecules/transport-input';
 import { imageSchema } from '@/lib/validation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+
 import * as z from 'zod';
 
 const locationSchema = z.object({
@@ -32,6 +34,8 @@ const formSchema = z.object({
 });
 
 const TransportRequestForm = () => {
+  const { t } = useTranslation();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -66,7 +70,7 @@ const TransportRequestForm = () => {
 
   return (
     <div className="flex flex-col w-full gap-4 px-6 overflow-y-auto pb-20">
-      <h1 className="text-2xl">Request Transport</h1>
+      <h1 className="text-2xl">{t('Request Transport')}</h1>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4" encType="multipart/form-data">
           <FormField
@@ -88,7 +92,7 @@ const TransportRequestForm = () => {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <TextInput label="Travel Date" placeholder="Travel Date" type="datetime-local" {...field} />
+                  <TextInput label={t('Travel Date')} placeholder={t('Travel Date')} type="datetime-local" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -101,7 +105,7 @@ const TransportRequestForm = () => {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <NumberInput label="How many free seats?" {...field} />
+                  <NumberInput label={t('How many free seats?')} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -115,8 +119,8 @@ const TransportRequestForm = () => {
               <FormItem>
                 <FormControl>
                   <TextInput
-                    label="How much storage space do you need?"
-                    placeholder="A 300L trunk for example"
+                    label={t('How much storage space do you need?')}
+                    placeholder={t('A 300L trunk for example')}
                     optional
                     {...field}
                   />
@@ -132,7 +136,12 @@ const TransportRequestForm = () => {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <TextAreaInput label="Description" placeholder="Type your message here" optional {...field} />
+                  <TextAreaInput
+                    label={t('Description')}
+                    placeholder={t('Type your message here')}
+                    optional
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -145,7 +154,7 @@ const TransportRequestForm = () => {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <TextInput label="Name" placeholder="Full Name" {...field} />
+                  <TextInput label={t('Name')} placeholder={t('Full Name')} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -158,7 +167,7 @@ const TransportRequestForm = () => {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <TextInput label="Email" type="email" placeholder="Email" optional {...field} />
+                  <TextInput label={t('Email')} type="email" placeholder={t('Email')} optional {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -171,7 +180,7 @@ const TransportRequestForm = () => {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <TextInput label="Phone Number" placeholder="Phone Number" type="tel" {...field} />
+                  <TextInput label={t('Phone Number')} placeholder={t('Phone Number')} type="tel" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -184,7 +193,7 @@ const TransportRequestForm = () => {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <FileInput label="Upload pictures" {...field} optional />
+                  <FileInput label={t('Upload pictures')} {...field} optional />
                 </FormControl>
                 <FormMessage />
               </FormItem>

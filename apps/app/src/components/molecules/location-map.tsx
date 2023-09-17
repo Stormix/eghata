@@ -1,4 +1,5 @@
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
+import { useTranslation } from 'react-i18next';
 
 import 'leaflet/dist/leaflet.css';
 
@@ -9,6 +10,8 @@ interface MapLocationProps {
 }
 
 const LocationMap = ({ location = [31.073, -8.407] }: MapLocationProps) => {
+  const { t } = useTranslation();
+
   return (
     <MapContainer center={location} zoom={8} className="h-48 w-full z-[5]">
       <TileLayer
@@ -16,7 +19,7 @@ const LocationMap = ({ location = [31.073, -8.407] }: MapLocationProps) => {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       <Marker position={location}>
-        <Popup>Help needed!</Popup>
+        <Popup>{t('Help needed')}!</Popup>
       </Marker>
     </MapContainer>
   );
