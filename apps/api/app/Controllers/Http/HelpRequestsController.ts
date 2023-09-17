@@ -121,7 +121,7 @@ export default class HelpRequestController {
     }
   }
 
-  public async indexById({ params, response }: HttpContextContract) {
+  public async show({ params, response }: HttpContextContract) {
     try {
       const helpRequest = await HelpRequest.find(params.id)
 
