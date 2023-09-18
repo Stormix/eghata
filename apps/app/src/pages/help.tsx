@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import ReactPullToRefresh from 'react-pull-to-refresh';
 
-const MAX = 1000;
+const MAX = 60;
 
 const Help = () => {
   const { t } = useTranslation();
@@ -52,7 +52,7 @@ const Help = () => {
   );
 
   return (
-    <div className="flex flex-col justify-start w-full gap-4 pb-2">
+    <div className="flex flex-col justify-start w-full gap-4 pb-32">
       <h1 className="text-2xl font-medium text-center">{t('Requesting help')}</h1>
       <div className="sticky top-0 px-4 bg-white">
         <SearchInput />
