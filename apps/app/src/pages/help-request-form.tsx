@@ -7,10 +7,12 @@ import Navbar from '@/components/molecules/navbar';
 import RadioInput from '@/components/molecules/radio-input';
 import TextAreaInput from '@/components/molecules/text-area-input';
 import TextInput from '@/components/molecules/text-input';
+import api from '@/lib/api';
 import { EARTHQUAKE_EPICENTER } from '@/lib/config';
 import { imageSchema } from '@/lib/validation';
 import { RequestTypes } from '@/types/types';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
@@ -54,14 +56,40 @@ const HelpRequestForm = () => {
     mode: 'onChange'
   });
 
+  const {
+    isSuccess,
+    isLoading,
+    isError,
+    mutate: createHelpRequest
+  } = useMutation({
+    mutationFn: (formData: FormData) => api.createHelpRequest(formData)
+  });
+
   const { isSubmitting, isDirty, isValid } = form.formState;
 
+  console.log(form.formState);
+
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+    const formData = new FormData();
+
+    formData.append('types', JSON.stringify(values.types));
+    formData.append('location', JSON.stringify(values.location));
+    formData.append('isOnSite', values.isOnSite);
+    if (values.description) formData.append('description', values.description);
+    if (values.source) formData.append('source', values.source);
+    formData.append('name', values.name);
+    if (values.email) formData.append('email', values.email);
+    formData.append('phone', values.phone);
+
+    values.files.forEach((file) => {
+      formData.append('files', file);
+    });
+
+    return createHelpRequest(formData);
   };
 
   return (
-    <div className="flex flex-col w-full gap-4 px-6 overflow-y-auto pb-20">
+    <div className="flex flex-col w-full gap-4 px-6 overflow-y-auto pb-28">
       <h1 className="text-2xl">{t('Request Help')}</h1>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4" encType="multipart/form-data">
@@ -222,7 +250,7 @@ const HelpRequestForm = () => {
             )}
           />
 
-          <Navbar asSubmit disabled={!isDirty || !isValid} loading={isSubmitting} />
+          <Navbar asSubmit disabled={!isDirty || !isValid} loading={isSubmitting || isLoading} />
         </form>
       </Form>
     </div>

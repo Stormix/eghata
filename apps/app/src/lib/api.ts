@@ -1,11 +1,16 @@
 import { QueryFunction, QueryKey, useQuery } from '@tanstack/react-query';
-import { User } from 'shared';
+import { LoginDTO } from 'shared';
 import { axios } from './axios';
 
 const api = {
   /* User endpoints */
-  authenticate: async (fingerprint: string | null): Promise<User.LoginDTO | null> => {
+  authenticate: async (fingerprint: string | null): Promise<LoginDTO | null> => {
     return axios.post('/authenticate', { fingerprint });
+  },
+
+  /* Help Request endpoints */
+  createHelpRequest: async (data: FormData) => {
+    return axios.post('/help-requests', data);
   }
 } as const;
 
@@ -18,28 +23,38 @@ export const useLazyQuery = (key: QueryKey, fn: QueryFunction, options = {}) => 
   return [query.refetch, query];
 };
 
-export const useApi = <QueryName extends keyof typeof api>(
-  queryName: QueryName,
-  params?: Parameters<(typeof api)[QueryName]>[0]
-) => {
-  const query = useQuery({
-    queryKey: [queryName],
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore TODO: fix this
-    queryFn: async () => await api[queryName](...params)
-  });
+// export const useApi = <QueryName extends keyof typeof api>(
+//   queryName: QueryName,
+//   params?: Parameters<(typeof api)[QueryName]>[0]
+// ) => {
+//   const query = useQuery({
+//     queryKey: [queryName],
+//     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+//     // @ts-ignore TODO: fix this
+//     queryFn: async () => await api[queryName](...params)
+//   });
 
-  return query;
-};
+//   return query;
+// };
 
-export const useApiLazy = <QueryName extends keyof typeof api>(
-  queryName: QueryName,
-  params?: Parameters<(typeof api)[QueryName]>[0]
-) => {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore TODO: fix this
-  const [refetch, query] = useLazyQuery([queryName], async () => await api[queryName](...params));
-  return [refetch, query];
-};
+// export const useApiMutation = <QueryName extends keyof typeof api>(
+//   queryName: QueryName,
+//   params?: Parameters<(typeof api)[QueryName]>[0]
+// ) => {
+//   const mutation = useMutation({
+//     mutationKey: [queryName],
+//     mutationFn: async () => await api[queryName](...params)
+//   });
+// };
+
+// export const useApiLazy = <QueryName extends keyof typeof api>(
+//   queryName: QueryName,
+//   params?: Parameters<(typeof api)[QueryName]>[0]
+// ) => {
+//   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+//   // @ts-ignore TODO: fix this
+//   const [refetch, query] = useLazyQuery([queryName], async () => await api[queryName](...params));
+//   return [refetch, query];
+// };
 
 export default api;

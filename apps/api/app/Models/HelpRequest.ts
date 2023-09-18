@@ -57,6 +57,9 @@ export default class HelpRequest extends BaseModel {
   @column()
   public isOnSite: boolean
 
+  @column()
+  public files: string
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
