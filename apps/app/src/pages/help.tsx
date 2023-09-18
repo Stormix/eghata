@@ -2,9 +2,20 @@ import SearchInput from '../components/atoms/search-input';
 import FilterButton from '../components/molecules/FilterButton';
 import Card from '../components/molecules/card';
 import { useTranslation } from 'react-i18next';
+import { List } from "react-virtualized";
 
 const Help = () => {
   const { t } = useTranslation();
+
+  const rowHeight = 128 + 16 + 16;
+  const rowWidth = 800;
+  const listHeight = 800;
+
+  const list = [...Array(1000).keys()]
+
+  function renderCard({ index , key, style } : any) {
+    return <Card key={index} style={style} className="" />;
+  }
 
   return (
     <div className="flex flex-col justify-start w-full gap-4 pb-28 ">
@@ -17,9 +28,13 @@ const Help = () => {
       </div>
 
       <div className="flex flex-col gap-4 px-4">
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((index) => (
-          <Card key={index} className="" />
-        ))}
+        <List
+          width={rowWidth}
+          height={listHeight}
+          rowHeight={rowHeight}
+          rowRenderer={renderCard}
+          rowCount={list.length}
+          overscanRowCount={5} />
       </div>
     </div>
   );

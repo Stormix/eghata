@@ -7,11 +7,12 @@ import User from '../../Models/User'
 export default class AuthController {
   public async authenticate({ request, response, auth }: HttpContextContract) {
     try {
-      const { fingerprint } = request.only(['fingerprint'])
-      const user = await User.firstOrCreate({ fingerprint })
-      const token = await auth.use('api').generate(user)
+      // const { fingerprint } = request.only(['fingerprint'])
+      // const user = await User.firstOrCreate({ fingerprint })
+      // const token = await auth.use('api').generate(user)
 
-      return response.json({ token } as LoginDTO)
+      // return response.json({ token } as LoginDTO)
+      return null
     } catch (error) {
       console.log(error)
       return response.badRequest({
