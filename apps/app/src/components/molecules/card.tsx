@@ -9,7 +9,6 @@ import { useNavigate } from 'react-router-dom';
 import { Badge } from '../atoms/badge';
 
 interface CardProps {
-  style?: React.CSSProperties;
   className?: string;
 }
 
