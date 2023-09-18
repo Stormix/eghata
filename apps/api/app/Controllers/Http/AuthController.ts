@@ -1,28 +1,46 @@
 import { Limiter } from '@adonisjs/limiter/build/services/index'
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import { rules, schema } from '@ioc:Adonis/Core/Validator'
+import { LoginDTO } from 'shared/dist/dto/user'
 import User from '../../Models/User'
 
 export default class AuthController {
+  public async authenticate({ request, response, auth }: HttpContextContract) {
+    try {
+      const { fingerprint } = request.only(['fingerprint'])
+      const user = await User.firstOrCreate({ fingerprint })
+      const token = await auth.use('api').generate(user, {
+        expiresIn: '1 day' // Don't give too much time
+      })
+
+      return response.json({ token } as LoginDTO)
+    } catch (error) {
+      console.log(error)
+      return response.badRequest({
+        error: { message: 'Unable to authenticate' }
+      })
+    }
+  }
+
   public async register({ request, response, auth }: HttpContextContract) {
     const throttleKey = `register_${request.ip()}`
     const limiter = Limiter.use({
       requests: 5,
       duration: '60 mins',
-      blockDuration: '8 hours',
+      blockDuration: '8 hours'
     })
 
     try {
       const userSchema = schema.create({
         fingerprint: schema.string({ trim: true }, [
-          rules.unique({ table: 'users', column: 'fingerprint', caseInsensitive: false }),
-        ]),
+          rules.unique({ table: 'users', column: 'fingerprint', caseInsensitive: false })
+        ])
       })
       const data = await request.validate({ schema: userSchema })
 
       if (await limiter.isBlocked(throttleKey)) {
         return response.tooManyRequests({
-          error: { message: 'Too many requests. Please try after some time' },
+          error: { message: 'Too many requests. Please try after some time' }
         })
       }
 
@@ -33,7 +51,7 @@ export default class AuthController {
     } catch (error) {
       await limiter.increment(throttleKey)
       return response.badRequest({
-        error: { message: 'Unable to register' },
+        error: { message: 'Unable to register' }
       })
     }
   }
@@ -46,12 +64,12 @@ export default class AuthController {
     const limiter = Limiter.use({
       requests: 1,
       duration: '15 mins',
-      blockDuration: '30 mins',
+      blockDuration: '30 mins'
     })
 
     if (await limiter.isBlocked(throttleKey)) {
       return response.tooManyRequests({
-        error: { message: 'Too many requests. Please try after some time' },
+        error: { message: 'Too many requests. Please try after some time' }
       })
     }
 
@@ -64,7 +82,7 @@ export default class AuthController {
     } catch (error) {
       await limiter.increment(throttleKey)
       return response.unauthorized({
-        error: { message: 'Invalid fingerprint' },
+        error: { message: 'Invalid fingerprint' }
       })
     }
   }
@@ -75,7 +93,7 @@ export default class AuthController {
       return response.json({ message: 'Logout successful' })
     } catch (error) {
       return response.badRequest({
-        error: { message: 'Unable to logout' },
+        error: { message: 'Unable to logout' }
       })
     }
   }

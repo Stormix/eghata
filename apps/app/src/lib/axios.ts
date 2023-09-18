@@ -4,10 +4,11 @@ import storage from './storage';
 
 const authRequestInterceptor = (config: AxiosRequestConfig) => {
   const token = storage.getToken();
-  if (token) {
-    config.headers.authentication = `Bearer ${token}`;
+  if (config.headers) {
+    console.log('AuthRequestInterceptor: setting headers', token);
+    if (token) config.headers.authentication = `Bearer ${token}`;
+    config.headers.Accept = 'application/json';
   }
-  config.headers.Accept = 'application/json';
   return config;
 };
 

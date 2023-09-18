@@ -4,9 +4,9 @@ import { ReactComponent as RiskIcon } from '@/assets/icons/risk.svg';
 import { ReactComponent as ShelterIcon } from '@/assets/icons/shelter.svg';
 import { cn } from '@/lib/utils';
 import { ArrowRightIcon } from '@radix-ui/react-icons';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { Badge } from '../atoms/badge';
-import { useTranslation } from 'react-i18next';
 
 interface CardProps {
   className?: string;
@@ -34,8 +34,8 @@ const Card = ({ className }: CardProps) => {
           <div className="flex items-center gap-2">
             <ShelterIcon className="w-5 h-5" />
             <FoodIcon className="w-6 h-6 text-teal-500" />
-            <RiskIcon className="w-5 h-5" />
-            <MedicalIcon className="w-5 h-5" />
+            <RiskIcon className="w-5 h-5 text-red-500" />
+            <MedicalIcon className="w-5 h-5 text-red-500" />
           </div>
         </div>
         <div className="flex justify-between items-center">

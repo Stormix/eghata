@@ -9,6 +9,7 @@ import TextAreaInput from '@/components/molecules/text-area-input';
 import TextInput from '@/components/molecules/text-input';
 import { EARTHQUAKE_EPICENTER } from '@/lib/config';
 import { imageSchema } from '@/lib/validation';
+
 import { RequestTypes } from '@/types/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';

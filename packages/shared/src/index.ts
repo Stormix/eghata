@@ -1,3 +1,4 @@
-import * as User from './dto/user';
+export * from './contracts/types';
+export * from './dto/help-requests';
+export * from './dto/user';
 
-export { User };

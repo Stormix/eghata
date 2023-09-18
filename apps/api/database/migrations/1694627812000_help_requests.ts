@@ -18,6 +18,7 @@ export default class extends BaseSchema {
       table.string('phone').nullable()
       table.string('email').nullable()
       table.boolean('is_on_site').defaultTo(false).notNullable()
+      table.integer('user_id').unsigned().references('users.id')
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

@@ -28,7 +28,7 @@
     "build"
   ],
   "prettier": {
-    "trailingComma": "es5",
+    "trailingComma": "none",
     "semi": false,
     "singleQuote": true,
     "useTabs": false,
@@ -70,6 +70,7 @@
     "proxy-addr": "^2.0.7",
     "reflect-metadata": "^0.1.13",
     "shared": "workspace:*",
-    "source-map-support": "^0.5.21"
+    "source-map-support": "^0.5.21",
+    "zod": "^3.22.2"
   }
 }
