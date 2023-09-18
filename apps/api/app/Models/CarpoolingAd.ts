@@ -1,10 +1,14 @@
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, belongsTo, BelongsTo, column } from '@ioc:Adonis/Lucid/Orm'
 import { DateTime } from 'luxon'
 import { CarpoolingStatus } from '../../contracts/status'
+import User from './User'
 
 export default class CarpoolingAd extends BaseModel {
   @column({ isPrimary: true })
   public id: number
+
+  @belongsTo(() => User)
+  public user: BelongsTo<typeof User>
 
   @column()
   public type: 'offer' | 'request'

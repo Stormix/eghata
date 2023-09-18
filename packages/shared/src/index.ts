@@ -1,1 +1,4 @@
-export const hello = (test: string) => console.log('hello', test);
+export * from './contracts/types';
+export * from './dto/help-requests';
+export * from './dto/user';
+

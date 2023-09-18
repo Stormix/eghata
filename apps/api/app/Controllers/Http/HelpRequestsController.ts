@@ -1,37 +1,67 @@
+import Application from '@ioc:Adonis/Core/Application'
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import Logger from '@ioc:Adonis/Core/Logger'
+import Type from 'App/Models/Type'
+import { HelpRequestStatus } from 'Contracts/status'
+import { createHelpRequestSchema } from 'shared'
 import HelpRequest from '../../Models/HelpRequest'
-;('use strict')
 
 export default class HelpRequestController {
   public async store({ request, response }: HttpContextContract) {
     try {
-      const data = request.only([
-        'longitude',
-        'latitude',
-        'address',
+      const payload = request.only([
+        'types',
+        'location',
+        'isOnSite',
         'description',
         'source',
-        'status',
+        'email',
         'name',
         'phone',
-        'email',
-        'isOnSite',
+        'files'
       ])
 
-      const helpRequest = await HelpRequest.create(data)
+      const parsedPayload = createHelpRequestSchema.parse({
+        ...payload,
+        types: JSON.parse(payload.types),
+        location: JSON.parse(payload.location)
+      })
 
-      if (request.input('types')) {
-        const types = request.input('types')
-        const typesQuery = helpRequest.related('types')
-        await typesQuery.attach(types)
-      }
+      // TODO: properly handle files / validate them
+      await Promise.allSettled(
+        request.files('files').map((file) => file.move(Application.tmpPath('uploads')))
+      )
 
-      await helpRequest.load('types')
+      const helpRequest = await HelpRequest.create({
+        longitude: parsedPayload.location.lng,
+        latitude: parsedPayload.location.lat,
+        address: parsedPayload.location.address,
+        description: parsedPayload.description,
+        source: parsedPayload.source,
+        status: HelpRequestStatus.Requested,
+        name: parsedPayload.name,
+        email: parsedPayload.email,
+        phone: parsedPayload.phone,
+        isOnSite: parsedPayload.isOnSite === 'yes',
+        files: JSON.stringify(
+          request
+            .files('files')
+            .map((file) => file.fileName!)
+            .filter(Boolean)
+        )
+      })
 
-      return response.created(helpRequest)
+      const types = await Type.query().whereIn('type', parsedPayload.types).exec()
+
+      await helpRequest.related('types').attach(types.map((type) => type.id))
+
+      return response.created(await helpRequest.load('types'))
     } catch (error) {
+      Logger.error('Failed to create help request: %s', error.message)
+      console.error(error)
       return response.badRequest({
-        error: { message: 'Unable add the help request' },
+        message: 'Failed to create help request',
+        error: error.messages
       })
     }
   }
@@ -50,7 +80,7 @@ export default class HelpRequestController {
         'name',
         'phone',
         'email',
-        'isOnSite',
+        'isOnSite'
       ])
 
       helpRequest.merge(data)
@@ -60,7 +90,7 @@ export default class HelpRequestController {
       return helpRequest
     } catch (error) {
       return response.badRequest({
-        error: { message: 'Unable update the help request' },
+        error: { message: 'Unable update the help request' }
       })
     }
   }
@@ -72,7 +102,7 @@ export default class HelpRequestController {
       await helpRequest.delete()
     } catch (error) {
       return response.badRequest({
-        error: { message: 'Unable delete the help request' },
+        error: { message: 'Unable delete the help request' }
       })
     }
   }
@@ -89,7 +119,7 @@ export default class HelpRequestController {
       return helpRequest.load('types')
     } catch (error) {
       return response.badRequest({
-        error: { message: 'Unable to add the types to the help request' },
+        error: { message: 'Unable to add the types to the help request' }
       })
     }
   }
@@ -106,7 +136,7 @@ export default class HelpRequestController {
       return helpRequest.load('types')
     } catch (error) {
       return response.badRequest({
-        error: { message: 'Unable to remove the types from the help request' },
+        error: { message: 'Unable to remove the types from the help request' }
       })
     }
   }
@@ -121,7 +151,7 @@ export default class HelpRequestController {
     }
   }
 
-  public async indexById({ params, response }: HttpContextContract) {
+  public async show({ params, response }: HttpContextContract) {
     try {
       const helpRequest = await HelpRequest.find(params.id)
 

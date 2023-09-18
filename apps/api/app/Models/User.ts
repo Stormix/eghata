@@ -1,5 +1,8 @@
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm'
 import { DateTime } from 'luxon'
+import CarpoolingAd from './CarpoolingAd'
+import HelpRequest from './HelpRequest'
+import Offer from './Offer'
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
@@ -19,6 +22,15 @@ export default class User extends BaseModel {
 
   @column()
   public fingerprint: string
+
+  @hasMany(() => CarpoolingAd)
+  public carpoolingAds: HasMany<typeof CarpoolingAd>
+
+  @hasMany(() => Offer)
+  public offers: HasMany<typeof Offer>
+
+  @hasMany(() => HelpRequest)
+  public helpRequests: HasMany<typeof HelpRequest>
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

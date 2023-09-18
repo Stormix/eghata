@@ -6,7 +6,7 @@ import { initReactI18next } from 'react-i18next';
 i18n
   .use(Backend)
   .use(LanguageDetector)
-  .use(initReactI18next) // bind react-i18next to the instance
+  .use(initReactI18next)
   .init({
     fallbackLng: 'en-us',
     debug: false,
@@ -19,7 +19,7 @@ i18n
     fallbackNS: ['common'],
 
     interpolation: {
-      escapeValue: false // not needed for react!!
+      escapeValue: false
     },
 
     react: {
@@ -31,7 +31,6 @@ i18n
       useSuspense: true
     },
 
-    // Detector
     detection: {
       order: ['cookie', 'localStorage'],
       lookupQuerystring: 'lng',

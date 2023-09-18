@@ -25,6 +25,7 @@ export default class extends BaseSchema {
       table.integer('storage_space').nullable()
 
       table.enum('status', Object.values(CarpoolingStatus)).notNullable()
+      table.integer('user_id').unsigned().references('users.id')
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
