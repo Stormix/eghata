@@ -41,6 +41,7 @@ importers:
       typescript: ~4.6
       youch: ^3.3.1
       youch-terminal: ^2.2.2
+      zod: ^3.22.2
     dependencies:
       '@adonisjs/auth': 8.2.3_barxagssy6a6yjt2dfkstsmurm
       '@adonisjs/bouncer': 2.3.0_3w4kptq7ieq33yws3e5oykkl7e
@@ -58,6 +59,7 @@ importers:
       reflect-metadata: 0.1.13
       shared: link:../../packages/shared
       source-map-support: 0.5.21
+      zod: 3.22.2
     devDependencies:
       '@adonisjs/assembler': 5.9.5_@adonisjs+core@5.9.0
       '@japa/preset-adonis': 1.2.0_soldvlx6eyfmnzl4kbtiga4bnq
@@ -92,6 +94,7 @@ importers:
       '@tanstack/eslint-plugin-query': ^4.34.1
       '@tanstack/react-query': ^4.35.3
       '@tanstack/react-query-devtools': ^4.35.3
+      '@total-typescript/ts-reset': ^0.5.1
       '@types/leaflet': ^1.9.4
       '@types/node': ^20.6.0
       '@types/react': ^18.2.15
@@ -179,6 +182,7 @@ importers:
     devDependencies:
       '@capacitor/cli': 5.4.0
       '@tanstack/eslint-plugin-query': 4.34.1_eslint@8.49.0
+      '@total-typescript/ts-reset': 0.5.1
       '@types/leaflet': 1.9.4
       '@types/node': 20.6.2
       '@types/react': 18.2.21
@@ -5812,6 +5816,10 @@ packages:
   /@tootallnate/once/2.0.0:
     resolution: {integrity: sha512-XCuKFP5PS55gnMVu3dty8KPatLqUoy/ZYzDzAGCQ8JNFCkLXzmI7vNHCR+XpbZaMWQK/vQubr7PkYq8g470J/A==}
     engines: {node: '>= 10'}
+    dev: true
+
+  /@total-typescript/ts-reset/0.5.1:
+    resolution: {integrity: sha512-AqlrT8YA1o7Ff5wPfMOL0pvL+1X+sw60NN6CcOCqs658emD6RfiXhF7Gu9QcfKBH7ELY2nInLhKSCWVoNL70MQ==}
     dev: true
 
   /@tufjs/canonical-json/1.0.0:

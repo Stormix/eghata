@@ -40,15 +40,15 @@ const databaseConfig: DatabaseConfig = {
         port: Env.get('PG_PORT'),
         user: Env.get('PG_USER'),
         password: Env.get('PG_PASSWORD', ''),
-        database: Env.get('PG_DB_NAME'),
+        database: Env.get('PG_DB_NAME')
       },
       migrations: {
-        naturalSort: true,
+        naturalSort: true
       },
       healthCheck: true,
-      debug: true,
-    },
-  },
+      debug: true
+    }
+  }
 }
 
 export default databaseConfig
