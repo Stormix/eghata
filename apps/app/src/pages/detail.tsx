@@ -15,11 +15,11 @@ const Detail = () => {
   const type = location.pathname.split('/')[2];
 
   return (
-    <div className="pb-32 overflow-y-auto">
-      <BackButton className="absolute top-10 left-4 z-10" />
+    <div className="pb-6 overflow-y-auto">
+      <BackButton className="absolute z-10 top-10 left-4" />
       <img src="https://maeq-tracker.rocmine.net/assets/earth.webp" className=" h-[40vh] object-cover w-full" />
       <div className="flex flex-col gap-2 p-6">
-        <div className="flex gap-4 justify-between items-center">
+        <div className="flex items-center justify-between gap-4">
           <h1 className="text-xl font-medium">
             {t('Detail')} {t(type)} {id}
           </h1>
