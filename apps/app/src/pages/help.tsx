@@ -1,4 +1,3 @@
-import { useWindowSize } from '@/hooks/useWindowSize';
 import SearchInput from '../components/atoms/search-input';
 import FilterButton from '../components/molecules/FilterButton';
 import Card from '../components/molecules/card';
