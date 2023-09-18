@@ -40,7 +40,7 @@ const Layout = () => {
       <Providers>
         <div className="">
           {!hideHeaderRoutes.some((route) => location.pathname.includes(route)) && <Header />}
-          <main className="flex flex-col flex-grow overflow-y-auto w-full">
+          <main className="flex flex-col flex-grow w-full ">
             <Outlet />
             {!hideNavbarRoutes.some((route) => location.pathname.includes(route)) && <Navbar />}
           </main>
