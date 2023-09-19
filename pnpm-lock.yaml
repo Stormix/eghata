@@ -210,12 +210,12 @@ importers:
       react-leaflet:
         specifier: ^4.2.1
         version: 4.2.1(leaflet@1.9.4)(react-dom@18.2.0)(react@18.2.0)
-      react-pull-to-refresh:
-        specifier: ^2.0.1
-        version: 2.0.1(react@18.2.0)
       react-router-dom:
         specifier: ^6.16.0
         version: 6.16.0(react-dom@18.2.0)(react@18.2.0)
+      react-simple-pull-to-refresh:
+        specifier: ^1.3.3
+        version: 1.3.3(react-dom@18.2.0)(react@18.2.0)
       shared:
         specifier: workspace:*
         version: link:../../packages/shared
@@ -10366,11 +10366,6 @@ packages:
     dev: true
     optional: true
 
-  /hammerjs@2.0.8:
-    resolution: {integrity: sha512-tSQXBXS/MWQOn/RKckawJ61vvsDpCom87JgxiYdGwHdOa0ht0vzUWDlfioofFCRU0L+6NGDt6XzbgoJvZkMeRQ==}
-    engines: {node: '>=0.8.0'}
-    dev: false
-
   /handlebars@4.7.8:
     resolution: {integrity: sha512-vafaFqs8MZkRrSX7sFVUdo3ap/eNiLnb4IakshzvP56X5Nr1iGKAIqdX6tMlm6HcNRIkr6AxO5jFEoJzzpT8aQ==}
     engines: {node: '>=0.4.7'}
@@ -14510,15 +14505,6 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
-  /react-pull-to-refresh@2.0.1(react@18.2.0):
-    resolution: {integrity: sha512-mbNI9r3sBF4X+2fBO8c9CuXDLIywNuoZ24AIGU3Odi+L8C4MpS0tuhMQUSg5cSOuUtDFkE8Z/YnBYixo10QI6Q==}
-    peerDependencies:
-      react: '>=16.8.0'
-    dependencies:
-      hammerjs: 2.0.8
-      react: 18.2.0
-    dev: false
-
   /react-remove-scroll-bar@2.3.4(@types/react@18.2.21)(react@18.2.0):
     resolution: {integrity: sha512-63C4YQBUt0m6ALadE9XV56hV8BgJWDmmTPY758iIJjfQKt2nYwoUrPk0LXRXcB/yIj82T1/Ixfdpdk68LwIB0A==}
     engines: {node: '>=10'}
@@ -14594,6 +14580,16 @@ packages:
     dependencies:
       '@remix-run/router': 1.9.0
       react: 18.2.0
+    dev: false
+
+  /react-simple-pull-to-refresh@1.3.3(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-6qXsa5RtNVmKJhLWvDLIX8UK51HFtCEGjdqQGf+M1Qjrcc4qH4fki97sgVpGEFBRwbY7DiVDA5N5p97kF16DTw==}
+    peerDependencies:
+      react: ^16.10.2 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.10.2 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
     dev: false
 
   /react-style-singleton@2.2.1(@types/react@18.2.21)(react@18.2.0):

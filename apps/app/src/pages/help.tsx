@@ -3,8 +3,8 @@ import FilterButton from '../components/molecules/FilterButton';
 import Card from '../components/molecules/card';
 import { useTranslation } from 'react-i18next';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import ReactPullToRefresh from 'react-pull-to-refresh';
-
+import PullToRefresh from 'react-simple-pull-to-refresh';
+import LoadingSpinner from '../components/atoms/loading-spinner';
 const MAX = 60;
 
 const Help = () => {
@@ -60,15 +60,32 @@ const Help = () => {
           <FilterButton />
         </div>
       </div>
-      <ReactPullToRefresh onRefresh={handleRefresh} className="">
+      <PullToRefresh
+        isPullable={true}
+        canFetchMore={false}
+        onRefresh={handleRefresh}
+        pullDownThreshold={70}
+        maxPullDownDistance={70}
+        resistance={4}
+        refreshingContent={
+          <div className="flex items-center justify-center h-full">
+            <LoadingSpinner className="w-12 h-12" />
+          </div>
+        }
+        pullingContent={
+          <div className="flex items-center justify-center h-full">
+            <LoadingSpinner className="w-12 h-12" />
+          </div>
+        }
+      >
         <ul className="flex flex-col gap-4 px-4">
           {data.map((item, index) => (
-            <li className="list-none" key={item} ref={index === data.length - 1 ? lastItemRef : null}>
+            <li className="list-none m-0 p-0" key={index} ref={index === data.length - 1 ? lastItemRef : null}>
               <Card key={index} className="" />
             </li>
           ))}
         </ul>
-      </ReactPullToRefresh>
+      </PullToRefresh>
     </div>
   );
 };
