@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useInfiniteScroll } from 'ahooks';
 import { getLoadMoreList } from '@/lib/getInfiniteScrollData';
 import { useRef } from 'react';
+import LoadingSpinner from '@/components/atoms/loading-spinner';
 
 const Help = () => {
   const { t } = useTranslation();
@@ -25,16 +26,20 @@ const Help = () => {
       </div>
 
       <div ref={ref} className="flex flex-col gap-4 px-4">
-        {loading ? <p>loading</p> : data?.list?.map((index) => <Card key={index} className="" />)}
+        {loading ? (
+          <LoadingSpinner className="flex justify-center w-full h-8" />
+        ) : (
+          data?.list?.map((index) => <Card key={index} className="" />)
+        )}
 
         <div style={{ marginTop: 8 }}>
           {!noMore && (
-            <button type="button" onClick={loadMore} disabled={loadingMore}>
-              {loadingMore ? 'Loading more...' : 'Click to load more'}
+            <button type="button" onClick={loadMore} disabled={loadingMore} className="w-full">
+              {loadingMore ? <LoadingSpinner className="flex justify-center w-full h-8" /> : 'Click to load more'}
             </button>
           )}
 
-          {noMore && <span>No more data</span>}
+          {noMore && !loading && <span>No more data</span>}
         </div>
       </div>
     </div>
