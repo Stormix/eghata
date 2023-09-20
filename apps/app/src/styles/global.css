@@ -96,12 +96,16 @@
 
 @layer base {
   * {
-    @apply border-border font-sans;
+    @apply font-sans border-border;
   }
   body {
     @apply bg-background text-foreground overflow-hidden;
     font-feature-settings:
       'rlig' 1,
       'calt' 1;
+  }
+
+  .navbar-shadow {
+    box-shadow: 0px -4.563933849334717px 11.409834861755371px 0px rgba(206, 206, 206, 0.35);
   }
 }

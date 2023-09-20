@@ -40,6 +40,7 @@
     "react-day-picker": "^8.8.2",
     "react-device-detect": "^2.2.3",
     "react-dom": "^18.2.0",
+    "react-esri-leaflet": "^2.0.1",
     "react-google-autocomplete": "^2.7.3",
     "react-hook-form": "^7.46.1",
     "react-i18next": "^13.2.2",
