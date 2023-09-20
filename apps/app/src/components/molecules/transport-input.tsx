@@ -19,8 +19,8 @@ const TransportInput = ({ value, onChange }: TransportInputProps) => {
 
   const [transportValue, setTransportValue] = useState<TransportValue>(value);
   return (
-    <div className="flex items-center gap-2">
-      <div className="flex flex-col gap-2 flex-grow">
+    <div className="relative flex items-center gap-2">
+      <div className="flex flex-col flex-grow gap-2">
         <AddressInput
           placeholder={t('Start address')}
           value={transportValue.start}
@@ -51,6 +51,7 @@ const TransportInput = ({ value, onChange }: TransportInputProps) => {
         />
       </div>
       <Button
+        className="absolute w-10 px-0 rounded-full right-6 top-9 "
         variant="outline"
         type="button"
         onClick={(e) => {
@@ -65,7 +66,7 @@ const TransportInput = ({ value, onChange }: TransportInputProps) => {
           });
         }}
       >
-        <SwitchIcon />
+        <SwitchIcon className="text-teal-500" />
       </Button>
     </div>
   );
