@@ -45,7 +45,7 @@ const Navbar = ({ asSubmit, loading, disabled }: NavbarProps) => {
       {/* nav bar dynamic background */}
       <div className="absolute bottom-0 flex items-end left-0 z-10 w-full h-[94px]">
         <div className=" h-full flex-1 navbar-shadow bg-white  rounded-l-[40px]"></div>
-        <NavCenter className="z-11" />
+        <NavCenter className="z-20" />
         <div className=" h-full flex-1  navbar-shadow bg-white  rounded-r-[40px]"></div>
       </div>
     </div>
