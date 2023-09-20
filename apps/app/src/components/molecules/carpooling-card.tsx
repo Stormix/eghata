@@ -25,7 +25,7 @@ const CarpoolingCard = ({ className }: CarpoolingCardProps) => {
         <span className="-mt-2 ">20:00</span>
         <span className="-mb-2">10:00</span>
       </div>
-      <Trip className="h-full" />
+      <Trip />
       <div className="flex flex-col justify-between ">
         <span className="-mt-2">{t('Casablanca')}</span>
         <CapacityIndicator capacity={2} maxCapacity={4} />
