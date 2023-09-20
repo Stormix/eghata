@@ -1,4 +1,5 @@
-import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
+import { MapContainer, Marker, Popup } from 'react-leaflet';
+import { BasemapLayer } from 'react-esri-leaflet';
 import { useTranslation } from 'react-i18next';
 
 import 'leaflet/dist/leaflet.css';
@@ -9,15 +10,14 @@ interface MapLocationProps {
   location?: LatLngExpression;
 }
 
+const token = import.meta.env.VITE_ARCGIS_TOKEN;
 const LocationMap = ({ location = [31.073, -8.407] }: MapLocationProps) => {
   const { t } = useTranslation();
 
   return (
     <MapContainer center={location} zoom={8} className="h-48 w-full z-[5]">
-      <TileLayer
-        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
+        <BasemapLayer name="ImageryLabels" token={`${token}`} />
+        <BasemapLayer name="Imagery" token={`${token}`} />
       <Marker position={location}>
         <Popup>{t('Help needed')}!</Popup>
       </Marker>
