@@ -13,7 +13,8 @@ interface CardProps {
 }
 
 const Card = ({ className }: CardProps) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const ar = i18n.language === 'ar-ma';
 
   const navigate = useNavigate();
   const onClick = () => {
@@ -42,8 +43,9 @@ const Card = ({ className }: CardProps) => {
           <span>
             <Badge variant={'destructive'}>{t('Requested')}</Badge>
           </span>
-          <div className="text-xs text-teal-500 flex" onClick={onClick}>
-            {t('More info')} <ArrowRightIcon className="w-4 h-4" />
+          <div className="text-xs text-teal-500 flex gap-1 " onClick={onClick}>
+            {t('More info')}
+            <ArrowRightIcon className={cn('w-4 h-4', ar && 'rotate-180')} />
           </div>
         </div>
       </div>
