@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Button } from '../atoms/button';
 import AddressInput, { Location } from './address-input';
 import { useTranslation } from 'react-i18next';
+import { cn } from '@/lib/utils';
 
 interface TransportValue {
   start: Location;
@@ -15,7 +16,8 @@ interface TransportInputProps {
 }
 
 const TransportInput = ({ value, onChange }: TransportInputProps) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const ar = i18n.language === 'ar-ma';
 
   const [transportValue, setTransportValue] = useState<TransportValue>(value);
   return (
@@ -51,7 +53,10 @@ const TransportInput = ({ value, onChange }: TransportInputProps) => {
         />
       </div>
       <Button
-        className="absolute w-10 px-0 rounded-full right-6 top-9 "
+        className={cn('absolute w-10 px-0 rounded-full  top-9 ', {
+          'left-8': ar,
+          'right-6': !ar
+        })}
         variant="outline"
         type="button"
         onClick={(e) => {
