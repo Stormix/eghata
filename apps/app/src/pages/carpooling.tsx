@@ -30,7 +30,7 @@ const Carpooling = () => {
 
       <Popover>
         <PopoverTrigger asChild>
-          <div className="bg-gray-100 text-teal-500 text-center font-medium  px-4 py-2">
+          <div className="bg-gray-100 text-teal-500 text-center font-medium  px-4 py-1 rounded-md">
             {date ? format(date, 'PPP') : <span>{t('Pick a date')}</span>}
           </div>
         </PopoverTrigger>

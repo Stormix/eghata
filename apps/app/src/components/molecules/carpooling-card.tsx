@@ -11,7 +11,8 @@ interface CarpoolingCardProps {
 }
 
 const CarpoolingCard = ({ className }: CarpoolingCardProps) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const ar = i18n.language === 'ar-ma';
 
   const navigate = useNavigate();
 
@@ -20,29 +21,27 @@ const CarpoolingCard = ({ className }: CarpoolingCardProps) => {
   };
 
   return (
-    <div
-      className={cn('flex gap-4 overflow-hidden rounded-lg bg-gray-100 p-6 items-center shadow-md', className)}
-      onClick={onClick}
-    >
-      <div className="flex flex-col justify-between h-full">
-        <span className="-mt-3">20:00</span>
+    <div className={cn('flex gap-4 overflow-hidden rounded-lg bg-gray-100 p-6 shadow-md', className)} onClick={onClick}>
+      <div className="flex flex-col justify-between  ">
+        <span className="-mt-2 ">20:00</span>
         <span className="-mb-2">10:00</span>
       </div>
       <Trip />
-      <div className="flex flex-col justify-between h-full">
-        <span className="-mt-3">{t('Casablanca')}</span>
+      <div className="flex flex-col justify-between ">
+        <span className="-mt-2">{t('Casablanca')}</span>
         <CapacityIndicator capacity={2} maxCapacity={4} />
         <span className="text-xs">
           300-{t('Litre')} {t('Trunk')}
         </span>
         <span className="-mb-2">{t('Marrakech')}</span>
       </div>
-      <div className="flex flex-col justify-between h-full flex-grow ">
-        <span className="-mt-3 flex justify-end">
+      <div className="flex flex-col justify-between  flex-grow ">
+        <span className=" flex justify-end ">
           <Badge>{t('Requested')}</Badge>
         </span>
-        <div className="text-xs text-teal-500 flex -mb-2 justify-end" onClick={onClick}>
-          {t('More info')} <ArrowRightIcon className="w-4 h-4" />
+        <div className="text-xs text-teal-500 flex gap-1 justify-end" onClick={onClick}>
+          {t('More info')}
+          <ArrowRightIcon className={cn('w-4 h-4', ar && 'rotate-180')} />
         </div>
       </div>
     </div>
