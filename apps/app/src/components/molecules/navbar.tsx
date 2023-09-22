@@ -54,7 +54,7 @@ const Navbar = ({ asSubmit, loading, disabled }: NavbarProps) => {
         })}
       >
         <div className=" h-full flex-1 navbar-shadow bg-white  rounded-l-[40px]"></div>
-        <NavCenter className="z-11" />
+        <NavCenter className="z-50" />
         <div className=" h-full flex-1  navbar-shadow bg-white  rounded-r-[40px]"></div>
       </div>
     </div>
