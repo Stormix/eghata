@@ -32,6 +32,7 @@ module.exports = {
           900: 'hsl(var(--red-900))',
           950: 'hsl(var(--red-950))'
         },
+        success: 'hsl(var(--success))',
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',

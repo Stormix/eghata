@@ -18,7 +18,7 @@ const Detail = () => {
     <div className="pb-6 overflow-y-auto">
       <BackButton className="absolute z-10 top-10 left-4" />
       <img src="https://maeq-tracker.rocmine.net/assets/earth.webp" className=" h-[40vh] object-cover w-full" />
-      <div className="flex flex-col gap-2 p-6 flex-grow">
+      <div className="flex flex-col gap-2 p-6 flex-grow mb-24">
         <div className="flex items-center justify-between gap-4">
           <h1 className="text-xl font-medium">
             {t('Detail')} {t(type)} {id}
@@ -68,20 +68,20 @@ const Detail = () => {
         <h3 className="text-gray-500 my-2">{t('Location')}</h3>
 
         <LocationMap />
+      </div>
 
-        <div className="absolute bottom-0 z-30 w-full px-6 pt-4 pb-8 -ml-6 rtl:-mr-6 bg-white">
-          <div className="flex gap-4">
-            <Button variant="primary" className="w-full">
-              {t('Offer assistance')}
-            </Button>
-            <Button variant="primary">
-              <DirectionIcon />
-            </Button>
-          </div>
-          <Button variant="outline" className="w-full mt-4">
-            {t('Report')}
+      <div className="fixed left-0 bottom-0 z-30 w-full px-6 pt-4 pb-8 -ml-6 rtl:-mr-6 rtl:ml-0 bg-white">
+        <div className="flex gap-4">
+          <Button variant="primary" className="w-full">
+            {t('Offer assistance')}
+          </Button>
+          <Button variant="primary">
+            <DirectionIcon />
           </Button>
         </div>
+        <Button variant="outline" className="w-full mt-4">
+          {t('Report')}
+        </Button>
       </div>
     </div>
   );

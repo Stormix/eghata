@@ -54,8 +54,8 @@ export default class HelpRequestController {
       const types = await Type.query().whereIn('type', parsedPayload.types).exec()
 
       await helpRequest.related('types').attach(types.map((type) => type.id))
-
-      return response.created(await helpRequest.load('types'))
+      await helpRequest.load('types')
+      return response.created(helpRequest)
     } catch (error) {
       Logger.error('Failed to create help request: %s', error.message)
       console.error(error)

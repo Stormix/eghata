@@ -10,7 +10,7 @@ import { useState } from 'react';
 import SearchInput from '../components/atoms/search-input';
 
 const Map = () => {
-  const [view, setView] = useState('satellite');
+  const [view, setView] = useState('street');
 
   return (
     <div className="flex w-screen h-screen ">

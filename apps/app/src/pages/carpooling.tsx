@@ -1,10 +1,10 @@
+import { Calendar } from '@/components/atoms/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/atoms/popover';
-import { Calendar } from '@/components/ui/calendar';
 import { format } from 'date-fns';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import CarpoolingCard from '../components/molecules/carpooling-card';
 import TransportInput from '../components/molecules/transport-input';
-import { useTranslation } from 'react-i18next';
 
 const Carpooling = () => {
   const { t } = useTranslation();
