@@ -46,21 +46,12 @@ const Navbar = ({ asSubmit, loading, disabled }: NavbarProps) => {
           <MapIcon onClick={() => navigate('/map')} className={cn(...iconClasses('/map'))} />
         </div>
       </div>
-<<<<<<< HEAD
-      {/* nav bar dynamic background */}
-      <div className="absolute bottom-0 flex items-end left-0 z-10 w-full h-[94px]">
-        <div className=" h-full flex-1 navbar-shadow bg-white  rounded-l-[40px]"></div>
-        <NavCenter className="z-20" />
-        <div className=" h-full flex-1  navbar-shadow bg-white  rounded-r-[40px]"></div>
-      </div>
-=======
       <NavbarBackground
         className={cn('absolute bottom-0 flex items-end left-0 z-10 w-full h-[94px]', {
           'flex-row-reverse': ar,
           'flex-row': !ar
         })}
       />
->>>>>>> a09b1ba5abc90aa636b1c770fa979cd388416da9
     </div>
   );
 };

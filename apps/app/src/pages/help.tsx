@@ -54,12 +54,13 @@ const Help = () => {
   return (
     <div className="flex flex-col justify-start w-full  gap-4  ">
       <h1 className="text-2xl font-medium text-center">{t('Requesting help')}</h1>
-      <div className="sticky top-0 px-4 bg-white ">
+      <div className="sticky -top-1 px-4 bg-white z-10 ">
         <SearchInput />
         <div className="flex flex-row justify-start pb-2">
           <FilterButton />
         </div>
       </div>
+
       <PullToRefresh
         isPullable={true}
         canFetchMore={false}
@@ -78,7 +79,7 @@ const Help = () => {
           </div>
         }
       >
-        <ul className="flex flex-col gap-4 px-4">
+        <ul className="flex flex-col gap-4 px-4 pb-28">
           {data.map((item, index) => (
             <li className="list-none m-0 p-0" key={index} ref={index === data.length - 1 ? lastItemRef : null}>
               <Card key={index} className="" />

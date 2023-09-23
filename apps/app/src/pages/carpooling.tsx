@@ -12,7 +12,7 @@ const Carpooling = () => {
   const [date, setDate] = useState<Date>(new Date());
   return (
     <div className="flex flex-col w-full  gap-4 justify-start py-4  ">
-      <div className="flex flex-col w-full gap-4 sticky top-0 bg-white px-4 pb-2">
+      <div className="flex flex-col w-full gap-4 sticky -top-1 bg-white px-4 pb-2">
         <TransportInput
           value={{
             start: {
