@@ -70,7 +70,7 @@ const Detail = () => {
         <LocationMap />
       </div>
 
-      <div className="fixed left-0 bottom-0 z-30 w-full px-6 pt-4 pb-8 -ml-6 rtl:-mr-6 rtl:ml-0 bg-white">
+      <div className="fixed left-0 bottom-0 z-30 w-full px-6 pt-4 pb-8 bg-white">
         <div className="flex gap-4">
           <Button variant="primary" className="w-full">
             {t('Offer assistance')}
