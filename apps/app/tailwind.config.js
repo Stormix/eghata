@@ -7,7 +7,8 @@ module.exports = {
   darkMode: ['class'],
   theme: {
     fontFamily: {
-      sans: ['Inter var', ...defaultTheme.fontFamily.sans]
+      sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+      arabic: ['Cairo', 'sans-serif']
     },
     container: {
       center: true,
@@ -31,6 +32,7 @@ module.exports = {
           900: 'hsl(var(--red-900))',
           950: 'hsl(var(--red-950))'
         },
+        success: 'hsl(var(--success))',
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',

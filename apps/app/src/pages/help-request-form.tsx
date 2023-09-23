@@ -1,4 +1,5 @@
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/atoms/form';
+import { useToast } from '@/components/atoms/use-toast';
 import AddressInput from '@/components/molecules/address-input';
 import AssistanceTypeInput from '@/components/molecules/assistance-type-input';
 import FileInput from '@/components/molecules/file-input';
@@ -9,12 +10,16 @@ import TextAreaInput from '@/components/molecules/text-area-input';
 import TextInput from '@/components/molecules/text-input';
 import api from '@/lib/api';
 import { EARTHQUAKE_EPICENTER } from '@/lib/config';
+import { DetailTypes } from '@/lib/routes';
 import { imageSchema } from '@/lib/validation';
 import { RequestTypes } from '@/types/types';
+import { FixType } from '@/types/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
+import { useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 import * as z from 'zod';
 
@@ -36,7 +41,8 @@ const formSchema = z.object({
 
 const HelpRequestForm = () => {
   const { t } = useTranslation();
-
+  const { toast } = useToast();
+  const timeout = useRef<NodeJS.Timeout | null>(null);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -56,18 +62,31 @@ const HelpRequestForm = () => {
     mode: 'onChange'
   });
 
-  const {
-    isSuccess,
-    isLoading,
-    isError,
-    mutate: createHelpRequest
-  } = useMutation({
-    mutationFn: (formData: FormData) => api.createHelpRequest(formData)
+  const navigate = useNavigate();
+
+  const { isLoading, mutate: createHelpRequest } = useMutation({
+    mutationFn: (formData: FormData) => api.createHelpRequest(formData),
+    onSuccess: (data: FixType) => {
+      toast({
+        title: 'Help Request Created',
+        description: 'Your help request has been created successfully',
+        variant: 'success'
+      });
+
+      timeout.current = setTimeout(() => {
+        return navigate('/detail/' + DetailTypes.Request + '/' + data.id);
+      }, 1000);
+    },
+    onError: () => {
+      toast({
+        title: 'Error',
+        description: 'Something went wrong, please try again later',
+        variant: 'destructive'
+      });
+    }
   });
 
   const { isSubmitting, isDirty, isValid } = form.formState;
-
-  console.log(form.formState);
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     const formData = new FormData();
@@ -87,6 +106,12 @@ const HelpRequestForm = () => {
 
     return createHelpRequest(formData);
   };
+
+  useEffect(() => {
+    return () => {
+      if (timeout.current) clearTimeout(timeout.current);
+    };
+  }, []);
 
   return (
     <div className="flex flex-col w-full gap-4 px-6 pb-28">

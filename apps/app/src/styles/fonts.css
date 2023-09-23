@@ -1,0 +1,57 @@
+@font-face {
+  font-family: 'Cairo';
+  src: url('/fonts/Cairo/Cairo-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Cairo';
+  src: url('/fonts/Cairo/Cairo-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Cairo';
+  src: url('/fonts/Cairo/Cairo-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Cairo';
+  src: url('/fonts/Cairo/Cairo-ExtraLight.ttf') format('truetype');
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Cairo';
+  src: url('/fonts/Cairo/Cairo-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Cairo';
+  src: url('/fonts/Cairo/Cairo-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Cairo';
+  src: url('/fonts/Cairo/Cairo-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Cairo';
+  src: url('/fonts/Cairo/Cairo-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}

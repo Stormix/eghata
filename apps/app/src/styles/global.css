@@ -46,6 +46,7 @@
     --ring: 215 20.2% 65.1%;
 
     --radius: 0.5rem;
+    --success: 160 84% 39%;
   }
 
   .dark {
@@ -91,12 +92,13 @@
     --ring: 216 34% 17%;
 
     --radius: 0.5rem;
+    --success: 160 84% 39%;
   }
 }
 
 @layer base {
   * {
-    @apply font-sans border-border;
+    @apply font-sans rtl:font-arabic border-border;
   }
   body {
     @apply bg-background text-foreground overflow-hidden;
