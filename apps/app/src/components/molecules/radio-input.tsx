@@ -12,7 +12,8 @@ interface RadioInputProps extends BaseInputProps {
 }
 
 const RadioInput = forwardRef<HTMLDivElement, RadioInputProps>((props, ref) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const ar = i18n.language === 'ar-ma';
 
   const { label, optional, options, value, onChange } = props;
   return (
@@ -23,6 +24,7 @@ const RadioInput = forwardRef<HTMLDivElement, RadioInputProps>((props, ref) => {
       </div>
 
       <RadioGroup
+        className={cn({ 'justify-end': ar, 'justify-start': !ar })}
         orientation="horizontal"
         value={value}
         onValueChange={(value) => {

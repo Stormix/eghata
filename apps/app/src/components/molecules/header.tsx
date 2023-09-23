@@ -9,7 +9,7 @@ const Header = () => {
   const { theme } = useTheme();
 
   return (
-    <header className="flex justify-between w-full p-6">
+    <header className="flex justify-between w-full p-6 rtl:flex-row-reverse">
       <BackButton
         className={cn({
           'opacity-0': !showBackButton

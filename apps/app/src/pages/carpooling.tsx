@@ -1,10 +1,10 @@
+import { Calendar } from '@/components/atoms/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/atoms/popover';
-import { Calendar } from '@/components/ui/calendar';
 import { format } from 'date-fns';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import CarpoolingCard from '../components/molecules/carpooling-card';
 import TransportInput from '../components/molecules/transport-input';
-import { useTranslation } from 'react-i18next';
 
 const Carpooling = () => {
   const { t } = useTranslation();
@@ -30,7 +30,7 @@ const Carpooling = () => {
 
       <Popover>
         <PopoverTrigger asChild>
-          <div className="bg-gray-100 text-teal-500 text-center font-medium  px-4 py-2">
+          <div className="bg-gray-100 text-teal-500 text-center font-medium  px-4 py-1 rounded-md">
             {date ? format(date, 'PPP') : <span>{t('Pick a date')}</span>}
           </div>
         </PopoverTrigger>

@@ -5,11 +5,19 @@ import { isBrowser } from 'react-device-detect';
 import { useTranslation } from 'react-i18next';
 import { Outlet, useLocation } from 'react-router-dom';
 import LoadingSpinner from '../atoms/loading-spinner';
+import { Toaster } from '../atoms/toaster';
 import Header from '../molecules/header';
 import Navbar from '../molecules/navbar';
 
 const Logo = () => {
-  const { theme } = useTheme();
+  const { theme, systemTheme } = useTheme();
+
+  if (theme === 'system') {
+    return (
+      <img src={systemTheme === 'dark' ? '/logo-light.svg' : 'logo.svg'} alt="logo" className="h-32 mx-auto my-8" />
+    );
+  }
+
   return <img src={theme === 'dark' ? '/logo-light.svg' : 'logo.svg'} alt="logo" className="h-32 mx-auto my-8" />;
 };
 
@@ -45,6 +53,7 @@ const Layout = () => {
             {!hideNavbarRoutes.some((route) => location.pathname.includes(route)) && <Navbar />}
           </main>
         </div>
+        <Toaster />
       </Providers>
     </Suspense>
   );

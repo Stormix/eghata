@@ -11,7 +11,7 @@ import TransportOfferForm from '@/pages/transport-offer-form';
 import TransportRequestForm from '@/pages/transport-request-form';
 import { RouteObject } from 'react-router-dom';
 
-enum DetailTypes {
+export enum DetailTypes {
   Offer = 'offer',
   Request = 'request',
   RideRequest = 'ride-request',
