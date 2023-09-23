@@ -7,7 +7,8 @@ module.exports = {
   darkMode: ['class'],
   theme: {
     fontFamily: {
-      sans: ['Inter var', ...defaultTheme.fontFamily.sans]
+      sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+      arabic: ['Cairo', 'sans-serif']
     },
     container: {
       center: true,

@@ -9,7 +9,14 @@ import Header from '../molecules/header';
 import Navbar from '../molecules/navbar';
 
 const Logo = () => {
-  const { theme } = useTheme();
+  const { theme, systemTheme } = useTheme();
+
+  if (theme === 'system') {
+    return (
+      <img src={systemTheme === 'dark' ? '/logo-light.svg' : 'logo.svg'} alt="logo" className="h-32 mx-auto my-8" />
+    );
+  }
+
   return <img src={theme === 'dark' ? '/logo-light.svg' : 'logo.svg'} alt="logo" className="h-32 mx-auto my-8" />;
 };
 

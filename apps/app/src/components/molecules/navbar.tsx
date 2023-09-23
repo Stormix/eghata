@@ -2,11 +2,11 @@ import { ReactComponent as CarIcon } from '@/assets/icons/car.svg';
 import { ReactComponent as HandIcon } from '@/assets/icons/hand.svg';
 import { ReactComponent as HomeIcon } from '@/assets/icons/home.svg';
 import { ReactComponent as MapIcon } from '@/assets/icons/map.svg';
-import { ReactComponent as NavCenter } from '@/assets/nav-center.svg';
 import { cn } from '@/lib/utils';
+import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ActionButton from '../atoms/action-button';
-import { useTranslation } from 'react-i18next';
+import NavbarBackground from './navbar-background';
 
 interface NavbarProps {
   asSubmit?: boolean;
@@ -36,7 +36,7 @@ const Navbar = ({ asSubmit, loading, disabled }: NavbarProps) => {
         disabled={disabled}
         loading={loading}
       />
-      <div className="z-20 flex flex-row justify-center w-full px-6 py-4 mb-3 gap-28 ">
+      <div className="z-20 flex flex-row justify-center w-full px-6 py-4 mb-3 gap-36">
         <div className="flex gap-9">
           <HomeIcon onClick={() => navigate('/')} className={cn(...iconClasses('/'))} />
           <CarIcon onClick={() => navigate('/carpooling')} className={cn(...iconClasses('/carpooling'))} />
@@ -46,17 +46,12 @@ const Navbar = ({ asSubmit, loading, disabled }: NavbarProps) => {
           <MapIcon onClick={() => navigate('/map')} className={cn(...iconClasses('/map'))} />
         </div>
       </div>
-      {/* nav bar dynamic background */}
-      <div
+      <NavbarBackground
         className={cn('absolute bottom-0 flex items-end left-0 z-10 w-full h-[94px]', {
           'flex-row-reverse': ar,
           'flex-row': !ar
         })}
-      >
-        <div className=" h-full flex-1 navbar-shadow bg-white  rounded-l-[40px]"></div>
-        <NavCenter className="z-50" />
-        <div className=" h-full flex-1  navbar-shadow bg-white  rounded-r-[40px]"></div>
-      </div>
+      />
     </div>
   );
 };

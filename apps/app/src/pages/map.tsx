@@ -1,13 +1,13 @@
-import { MapContainer, TileLayer } from 'react-leaflet';
-import { BasemapLayer } from 'react-esri-leaflet';
 import { Button } from '@/components/atoms/button';
 import { LayersIcon } from '@radix-ui/react-icons';
 import 'leaflet/dist/leaflet.css';
+import { BasemapLayer } from 'react-esri-leaflet';
+import { MapContainer, TileLayer } from 'react-leaflet';
 
-import SearchInput from '../components/atoms/search-input';
-import { useState } from 'react';
 import ZoomInButton from '@/components/atoms/zoom-in-button';
 import ZoomOutButton from '@/components/atoms/zoom-out-button';
+import { useState } from 'react';
+import SearchInput from '../components/atoms/search-input';
 
 const Map = () => {
   const [view, setView] = useState('satellite');

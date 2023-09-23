@@ -4,8 +4,8 @@ import { Badge } from '@/components/atoms/badge';
 import { Button } from '@/components/atoms/button';
 import LocationMap from '@/components/molecules/location-map';
 import { MailIcon, PhoneIcon } from 'lucide-react';
-import { useLocation, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useLocation, useParams } from 'react-router-dom';
 
 const Detail = () => {
   const { t } = useTranslation();
@@ -18,7 +18,7 @@ const Detail = () => {
     <div className="pb-6 overflow-y-auto">
       <BackButton className="absolute z-10 top-10 left-4" />
       <img src="https://maeq-tracker.rocmine.net/assets/earth.webp" className=" h-[40vh] object-cover w-full" />
-      <div className="flex flex-col gap-2 p-6">
+      <div className="flex flex-col gap-2 p-6 flex-grow">
         <div className="flex items-center justify-between gap-4">
           <h1 className="text-xl font-medium">
             {t('Detail')} {t(type)} {id}
@@ -69,7 +69,7 @@ const Detail = () => {
 
         <LocationMap />
 
-        <div className="absolute bottom-0 z-30 w-full px-6 pt-4 pb-8 -ml-6 bg-white">
+        <div className="absolute bottom-0 z-30 w-full px-6 pt-4 pb-8 -ml-6 rtl:-mr-6 bg-white">
           <div className="flex gap-4">
             <Button variant="primary" className="w-full">
               {t('Offer assistance')}
