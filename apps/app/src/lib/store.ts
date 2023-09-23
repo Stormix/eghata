@@ -9,7 +9,7 @@ export interface State {
 
 export const useStore = create<State>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       token: '',
       setToken: (token: string) => set({ token })
     }),

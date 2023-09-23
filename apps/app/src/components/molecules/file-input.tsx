@@ -1,8 +1,8 @@
 import { cn } from '@/lib/utils';
 import { BaseInputProps } from '@/types/form';
 import { forwardRef } from 'react';
-import { Input } from '../atoms/input';
 import { useTranslation } from 'react-i18next';
+import { Input } from '../atoms/input';
 
 interface FileProps extends BaseInputProps {
   value: File[];
@@ -16,7 +16,7 @@ const FileInput = forwardRef<HTMLInputElement, FileProps>((props, ref) => {
   return (
     <div className={cn('flex flex-col gap-y-2.5')}>
       <div className="font-medium">
-        <label>{t(label)}</label>
+        <label>{t(label!)}</label>
         {!optional && <span className="text-red-500">*</span>}
       </div>
       <Input

@@ -27,7 +27,7 @@ const AssistanceTypeBlock = ({ className, title, icon: Icon, selected, onClick }
           'text-gray-500': !selected
         })}
       />
-      <span className="text-xs">{title}</span>
+      <span className="text-xs">{t(title)}</span>
     </div>
   );
 };
