@@ -1,3 +1,4 @@
+import { FixType } from '@/types/utils';
 import Axios, { AxiosRequestConfig } from 'axios';
 import { API_URL } from './config';
 import storage from './storage';
@@ -16,7 +17,7 @@ export const axios = Axios.create({
   baseURL: API_URL
 });
 
-axios.interceptors.request.use(authRequestInterceptor);
+axios.interceptors.request.use(authRequestInterceptor as FixType);
 axios.interceptors.response.use(
   (response) => {
     return response.data;

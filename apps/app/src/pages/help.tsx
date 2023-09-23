@@ -1,10 +1,10 @@
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import PullToRefresh from 'react-simple-pull-to-refresh';
+import LoadingSpinner from '../components/atoms/loading-spinner';
 import SearchInput from '../components/atoms/search-input';
 import FilterButton from '../components/molecules/FilterButton';
 import Card from '../components/molecules/card';
-import { useTranslation } from 'react-i18next';
-import { useCallback, useEffect, useRef, useState } from 'react';
-import PullToRefresh from 'react-simple-pull-to-refresh';
-import LoadingSpinner from '../components/atoms/loading-spinner';
 const MAX = 60;
 
 const Help = () => {
@@ -79,7 +79,7 @@ const Help = () => {
         }
       >
         <ul className="flex flex-col gap-4 px-4">
-          {data.map((item, index) => (
+          {data.map((_, index) => (
             <li className="list-none m-0 p-0" key={index} ref={index === data.length - 1 ? lastItemRef : null}>
               <Card key={index} className="" />
             </li>
