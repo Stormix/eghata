@@ -79,10 +79,8 @@ const Help = () => {
           </div>
         }
       >
-
-        <ul className="flex flex-col gap-4 px-4">
+        <ul className="flex flex-col gap-4 px-4 pb-28">
           {data.map((_, index) => (
-
             <li className="list-none m-0 p-0" key={index} ref={index === data.length - 1 ? lastItemRef : null}>
               <Card key={index} className="" />
             </li>
