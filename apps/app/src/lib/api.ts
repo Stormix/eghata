@@ -11,6 +11,10 @@ const api = {
   /* Help Request endpoints */
   createHelpRequest: async (data: FormData) => {
     return axios.post('/help-requests', data);
+  },
+
+  createHelpOffer: async (data: FormData) => {
+    return axios.post('/offers', data);
   }
 } as const;
 

@@ -33,21 +33,21 @@ Route.get('/health', async ({ response }) => {
 Route.resource('offers', 'OffersController')
   .middleware({
     store: ['auth'],
-    destroy: ['auth'],
+    destroy: ['auth']
   })
   .apiOnly()
 
 Route.resource('carpooling-ads', 'CarpoolingAdsController')
   .middleware({
     destroy: ['auth'],
-    update: ['auth'],
+    update: ['auth']
   })
   .apiOnly()
 
 Route.resource('help-requests', 'HelpRequestsController')
   .middleware({
     destroy: ['auth'],
-    update: ['auth'],
+    update: ['auth']
   })
   .apiOnly()
 
@@ -55,13 +55,13 @@ Route.resource('types', 'TypesController')
   .middleware({
     store: ['auth'],
     destroy: ['auth'],
-    update: ['auth'],
+    update: ['auth']
   })
   .apiOnly()
 
 Route.resource('users', 'UsersController')
   .middleware({
-    '*': ['auth'],
+    '*': ['auth']
   })
   .apiOnly()
 

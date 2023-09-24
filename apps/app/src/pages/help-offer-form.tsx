@@ -1,4 +1,5 @@
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/atoms/form';
+import { useToast } from '@/components/atoms/use-toast';
 import AddressInput from '@/components/molecules/address-input';
 import AssistanceTypeInput from '@/components/molecules/assistance-type-input';
 import FileInput from '@/components/molecules/file-input';
@@ -7,13 +8,19 @@ import Navbar from '@/components/molecules/navbar';
 import RadioInput from '@/components/molecules/radio-input';
 import TextAreaInput from '@/components/molecules/text-area-input';
 import TextInput from '@/components/molecules/text-input';
+import api from '@/lib/api';
 import { EARTHQUAKE_EPICENTER } from '@/lib/config';
+import { DetailTypes } from '@/lib/routes';
 import { imageSchema } from '@/lib/validation';
 
 import { RequestTypes } from '@/types/types';
+import { FixType } from '@/types/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation } from '@tanstack/react-query';
+import { useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 import * as z from 'zod';
 
@@ -26,7 +33,6 @@ const formSchema = z.object({
   }),
   isOnSite: z.enum(['yes', 'no'] as const),
   description: z.string().optional(),
-  source: z.string().optional(),
   name: z.string().nonempty(),
   email: z.string().email().optional(),
   phone: z.string().nonempty(),
@@ -35,6 +41,9 @@ const formSchema = z.object({
 
 const OfferHelpForm = () => {
   const { t } = useTranslation();
+  const { toast } = useToast();
+  const timeout = useRef<NodeJS.Timeout | null>(null);
+  const navigate = useNavigate();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -56,9 +65,51 @@ const OfferHelpForm = () => {
 
   const { isSubmitting, isDirty, isValid } = form.formState;
 
+  const { isLoading, mutate: createHelpRequest } = useMutation({
+    mutationFn: (formData: FormData) => api.createHelpOffer(formData),
+    onSuccess: (data: FixType) => {
+      toast({
+        title: 'Help Offer Created',
+        description: 'Your help request has been created successfully, Thank you!',
+        variant: 'success'
+      });
+
+      timeout.current = setTimeout(() => {
+        return navigate('/detail/' + DetailTypes.Offer + '/' + data.id);
+      }, 1000);
+    },
+    onError: () => {
+      toast({
+        title: 'Error',
+        description: 'Something went wrong, please try again later',
+        variant: 'destructive'
+      });
+    }
+  });
+
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+    const formData = new FormData();
+
+    formData.append('types', JSON.stringify(values.types));
+    formData.append('location', JSON.stringify(values.location));
+    formData.append('isOnSite', values.isOnSite);
+    if (values.description) formData.append('description', values.description);
+    formData.append('name', values.name);
+    if (values.email) formData.append('email', values.email);
+    formData.append('phone', values.phone);
+
+    values.files.forEach((file) => {
+      formData.append('files', file);
+    });
+
+    return createHelpRequest(formData);
   };
+
+  useEffect(() => {
+    return () => {
+      if (timeout.current) clearTimeout(timeout.current);
+    };
+  }, []);
 
   return (
     <div className="flex flex-col w-full gap-4 px-6 overflow-y-auto pb-20">
@@ -211,7 +262,7 @@ const OfferHelpForm = () => {
             )}
           />
 
-          <Navbar asSubmit disabled={!isDirty || !isValid} loading={isSubmitting} />
+          <Navbar asSubmit disabled={!isDirty || !isValid} loading={isSubmitting || isLoading} />
         </form>
       </Form>
     </div>

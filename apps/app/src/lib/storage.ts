@@ -22,7 +22,9 @@ const storage = {
     return state?.state?.token;
   },
   setToken(token: string) {
-    return localStorage.setItem('token', token);
+    const state = loadPersistedState();
+    state.state = { ...state.state, token };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
   }
 };
 

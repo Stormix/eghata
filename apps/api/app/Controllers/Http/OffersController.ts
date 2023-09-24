@@ -1,39 +1,69 @@
+import Application from '@ioc:Adonis/Core/Application'
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import Logger from '@ioc:Adonis/Core/Logger'
+import Type from 'App/Models/Type'
+import { OfferStatus } from 'Contracts/status'
+import { createHelpOfferSchema } from 'shared'
 import Offer from '../../Models/Offer'
 
 export default class OffersController {
   public async store({ request, response }: HttpContextContract) {
     try {
-      const data = request.only([
-        'longitude',
-        'latitude',
-        'address',
+      const payload = request.only([
+        'types',
+        'location',
+        'isOnSite',
         'description',
-        'status',
+        'source',
+        'email',
         'name',
         'phone',
-        'email',
-        'isOnSite',
+        'files'
       ])
 
-      const offer = await Offer.create(data)
+      const parsedPayload = createHelpOfferSchema.parse({
+        ...payload,
+        types: JSON.parse(payload.types),
+        location: JSON.parse(payload.location)
+      })
 
-      if (request.input('types')) {
-        const types = request.input('types')
-        const typesQuery = offer.related('types')
-        await typesQuery.attach(types)
-      }
+      // TODO: properly handle files / validate them
+      await Promise.allSettled(
+        request.files('files').map((file) => file.move(Application.tmpPath('uploads')))
+      )
 
-      await offer.load('types')
+      const helpRequest = await Offer.create({
+        longitude: parsedPayload.location.lng,
+        latitude: parsedPayload.location.lat,
+        address: parsedPayload.location.address,
+        description: parsedPayload.description,
+        status: OfferStatus.planned,
+        name: parsedPayload.name,
+        email: parsedPayload.email,
+        phone: parsedPayload.phone,
+        isOnSite: parsedPayload.isOnSite === 'yes',
+        files: JSON.stringify(
+          request
+            .files('files')
+            .map((file) => file.fileName!)
+            .filter(Boolean)
+        )
+      })
 
-      return response.created(offer)
+      const types = await Type.query().whereIn('type', parsedPayload.types).exec()
+
+      await helpRequest.related('types').attach(types.map((type) => type.id))
+      await helpRequest.load('types')
+      return response.created(helpRequest)
     } catch (error) {
+      Logger.error('Failed to create help request: %s', error.message)
+      console.error(error)
       return response.badRequest({
-        error: { message: 'Unable add the offer' },
+        message: 'Failed to create help request',
+        error: error.messages
       })
     }
   }
-
   public async update({ request, params, response }: HttpContextContract) {
     try {
       const offer = await Offer.findOrFail(params.id)
@@ -47,7 +77,7 @@ export default class OffersController {
         'name',
         'phone',
         'email',
-        'isOnSite',
+        'isOnSite'
       ])
 
       offer.merge(data)
@@ -57,7 +87,7 @@ export default class OffersController {
       return offer
     } catch (error) {
       return response.badRequest({
-        error: { message: 'Unable update the offer' },
+        error: { message: 'Unable update the offer' }
       })
     }
   }
@@ -69,7 +99,7 @@ export default class OffersController {
       await offer.delete()
     } catch (error) {
       return response.badRequest({
-        error: { message: 'Unable delete the offer' },
+        error: { message: 'Unable delete the offer' }
       })
     }
   }
@@ -86,7 +116,7 @@ export default class OffersController {
       return offer.load('types')
     } catch (error) {
       return response.badRequest({
-        error: { message: 'Unable to add the types to the offer' },
+        error: { message: 'Unable to add the types to the offer' }
       })
     }
   }
@@ -103,7 +133,7 @@ export default class OffersController {
       return offer.load('types')
     } catch (error) {
       return response.badRequest({
-        error: { message: 'Unable to remove the types from the offer' },
+        error: { message: 'Unable to remove the types from the offer' }
       })
     }
   }
@@ -165,6 +195,4 @@ export default class OffersController {
         }
       }
       */
-
-
 }
