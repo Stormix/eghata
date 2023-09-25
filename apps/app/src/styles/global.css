@@ -101,7 +101,7 @@
     @apply font-sans rtl:font-arabic border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground overflow-hidden;
     font-feature-settings:
       'rlig' 1,
       'calt' 1;

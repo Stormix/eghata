@@ -46,9 +46,9 @@ const Layout = () => {
   return (
     <Suspense fallback={<LoadingSpinner />}>
       <Providers>
-        <div className="">
+        <div className="overflow-hidden">
           {!hideHeaderRoutes.some((route) => location.pathname.includes(route)) && <Header />}
-          <main className="flex flex-col flex-grow overflow-y-auto w-full">
+          <main className="flex flex-col flex-grow overflow-auto h-[calc(100vh-100px)]">
             <Outlet />
             {!hideNavbarRoutes.some((route) => location.pathname.includes(route)) && <Navbar />}
           </main>

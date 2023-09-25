@@ -114,7 +114,7 @@ const HelpRequestForm = () => {
   }, []);
 
   return (
-    <div className="flex flex-col w-full gap-4 px-6 overflow-y-auto pb-28">
+    <div className="flex flex-col w-full gap-4 px-6 pb-28">
       <h1 className="text-2xl">{t('Request Help')}</h1>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4" encType="multipart/form-data">
