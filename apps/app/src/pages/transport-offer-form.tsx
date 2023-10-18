@@ -82,7 +82,7 @@ const TransportOfferForm = () => {
         variant: 'success'
       });
       timeout.current = setTimeout(() => {
-        return navigate('/detail/' + DetailTypes.RideOffer + '/' + data.id);
+        return navigate('/detail/' + DetailTypes.RideRequest + '/' + data.id);
       }, 1000);
     },
     onError: () => {
