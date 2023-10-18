@@ -1,14 +1,21 @@
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/atoms/form';
+import { toast } from '@/components/atoms/use-toast';
 import FileInput from '@/components/molecules/file-input';
 import Navbar from '@/components/molecules/navbar';
 import NumberInput from '@/components/molecules/numper-input';
 import TextAreaInput from '@/components/molecules/text-area-input';
 import TextInput from '@/components/molecules/text-input';
 import TransportInput from '@/components/molecules/transport-input';
+import api from '@/lib/api';
+import { DetailTypes } from '@/lib/routes';
 import { imageSchema } from '@/lib/validation';
+import { FixType } from '@/types/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation } from '@tanstack/react-query';
+import { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 import * as z from 'zod';
 
@@ -35,7 +42,8 @@ const formSchema = z.object({
 
 const TransportRequestForm = () => {
   const { t } = useTranslation();
-
+  const timeout = useRef<NodeJS.Timeout | null>(null);
+  const navigate = useNavigate();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -64,8 +72,43 @@ const TransportRequestForm = () => {
 
   const { isSubmitting, isDirty, isValid } = form.formState;
 
+  const { isLoading, mutate: createCarpoolingRequest } = useMutation({
+    mutationFn: (formData: FormData) => api.createCarpooling(formData),
+    onSuccess: (data: FixType) => {
+      toast({
+        title: 'Transport Offer Created',
+        description: 'Your offer has been successfully created.',
+        variant: 'success'
+      });
+      timeout.current = setTimeout(() => {
+        return navigate('/detail/' + DetailTypes.RideOffer + '/' + data.id);
+      }, 1000);
+    },
+    onError: () => {
+      toast({
+        title: 'Error',
+        description: 'Something went wrong',
+        variant: 'destructive'
+      });
+    }
+  });
+
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+    //  'type','departure_longitude','departureLatitude','departureAddress','departureDate','arrivalLongitude','arrivalLatitude','arrivalAddress','arrivalDate','description','capacity','storageSpace','status',
+    const formData = new FormData();
+    formData.append('transport', JSON.stringify(values.transport));
+    formData.append('date', values.date);
+    formData.append('capacity', String(values.capacity));
+    if (values.storage) formData.append('storageSpace', values.storage);
+    if (values.description) formData.append('description', values.description);
+    formData.append('name', values.name);
+    if (values.email) formData.append('email', values.email);
+    formData.append('phone', values.phone);
+    values.files.forEach((file) => {
+      formData.append('files', file);
+    });
+    formData.append('type', 'request');
+    return createCarpoolingRequest(formData);
   };
 
   return (
@@ -200,7 +243,7 @@ const TransportRequestForm = () => {
             )}
           />
 
-          <Navbar asSubmit disabled={!isDirty || !isValid} loading={isSubmitting} />
+          <Navbar asSubmit disabled={!isDirty || !isValid} loading={isSubmitting || isLoading} />
         </form>
       </Form>
     </div>
