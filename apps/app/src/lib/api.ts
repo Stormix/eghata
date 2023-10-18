@@ -15,6 +15,9 @@ const api = {
 
   createHelpOffer: async (data: FormData) => {
     return axios.post('/offers', data);
+  },
+  createCarpooling: async (data: FormData) => {
+    return axios.post('/carpooling-ads', data);
   }
 } as const;
 
