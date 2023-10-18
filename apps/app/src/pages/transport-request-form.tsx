@@ -96,8 +96,18 @@ const TransportRequestForm = () => {
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     //  'type','departure_longitude','departureLatitude','departureAddress','departureDate','arrivalLongitude','arrivalLatitude','arrivalAddress','arrivalDate','description','capacity','storageSpace','status',
     const formData = new FormData();
-    formData.append('transport', JSON.stringify(values.transport));
-    formData.append('date', values.date);
+    formData.append('departureLongitude', String(values.transport.start.lng));
+    formData.append('departureLatitude', String(values.transport.start.lat));
+    formData.append('departureAddress', String(values.transport.start.address));
+
+    formData.append('departureDate', values.date);
+
+    formData.append('arrivalLongitude', String(values.transport.end.lng));
+    formData.append('arrivalLatitude', String(values.transport.end.lat));
+    formData.append('arrivalAddress', String(values.transport.end.address));
+
+    formData.append('arrivalDate', values.date); // TODO add arrival date input field (optional)
+
     formData.append('capacity', String(values.capacity));
     if (values.storage) formData.append('storageSpace', values.storage);
     if (values.description) formData.append('description', values.description);
