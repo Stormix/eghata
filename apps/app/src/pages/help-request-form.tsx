@@ -31,8 +31,8 @@ const formSchema = z.object({
     lng: z.number()
   }),
   isOnSite: z.enum(['yes', 'no'] as const),
-  description: z.string().optional(),
-  source: z.string().optional(),
+  description: z.string().nonempty(),
+  source: z.string().nonempty(),
   name: z.string().nonempty(),
   email: z.string().email().optional(),
   phone: z.string().nonempty(),
@@ -192,7 +192,6 @@ const HelpRequestForm = () => {
                   <TextAreaInput
                     label={t('Can you give us more info about the situation?')}
                     placeholder={t('Type your message here')}
-                    optional
                     {...field}
                   />
                 </FormControl>
@@ -210,7 +209,6 @@ const HelpRequestForm = () => {
                   <TextAreaInput
                     label={t('Source of information')}
                     placeholder={t('Type your message here')}
-                    optional
                     {...field}
                   />
                 </FormControl>
@@ -268,7 +266,7 @@ const HelpRequestForm = () => {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <FileInput label={t('Upload pictures')} {...field} />
+                  <FileInput label={t('Upload pictures')} optional {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

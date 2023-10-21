@@ -12,7 +12,7 @@ import { imageSchema } from '@/lib/validation';
 import { FixType } from '@/types/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -32,7 +32,7 @@ const formSchema = z.object({
   }),
   date: z.string(),
   capacity: z.number().int().positive().optional(),
-  description: z.string().optional(),
+  description: z.string().nonempty(),
   name: z.string().nonempty(),
   email: z.string().email().optional(),
   phone: z.string().nonempty(),
@@ -118,8 +118,15 @@ const TransportRequestForm = () => {
       formData.append('files', file);
     });
     formData.append('type', 'request');
+    formData.append('status', 'planned');
+
     return createCarpoolingRequest(formData);
   };
+  useEffect(() => {
+    return () => {
+      if (timeout.current) clearTimeout(timeout.current);
+    };
+  }, []);
 
   return (
     <div className="flex flex-col w-full gap-4 px-6 overflow-y-auto pb-20">
@@ -189,12 +196,7 @@ const TransportRequestForm = () => {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <TextAreaInput
-                    label={t('Description')}
-                    placeholder={t('Type your message here')}
-                    optional
-                    {...field}
-                  />
+                  <TextAreaInput label={t('Description')} placeholder={t('Type your message here')} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

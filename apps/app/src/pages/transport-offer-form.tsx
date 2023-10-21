@@ -12,7 +12,7 @@ import { imageSchema } from '@/lib/validation';
 import { FixType } from '@/types/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -32,7 +32,7 @@ const formSchema = z.object({
   }),
   date: z.string(),
   capacity: z.number().int().positive().optional(),
-  description: z.string().optional(),
+  description: z.string().nonempty(),
   name: z.string().nonempty(),
   email: z.string().email().optional(),
   phone: z.string().nonempty(),
@@ -110,7 +110,7 @@ const TransportOfferForm = () => {
     formData.append('arrivalDate', values.date); // TODO add arrival date input field (optional)
     formData.append('capacity', String(values.capacity));
     if (values.storage) formData.append('storageSpace', values.storage);
-    if (values.description) formData.append('description', values.description);
+    formData.append('description', values.description!);
     formData.append('name', values.name);
     if (values.email) formData.append('email', values.email);
     formData.append('phone', values.phone);
@@ -118,8 +118,15 @@ const TransportOfferForm = () => {
       formData.append('files', file);
     });
     formData.append('type', 'offer');
+    formData.append('status', 'planned');
     return createCarpoolingOffer(formData);
   };
+
+  useEffect(() => {
+    return () => {
+      if (timeout.current) clearTimeout(timeout.current);
+    };
+  }, []);
 
   return (
     <div className="flex flex-col w-full gap-4 px-6 overflow-y-auto pb-20">
@@ -189,12 +196,7 @@ const TransportOfferForm = () => {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <TextAreaInput
-                    label={t('Description')}
-                    placeholder={t('Type your message here')}
-                    optional
-                    {...field}
-                  />
+                  <TextAreaInput label={t('Description')} placeholder={t('Type your message here')} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
