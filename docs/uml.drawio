@@ -1,0 +1,102 @@
+<mxfile host="app.diagrams.net" modified="2023-10-18T14:31:16.929Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" etag="LURFeiEQaK-mON4cEFCB" version="22.0.4" type="device">
+  <diagram name="Page-1" id="y1TVgVztDo3s4r3oG7bx">
+    <mxGraphModel dx="787" dy="1232" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="NAX4-T264_ecdarD_Z4u-1" value="User" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="291" y="-336" width="202" height="216" as="geometry" />
+        </mxCell>
+        <mxCell id="NAX4-T264_ecdarD_Z4u-2" value="+ id: number&lt;br&gt;+ isAdmin: boolean&lt;br&gt;+ isDisabled: boolean&lt;br&gt;+ email: string&lt;br&gt;+ password: string&lt;br&gt;+ fingerprint: string&lt;br&gt;+ createdAt: datetime&lt;br&gt;+ updatedAt: datetime" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="NAX4-T264_ecdarD_Z4u-1">
+          <mxGeometry y="26" width="202" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="NAX4-T264_ecdarD_Z4u-31" value="" style="endArrow=none;html=1;rounded=0;fontSize=12;startSize=8;endSize=8;entryX=0.465;entryY=0.003;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="NAX4-T264_ecdarD_Z4u-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="85" y="217" as="sourcePoint" />
+            <mxPoint x="85.00499999999988" y="299.9960000000001" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NAX4-T264_ecdarD_Z4u-32" value="1" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=bottom;fontSize=16;" connectable="0" vertex="1" parent="NAX4-T264_ecdarD_Z4u-31">
+          <mxGeometry x="-1" relative="1" as="geometry">
+            <mxPoint x="-23" y="25" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NAX4-T264_ecdarD_Z4u-33" value="0..*" style="edgeLabel;resizable=0;html=1;align=right;verticalAlign=bottom;fontSize=16;" connectable="0" vertex="1" parent="NAX4-T264_ecdarD_Z4u-31">
+          <mxGeometry x="1" relative="1" as="geometry">
+            <mxPoint x="-2" y="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NAX4-T264_ecdarD_Z4u-5" value="Type" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="316" y="385" width="140" height="215" as="geometry" />
+        </mxCell>
+        <mxCell id="NAX4-T264_ecdarD_Z4u-6" value="+ id: number&lt;br&gt;+ type: requestTypes&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;+ createdAt: datetime&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;+ updatedAt: datetime" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="NAX4-T264_ecdarD_Z4u-5">
+          <mxGeometry y="26" width="140" height="189" as="geometry" />
+        </mxCell>
+        <mxCell id="NAX4-T264_ecdarD_Z4u-9" value="Offer" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="11" y="-34" width="215" height="285" as="geometry" />
+        </mxCell>
+        <mxCell id="NAX4-T264_ecdarD_Z4u-10" value="+ id: number&lt;br&gt;+ longitude: number&lt;br&gt;+ latitude: number&lt;br&gt;+ address: string&lt;br&gt;+ description: string&lt;br&gt;+ status: offerStatus&lt;br&gt;+ name: string&lt;br&gt;+ phone: string&lt;br&gt;+ email: string&lt;br&gt;+ isOnSite: boolean&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;+ createdAt: datetime&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;+ updatedAt: datetime" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="NAX4-T264_ecdarD_Z4u-9">
+          <mxGeometry y="26" width="215" height="259" as="geometry" />
+        </mxCell>
+        <mxCell id="NAX4-T264_ecdarD_Z4u-13" value="HelpRequest" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="277.5" y="-36" width="229" height="342" as="geometry" />
+        </mxCell>
+        <mxCell id="NAX4-T264_ecdarD_Z4u-14" value="+ id: number&lt;br&gt;+ longitude: number&lt;br&gt;+ latitude: number&lt;br&gt;+ address: string&lt;br&gt;+ description: string&lt;br&gt;+ source: string&lt;br&gt;+ status: helpRequestStatus&lt;br&gt;+ name: string&lt;br&gt;+ phone: string&lt;br&gt;+ email: string&lt;br&gt;+ isOnSite: boolean&lt;br&gt;+ files: string&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;+ createdAt: datetime&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;+ updatedAt: datetime" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="NAX4-T264_ecdarD_Z4u-13">
+          <mxGeometry y="26" width="229" height="316" as="geometry" />
+        </mxCell>
+        <mxCell id="NAX4-T264_ecdarD_Z4u-17" value="CarpoolingAd" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="555" y="-34" width="234" height="347" as="geometry" />
+        </mxCell>
+        <mxCell id="NAX4-T264_ecdarD_Z4u-18" value="+ id: number&lt;br&gt;+ type: string&lt;br&gt;+&amp;nbsp;departureLongitude: number&lt;br&gt;+&amp;nbsp;departureLatitude: number&lt;br&gt;+&amp;nbsp;departureAddress: string&lt;br&gt;+&amp;nbsp;departureDate: datetime&lt;br&gt;+&amp;nbsp;arrivalLongitude: number&lt;br&gt;+&amp;nbsp;arrivalLatitude: number&lt;br&gt;+&amp;nbsp;arrivalAddress: string&lt;br&gt;+&amp;nbsp;arrivalDate: datetime&lt;br&gt;+&amp;nbsp;description: string&lt;br&gt;+ capacity: number,&lt;br&gt;+ storageSpace: number&lt;br&gt;+ status: carpoolingStatus&lt;br&gt;+ createdAt: datetime&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;+ updatedAt: datetime" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="NAX4-T264_ecdarD_Z4u-17">
+          <mxGeometry y="26" width="234" height="321" as="geometry" />
+        </mxCell>
+        <mxCell id="NAX4-T264_ecdarD_Z4u-28" value="" style="endArrow=none;html=1;edgeStyle=orthogonalEdgeStyle;rounded=0;fontSize=12;startSize=8;endSize=8;curved=1;exitX=-0.02;exitY=0.437;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="NAX4-T264_ecdarD_Z4u-2" target="NAX4-T264_ecdarD_Z4u-9">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="26" y="-125" as="sourcePoint" />
+            <mxPoint x="186" y="-125" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NAX4-T264_ecdarD_Z4u-29" value="1" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=bottom;fontSize=16;" connectable="0" vertex="1" parent="NAX4-T264_ecdarD_Z4u-28">
+          <mxGeometry x="-1" relative="1" as="geometry">
+            <mxPoint x="-15" y="-4" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NAX4-T264_ecdarD_Z4u-30" value="0..*" style="edgeLabel;resizable=0;html=1;align=right;verticalAlign=bottom;fontSize=16;" connectable="0" vertex="1" parent="NAX4-T264_ecdarD_Z4u-28">
+          <mxGeometry x="1" relative="1" as="geometry">
+            <mxPoint x="-3" y="-2" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NAX4-T264_ecdarD_Z4u-34" value="" style="endArrow=none;html=1;edgeStyle=orthogonalEdgeStyle;rounded=0;fontSize=12;startSize=8;endSize=8;curved=1;exitX=1.005;exitY=0.458;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="NAX4-T264_ecdarD_Z4u-2" target="NAX4-T264_ecdarD_Z4u-17">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="539" y="-208" as="sourcePoint" />
+            <mxPoint x="699" y="-208" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NAX4-T264_ecdarD_Z4u-35" value="1" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=bottom;fontSize=16;" connectable="0" vertex="1" parent="NAX4-T264_ecdarD_Z4u-34">
+          <mxGeometry x="-1" relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NAX4-T264_ecdarD_Z4u-36" value="0..*" style="edgeLabel;resizable=0;html=1;align=right;verticalAlign=bottom;fontSize=16;" connectable="0" vertex="1" parent="NAX4-T264_ecdarD_Z4u-34">
+          <mxGeometry x="1" relative="1" as="geometry">
+            <mxPoint x="-4" y="-2" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NAX4-T264_ecdarD_Z4u-37" value="" style="endArrow=none;html=1;rounded=0;fontSize=12;startSize=8;endSize=8;exitX=0.474;exitY=1.006;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="NAX4-T264_ecdarD_Z4u-14" target="NAX4-T264_ecdarD_Z4u-5">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="389" y="321" as="sourcePoint" />
+            <mxPoint x="386" y="384" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NAX4-T264_ecdarD_Z4u-38" value="0..*" style="edgeLabel;resizable=0;html=1;align=left;verticalAlign=bottom;fontSize=16;" connectable="0" vertex="1" parent="NAX4-T264_ecdarD_Z4u-37">
+          <mxGeometry x="-1" relative="1" as="geometry">
+            <mxPoint x="-31" y="25" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NAX4-T264_ecdarD_Z4u-39" value="0..*" style="edgeLabel;resizable=0;html=1;align=right;verticalAlign=bottom;fontSize=16;" connectable="0" vertex="1" parent="NAX4-T264_ecdarD_Z4u-37">
+          <mxGeometry x="1" relative="1" as="geometry">
+            <mxPoint x="-2" y="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
