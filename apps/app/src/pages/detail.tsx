@@ -18,6 +18,8 @@ import { ReactComponent as OtherIcon } from '@/assets/icons/other.svg';
 import { ReactComponent as RescueIcon } from '@/assets/icons/rescue.svg';
 import { ReactComponent as ShelterIcon } from '@/assets/icons/shelter.svg';
 import { formatDistance } from 'date-fns';
+import { Carousel } from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
 
 export type DataProps = {
   types: {
@@ -76,15 +78,19 @@ const Detail = () => {
     }
   }, []);
   console.log(data);
+
   if (!data) return <LoadingSpinner />;
   return (
     <div className="pb-6 overflow-y-auto">
       <BackButton className="absolute z-10 top-10 left-4" />
-      {/* TODO carousel multiple images */}
       {data.files.length === 0 ? (
-        <img src="/logo.svg" className=" h-[40vh]" />
+        <img src="/logo.svg" className="h-[40vh]" />
       ) : (
-        <img src={`http://localhost:3333${data.files[0]}`} className=" h-[40vh] object-cover w-full" />
+        <Carousel showThumbs={false} infiniteLoop={true}>
+          {data.files.map((image) => (
+            <img key={image} src={`http://localhost:3333${image}`} className="h-[40vh] object-cover w-full" />
+          ))}
+        </Carousel>
       )}
 
       <div className="flex flex-col gap-2 p-6 flex-grow mb-24">
@@ -104,53 +110,44 @@ const Detail = () => {
             {formatDistance(new Date(), new Date(Date.parse(data.updated_at)))} {t('ago')}
           </span>
         </div>
-        <div className="flex">
+        <div className="flex flex-wrap">
           {data.types.map((type) => {
-            if (type.type === RequestTypes.MedicalAssistance)
-              return (
-                <div className="mx-1">
-                  <AssistanceTypeBlock key={type.id} icon={MedicalIcon} title={t('Medical Aid')} />
-                </div>
-              );
-            else if (type.type === RequestTypes.Shelter)
-              return (
-                <div className="mx-1">
-                  <AssistanceTypeBlock key={type.id} icon={ShelterIcon} title={t('Shelter')} className="text-black" />
-                </div>
-              );
-            else if (type.type === RequestTypes.Food)
-              return (
-                <div className="mx-1">
-                  {' '}
-                  <AssistanceTypeBlock key={type.id} icon={FoodIcon} title={t('Food')} className="text-teal-500" />
-                </div>
-              );
-            else if (type.type === RequestTypes.Rescue)
-              return (
-                <div className="mx-1">
-                  {' '}
-                  <AssistanceTypeBlock key={type.id} icon={RescueIcon} title={t('Rescue')} />
-                </div>
-              );
-            else if (type.type === RequestTypes.Other)
-              return (
-                <div className="mx-1">
-                  {' '}
-                  <AssistanceTypeBlock key={type.id} icon={OtherIcon} className="text-black" title={t('Other')} />
-                </div>
-              );
+            let icon: typeof FoodIcon;
+            let title = '';
+            let className = '';
+            if (type.type === RequestTypes.MedicalAssistance) {
+              icon = MedicalIcon;
+              title = 'Medical Aid';
+            } else if (type.type === RequestTypes.Shelter) {
+              icon = ShelterIcon;
+              title = 'Shelter';
+              className = 'text-black';
+            } else if (type.type === RequestTypes.Food) {
+              icon = FoodIcon;
+              title = 'Food';
+              className = 'text-teal-500';
+            } else if (type.type === RequestTypes.Rescue) {
+              icon = RescueIcon;
+              title = 'Rescue';
+            } else if (type.type === RequestTypes.Other) {
+              icon = OtherIcon;
+              title = 'Other';
+              className = 'text-black';
+            }
+
+            return <AssistanceTypeBlock key={type.id} icon={icon} title={t(title)} className={className} />;
           })}
         </div>
         <h3 className="text-gray-500 mt-2">{t('Description')}</h3>
         <p className="text-justify">{t(data.description)}</p>
-
+        <p className="text-justify text-sm">Source: {t(data.source)}</p>
         <h3 className="text-gray-500 my-2">{t('Contact Info')}</h3>
 
         <div className="flex flex-col gap-4 font-medium">
-          <div className="flex text-justify">
+          <div className="flex text-justify text-sm">
             Name: <p className="text-gray-500 mx-2">{capitalize(data.name)}</p>
           </div>
-          <div className="flex text-justify">
+          <div className="flex text-justify text-sm">
             On site: <p className="text-gray-500 mx-2">{data.is_on_site ? 'Yes' : 'No'}</p>
           </div>
           <div className="flex items-center gap-2">
@@ -162,15 +159,17 @@ const Detail = () => {
               {data!.phone}
             </a>
           </div>
-          <div className="flex items-center gap-2">
-            <MailIcon className="w-4 h-4" />
-            <a
-              href={`mailto:${data.email}`}
-              className="flex-grow underline underline-offset-4 decoration-dotted decoration-red-200"
-            >
-              {data!.email}
-            </a>
-          </div>
+          {data.email && (
+            <div className="flex items-center gap-2">
+              <MailIcon className="w-4 h-4" />
+              <a
+                href={`mailto:${data.email}`}
+                className="flex-grow underline underline-offset-4 decoration-dotted decoration-red-200"
+              >
+                {data!.email}
+              </a>
+            </div>
+          )}
         </div>
 
         <h3 className="text-gray-500 my-2">{t('Location')}</h3>
