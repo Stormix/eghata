@@ -10,8 +10,22 @@ import { useLocation, useParams } from 'react-router-dom';
 import api from '@/lib/api';
 import LoadingSpinner from '@/components/atoms/loading-spinner';
 import { capitalize } from 'lodash';
+import AssistanceTypeBlock from '@/components/atoms/assistance-type-block';
+import { RequestTypes } from 'shared';
+import { ReactComponent as FoodIcon } from '@/assets/icons/food.svg';
+import { ReactComponent as MedicalIcon } from '@/assets/icons/medical.svg';
+import { ReactComponent as OtherIcon } from '@/assets/icons/other.svg';
+import { ReactComponent as RescueIcon } from '@/assets/icons/rescue.svg';
+import { ReactComponent as ShelterIcon } from '@/assets/icons/shelter.svg';
+import { formatDistance } from 'date-fns';
 
 export type DataProps = {
+  types: {
+    id: number;
+    type: string;
+    created_at: string;
+    updated_at: string;
+  }[];
   id: number;
   longitude: string;
   latitude: string;
@@ -44,7 +58,6 @@ const Detail = () => {
           .getHelpOffer(id!)
           .then((response) => setData(response))
           .catch((err) => console.log(err));
-        console.log(data);
         break;
       case 'request':
         api
@@ -67,35 +80,83 @@ const Detail = () => {
   return (
     <div className="pb-6 overflow-y-auto">
       <BackButton className="absolute z-10 top-10 left-4" />
-      {/* TODO multiple images */}
-      <img src="http://localhost:3333/uploads/IMG-3769.jpg" className=" h-[40vh] object-cover w-full" />
+      {/* TODO carousel multiple images */}
+      {data.files.length === 0 ? (
+        <img src="/logo.svg" className=" h-[40vh]" />
+      ) : (
+        <img src={`http://localhost:3333${data.files[0]}`} className=" h-[40vh] object-cover w-full" />
+      )}
+
       <div className="flex flex-col gap-2 p-6 flex-grow mb-24">
         <div className="flex items-center justify-between gap-4">
           <h1 className="text-xl font-medium">
             {t('Detail')} {t(type)} {id}
           </h1>
           <span>
-            <Badge variant={'destructive'}>{t(data!.status)}</Badge>
+            <Badge variant={'destructive'}>{t(data.status)}</Badge>
           </span>
         </div>
         <div className="flex justify-between">
           <p>
-            {t(capitalize(data!.address))}, {t('Yes')}
+            {t(capitalize(data.address))}, {t('Yes')}
           </p>
           <span className="text-gray-500 text-sm">
-            {/* {data.updated_at}*/} {t('hours')} {t('ago')}
+            {formatDistance(new Date(), new Date(Date.parse(data.updated_at)))} {t('ago')}
           </span>
         </div>
+        <div className="flex">
+          {data.types.map((type) => {
+            if (type.type === RequestTypes.MedicalAssistance)
+              return (
+                <div className="mx-1">
+                  <AssistanceTypeBlock key={type.id} icon={MedicalIcon} title={t('Medical Aid')} />
+                </div>
+              );
+            else if (type.type === RequestTypes.Shelter)
+              return (
+                <div className="mx-1">
+                  <AssistanceTypeBlock key={type.id} icon={ShelterIcon} title={t('Shelter')} className="text-black" />
+                </div>
+              );
+            else if (type.type === RequestTypes.Food)
+              return (
+                <div className="mx-1">
+                  {' '}
+                  <AssistanceTypeBlock key={type.id} icon={FoodIcon} title={t('Food')} className="text-teal-500" />
+                </div>
+              );
+            else if (type.type === RequestTypes.Rescue)
+              return (
+                <div className="mx-1">
+                  {' '}
+                  <AssistanceTypeBlock key={type.id} icon={RescueIcon} title={t('Rescue')} />
+                </div>
+              );
+            else if (type.type === RequestTypes.Other)
+              return (
+                <div className="mx-1">
+                  {' '}
+                  <AssistanceTypeBlock key={type.id} icon={OtherIcon} className="text-black" title={t('Other')} />
+                </div>
+              );
+          })}
+        </div>
         <h3 className="text-gray-500 mt-2">{t('Description')}</h3>
-        <p className="text-justify">{t(data!.description)}</p>
+        <p className="text-justify">{t(data.description)}</p>
 
         <h3 className="text-gray-500 my-2">{t('Contact Info')}</h3>
 
         <div className="flex flex-col gap-4 font-medium">
+          <div className="flex text-justify">
+            Name: <p className="text-gray-500 mx-2">{capitalize(data.name)}</p>
+          </div>
+          <div className="flex text-justify">
+            On site: <p className="text-gray-500 mx-2">{data.is_on_site ? 'Yes' : 'No'}</p>
+          </div>
           <div className="flex items-center gap-2">
             <PhoneIcon className="w-4 h-4" />
             <a
-              href={`tel:${data!.phone}`}
+              href={`tel:${data.phone}`}
               className="flex-grow underline underline-offset-4 decoration-dotted decoration-red-200"
             >
               {data!.phone}
@@ -104,7 +165,7 @@ const Detail = () => {
           <div className="flex items-center gap-2">
             <MailIcon className="w-4 h-4" />
             <a
-              href={`mailto:${data!.email}`}
+              href={`mailto:${data.email}`}
               className="flex-grow underline underline-offset-4 decoration-dotted decoration-red-200"
             >
               {data!.email}
@@ -114,7 +175,7 @@ const Detail = () => {
 
         <h3 className="text-gray-500 my-2">{t('Location')}</h3>
 
-        <LocationMap location={[parseFloat(data!.latitude), parseFloat(data!.longitude)]} />
+        <LocationMap location={[parseFloat(data.latitude), parseFloat(data.longitude)]} />
       </div>
 
       <div className="fixed left-0 bottom-0 z-30 w-full px-6 pt-4 pb-8 -ml-6 rtl:-mr-6 rtl:ml-0 bg-white">
