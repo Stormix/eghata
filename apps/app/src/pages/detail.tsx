@@ -20,6 +20,7 @@ import { ReactComponent as ShelterIcon } from '@/assets/icons/shelter.svg';
 import { formatDistance } from 'date-fns';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
+import { useQuery } from '@tanstack/react-query';
 
 export type DataProps = {
   types: {
@@ -53,33 +54,43 @@ const Detail = () => {
 
   const [data, setData] = useState<DataProps>();
 
-  useEffect(() => {
+  const getDetails = () => {
     switch (type) {
       case 'offer':
-        api
-          .getHelpOffer(id!)
-          .then((response) => setData(response))
-          .catch((err) => console.log(err));
-        break;
+        return useQuery({
+          queryKey: [`${type}-${id}`],
+          queryFn: () => api.getHelpOffer(id!)
+        });
       case 'request':
-        api
-          .getHelpRequest(id!)
-          .then((response) => {
-            setData(response);
-          })
-          .catch((err) => console.log(err));
-        break;
+        return useQuery({
+          queryKey: [`${type}-${id}`],
+          queryFn: () => {
+            if (!id) return;
+            return api.getHelpRequest(id);
+          }
+        });
       case 'ride-request' || 'ride-offer':
-        api
-          .getCarpoolingRequest(id!)
-          .then((response) => setData(response))
-          .catch((err) => console.log(err));
-        break;
+        return useQuery({
+          queryKey: [`${type}-${id}`],
+          queryFn: () => api.getCarpoolingRequest(id!)
+        });
     }
-  }, []);
-  console.log(data);
+  };
 
-  if (!data) return <LoadingSpinner />;
+  const { isLoading, data: detailData } = getDetails();
+  useEffect(() => {
+    setData(detailData);
+  }, []);
+  console.log(getDetails());
+  console.log(isLoading);
+  console.log(data);
+  if (isLoading)
+    return (
+      <div className="flex justify-center ">
+        <LoadingSpinner className="w-10 h-14" />
+      </div>
+    );
+  if (!isLoading && !data) return <div>Not found</div>;
   return (
     <div className="pb-6 overflow-y-auto">
       <BackButton className="absolute z-10 top-10 left-4" />
@@ -129,7 +140,7 @@ const Detail = () => {
             } else if (type.type === RequestTypes.Rescue) {
               icon = RescueIcon;
               title = 'Rescue';
-            } else if (type.type === RequestTypes.Other) {
+            } else {
               icon = OtherIcon;
               title = 'Other';
               className = 'text-black';
