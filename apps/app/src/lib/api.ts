@@ -15,6 +15,19 @@ const api = {
 
   createHelpOffer: async (data: FormData) => {
     return axios.post('/offers', data);
+  },
+
+  /* Get a help request */
+  getHelpRequest: async (id: string) => {
+    return axios.get(`/help-requests/${id}`);
+  },
+  /* Get a help offer */
+  getHelpOffer: async (id: string) => {
+    return axios.get(`/offers/${id}`);
+  },
+  /* Get a carpooling request/offer */
+  getCarpoolingRequest: async (id: string) => {
+    return axios.get(`/carpooling-ads/${id}`);
   }
 } as const;
 

@@ -34,6 +34,15 @@
   "aceProviders": [
     "@adonisjs/repl"
   ],
+  "directories": {
+    "public": "public"
+  },
+  "metaFiles": [
+    {
+      "pattern": "public/**",
+      "reloadServer": false
+    }
+  ],
   "tests": {
     "suites": [
       {
