@@ -1,12 +1,21 @@
+import Application from '@ioc:Adonis/Core/Application'
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import Logger from '@ioc:Adonis/Core/Logger'
+import { CarpoolingStatus } from 'Contracts/status'
+import {
+  CreateCarpoolingOfferDto,
+  CreateCarpoolingRequestDto,
+  createCarpoolingOfferSchema,
+  createCarpoolingRequestSchema
+} from 'shared'
 import CarpoolingAd from '../../Models/CarpoolingAd'
 
 export default class CarpoolingAdsController {
-  async store({ request, response }: HttpContextContract) {
+  public async store({ request, response }: HttpContextContract) {
     try {
-      const carpoolingData = request.only([
+      const payload = request.only([
         'type',
-        'departure_longitude',
+        'departureLongitude',
         'departureLatitude',
         'departureAddress',
         'departureDate',
@@ -17,15 +26,53 @@ export default class CarpoolingAdsController {
         'description',
         'capacity',
         'storageSpace',
-        'status',
+        'status'
       ])
 
-      const carpooling = await CarpoolingAd.create(carpoolingData)
+      let parsedPayload: CreateCarpoolingOfferDto | CreateCarpoolingRequestDto
+
+      switch (payload.type) {
+        case 'offer':
+          console.log('Validating', payload)
+          parsedPayload = createCarpoolingOfferSchema.parse({
+            ...payload
+          })
+          break
+        case 'request':
+          parsedPayload = createCarpoolingRequestSchema.parse({
+            ...payload
+          })
+          break
+        default:
+          return response.badRequest({
+            error: {
+              message: 'Invalid type.'
+            }
+          })
+      }
+
+      const carpooling = await CarpoolingAd.create({
+        ...parsedPayload,
+        status: payload.type === 'offer' ? CarpoolingStatus.planned : CarpoolingStatus.requested,
+        type: payload.type as 'request' | 'offer',
+        files: JSON.stringify(
+          request
+            .files('files')
+            .map((file) => file.fileName!)
+            .filter(Boolean)
+        )
+      })
+
+      // TODO: properly handle files / validate them
+      await Promise.allSettled(
+        request.files('files').map((file) => file.move(Application.tmpPath('uploads')))
+      )
 
       return response.created(carpooling)
     } catch (error) {
+      Logger.error('Failed to create carpooling: %s', error.message)
       return response.badRequest({
-        error: { message: `Unable to add the Carpooling ${request.param('type')}` },
+        error: { message: `Unable to add the carpooling offer/request` }
       })
     }
   }
@@ -46,7 +93,7 @@ export default class CarpoolingAdsController {
         'description',
         'capacity',
         'storageSpace',
-        'status',
+        'status'
       ])
 
       carpooling.merge(data)
@@ -55,7 +102,7 @@ export default class CarpoolingAdsController {
       return carpooling
     } catch (error) {
       return response.badRequest({
-        error: { message: `Unable to add the Carpooling ${request.param('type')}` },
+        error: { message: `Unable to add the Carpooling ${request.param('type')}` }
       })
     }
   }
@@ -66,7 +113,7 @@ export default class CarpoolingAdsController {
       await carpooling.delete()
     } catch (error) {
       return response.badRequest({
-        error: { message: `Unable to add the Carpooling ${params.type}` },
+        error: { message: `Unable to add the Carpooling ${params.type}` }
       })
     }
   }

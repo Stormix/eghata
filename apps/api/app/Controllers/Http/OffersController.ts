@@ -56,10 +56,10 @@ export default class OffersController {
       await helpRequest.load('types')
       return response.created(helpRequest)
     } catch (error) {
-      Logger.error('Failed to create help request: %s', error.message)
+      Logger.error('Failed to create help offer: %s', error.message)
       console.error(error)
       return response.badRequest({
-        message: 'Failed to create help request',
+        message: 'Failed to create help offer',
         error: error.messages
       })
     }

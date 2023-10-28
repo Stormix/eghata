@@ -95,7 +95,6 @@ const TransportOfferForm = () => {
   });
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    //  'type','departure_longitude','departureLatitude','departureAddress','departureDate','arrivalLongitude','arrivalLatitude','arrivalAddress','arrivalDate','description','capacity','storageSpace','status',
     const formData = new FormData();
     formData.append('departureLongitude', String(values.transport.start.lng));
     formData.append('departureLatitude', String(values.transport.start.lat));
@@ -118,7 +117,6 @@ const TransportOfferForm = () => {
       formData.append('files', file);
     });
     formData.append('type', 'offer');
-    formData.append('status', 'planned');
     return createCarpoolingOffer(formData);
   };
 

@@ -44,10 +44,13 @@ export default class CarpoolingAd extends BaseModel {
   public capacity: number
 
   @column()
-  public storageSpace: number
+  public storageSpace: string
 
   @column()
   public status: CarpoolingStatus
+
+  @column()
+  public files: string
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

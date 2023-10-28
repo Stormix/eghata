@@ -9,6 +9,10 @@
 			"path": "../apps/api"
 		},
 		{
+			"name": "shared",
+			"path": "../packages/shared"
+		},
+		{
 			"name": "🚀app",
 			"path": "../apps/app"
 		}

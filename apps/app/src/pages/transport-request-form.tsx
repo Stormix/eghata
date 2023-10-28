@@ -118,7 +118,6 @@ const TransportRequestForm = () => {
       formData.append('files', file);
     });
     formData.append('type', 'request');
-    formData.append('status', 'planned');
 
     return createCarpoolingRequest(formData);
   };

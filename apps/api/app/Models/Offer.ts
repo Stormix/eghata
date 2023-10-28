@@ -54,6 +54,7 @@ export default class Offer extends BaseModel {
   @column()
   public isOnSite: boolean
 
+  @column()
   public files: string
 
   @column.dateTime({ autoCreate: true })

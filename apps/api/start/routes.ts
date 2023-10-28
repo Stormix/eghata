@@ -32,30 +32,33 @@ Route.get('/health', async ({ response }) => {
 
 Route.resource('offers', 'OffersController')
   .middleware({
-    store: ['auth'],
-    destroy: ['auth']
+    // store: ['auth:api'],
+    // destroy: ['auth:api'],
+    // update: ['auth:api']
   })
   .apiOnly()
 
 Route.resource('carpooling-ads', 'CarpoolingAdsController')
   .middleware({
-    destroy: ['auth'],
-    update: ['auth']
+    // store: ['auth:api'],
+    // destroy: ['auth:api'],
+    // update: ['auth:api']
   })
   .apiOnly()
 
 Route.resource('help-requests', 'HelpRequestsController')
   .middleware({
-    destroy: ['auth'],
-    update: ['auth']
+    // store: ['auth:api'],
+    // destroy: ['auth:api'],
+    // update: ['auth:api']
   })
   .apiOnly()
 
 Route.resource('types', 'TypesController')
   .middleware({
-    store: ['auth'],
-    destroy: ['auth'],
-    update: ['auth']
+    // store: ['auth:api'],
+    // destroy: ['auth:api'],
+    // update: ['auth:api']
   })
   .apiOnly()
 

@@ -22,7 +22,7 @@ export default class extends BaseSchema {
 
       table.text('description').notNullable()
       table.integer('capacity').nullable()
-      table.integer('storage_space').nullable()
+      table.text('storage_space').nullable()
 
       table.enum('status', Object.values(CarpoolingStatus)).notNullable()
       table.integer('user_id').unsigned().references('users.id')

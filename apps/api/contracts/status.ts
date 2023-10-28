@@ -10,6 +10,7 @@ export enum OfferStatus {
 }
 
 export enum CarpoolingStatus {
+  requested = 'requested',
   planned = 'planned',
   ongoing = 'ongoing',
   completed = 'completed'
