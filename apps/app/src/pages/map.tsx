@@ -1,22 +1,31 @@
+import { AttributionControl, MapContainer, TileLayer } from 'react-leaflet';
+import { BasemapLayer } from 'react-esri-leaflet';
 import { Button } from '@/components/atoms/button';
 import { LayersIcon } from '@radix-ui/react-icons';
 import 'leaflet/dist/leaflet.css';
-import { BasemapLayer } from 'react-esri-leaflet';
-import { MapContainer, TileLayer } from 'react-leaflet';
 
+import SearchInput from '../components/atoms/search-input';
+import { useState } from 'react';
 import ZoomInButton from '@/components/atoms/zoom-in-button';
 import ZoomOutButton from '@/components/atoms/zoom-out-button';
-import { useState } from 'react';
-import SearchInput from '../components/atoms/search-input';
 
 const Map = () => {
-  const [view, setView] = useState('street');
+  const [view, setView] = useState('satellite');
 
   return (
     <div className="flex w-screen h-screen ">
       <SearchInput className="absolute z-10 w-11/12 my-4 -translate-x-1/2 top-4 left-1/2" />
 
-      <MapContainer center={[31.073, -8.407]} zoom={8} className="w-full h-full z-[5]" zoomControl={false}>
+      <MapContainer
+        center={[31.073, -8.407]}
+        minZoom={3}
+        maxZoom={18}
+        zoom={8}
+        className="w-full h-full z-[5]"
+        zoomControl={false}
+        attributionControl={false}
+      >
+        <AttributionControl position="topleft" />
         <div className="flex flex-col gap-2 z-[9999] absolute bottom-[118px] right-4">
           <ZoomInButton />
           <ZoomOutButton />
