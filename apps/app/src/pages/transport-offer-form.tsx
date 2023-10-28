@@ -1,14 +1,21 @@
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/atoms/form';
+import { toast } from '@/components/atoms/use-toast';
 import FileInput from '@/components/molecules/file-input';
 import Navbar from '@/components/molecules/navbar';
 import NumberInput from '@/components/molecules/numper-input';
 import TextAreaInput from '@/components/molecules/text-area-input';
 import TextInput from '@/components/molecules/text-input';
 import TransportInput from '@/components/molecules/transport-input';
+import api from '@/lib/api';
+import { DetailTypes } from '@/lib/routes';
 import { imageSchema } from '@/lib/validation';
+import { FixType } from '@/types/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation } from '@tanstack/react-query';
+import { useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 import * as z from 'zod';
 
@@ -25,7 +32,7 @@ const formSchema = z.object({
   }),
   date: z.string(),
   capacity: z.number().int().positive().optional(),
-  description: z.string().optional(),
+  description: z.string().nonempty(),
   name: z.string().nonempty(),
   email: z.string().email().optional(),
   phone: z.string().nonempty(),
@@ -35,6 +42,8 @@ const formSchema = z.object({
 
 const TransportOfferForm = () => {
   const { t } = useTranslation();
+  const timeout = useRef<NodeJS.Timeout | null>(null);
+  const navigate = useNavigate();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -64,9 +73,60 @@ const TransportOfferForm = () => {
 
   const { isSubmitting, isDirty, isValid } = form.formState;
 
+  const { isLoading, mutate: createCarpoolingOffer } = useMutation({
+    mutationFn: (formData: FormData) => api.createCarpooling(formData),
+    onSuccess: (data: FixType) => {
+      toast({
+        title: 'Transport Offer Created',
+        description: 'Your offer has been successfully created.',
+        variant: 'success'
+      });
+      timeout.current = setTimeout(() => {
+        return navigate('/detail/' + DetailTypes.RideRequest + '/' + data.id);
+      }, 1000);
+    },
+    onError: () => {
+      toast({
+        title: 'Error',
+        description: 'Something went wrong',
+        variant: 'destructive'
+      });
+    }
+  });
+
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+    //  'type','departure_longitude','departureLatitude','departureAddress','departureDate','arrivalLongitude','arrivalLatitude','arrivalAddress','arrivalDate','description','capacity','storageSpace','status',
+    const formData = new FormData();
+    formData.append('departureLongitude', String(values.transport.start.lng));
+    formData.append('departureLatitude', String(values.transport.start.lat));
+    formData.append('departureAddress', String(values.transport.start.address));
+
+    formData.append('departureDate', values.date);
+
+    formData.append('arrivalLongitude', String(values.transport.end.lng));
+    formData.append('arrivalLatitude', String(values.transport.end.lat));
+    formData.append('arrivalAddress', String(values.transport.end.address));
+
+    formData.append('arrivalDate', values.date); // TODO add arrival date input field (optional)
+    formData.append('capacity', String(values.capacity));
+    if (values.storage) formData.append('storageSpace', values.storage);
+    formData.append('description', values.description!);
+    formData.append('name', values.name);
+    if (values.email) formData.append('email', values.email);
+    formData.append('phone', values.phone);
+    values.files.forEach((file) => {
+      formData.append('files', file);
+    });
+    formData.append('type', 'offer');
+    formData.append('status', 'planned');
+    return createCarpoolingOffer(formData);
   };
+
+  useEffect(() => {
+    return () => {
+      if (timeout.current) clearTimeout(timeout.current);
+    };
+  }, []);
 
   return (
     <div className="flex flex-col w-full gap-4 px-6 overflow-y-auto pb-20">
@@ -136,12 +196,7 @@ const TransportOfferForm = () => {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <TextAreaInput
-                    label={t('Description')}
-                    placeholder={t('Type your message here')}
-                    optional
-                    {...field}
-                  />
+                  <TextAreaInput label={t('Description')} placeholder={t('Type your message here')} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -200,7 +255,7 @@ const TransportOfferForm = () => {
             )}
           />
 
-          <Navbar asSubmit disabled={!isDirty || !isValid} loading={isSubmitting} />
+          <Navbar asSubmit disabled={!isDirty || !isValid} loading={isSubmitting || isLoading} />
         </form>
       </Form>
     </div>
